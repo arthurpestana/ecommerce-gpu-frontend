@@ -1,0 +1,55 @@
+<div class="products-page">
+  <main class="products-page__main">
+    <div class="products-page__content-wrapper">
+      
+      <div class="products-page__header">
+        <h1 class="products-page__title">Placas de Vídeo</h1>
+        <p class="products-page__subtitle">
+          Encontre a placa de vídeo perfeita para suas necessidades
+        </p>
+      </div>
+
+      <div class="products-page__search-container">
+        <app-search-filter (searchTextChange)="onSearchTextChanged($event)" />
+      </div>
+
+      <div class="products-page__results">
+        @if (loading) {
+          <div class="products-page__state-indicator">
+            <p class="products-page__state-text">Carregando produtos...</p>
+          </div>
+        } @else if (paginatedProducts.length > 0) {
+          
+          <div class="products-page__results-info">
+            <p class="products-page__results-text">
+              Mostrando {{ getProductsRangeStart() }}-{{ getProductsRangeEnd() }} de
+              {{ totalItems }} produtos
+            </p>
+          </div>
+
+          <div class="products-page__product-grid">
+            @for (gpu of paginatedProducts; track gpu.id) {
+              <app-gpu-card [gpu]="gpu"></app-gpu-card>
+            }
+          </div>
+
+          @if (totalPages > 1) {
+            <div class="products-page__pagination-container">
+              <app-pagination
+                [currentPage]="currentPage"
+                [totalPages]="totalPages"
+                (pageChange)="onPageChanged($event)"
+              />
+            </div>
+          }
+        } @else {
+          <div class="products-page__state-indicator">
+            <p class="products-page__state-text">
+              Nenhum produto encontrado com os filtros selecionados.
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  </main>
+</div>

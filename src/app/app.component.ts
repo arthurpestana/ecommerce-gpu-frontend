@@ -4,9 +4,13 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
-export class App {
+export class AppComponent {
   protected readonly title = signal('ecommerce-gpu-frontend');
+
+  logar(event: string) {
+    console.log('Evento recebido no AppComponent:', event);
+  }
 }

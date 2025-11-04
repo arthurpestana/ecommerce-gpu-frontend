@@ -1,0 +1,39 @@
+<div class="product-card">
+  
+  <div class="product-card__image-container">
+    <img
+      [src]="image || '/placeholder.svg'"
+      [alt]="gpu.name"
+      class="product-card__image"
+    />
+    <div class="product-card__image-gradient"></div>
+    
+    <div class="product-card__category-badge-container">
+      <span class="product-card__category-badge">
+        {{ categoryLabel }}
+      </span>
+    </div>
+  </div>
+
+  <div class="product-card__content">
+
+    <p class="product-card__brand">{{ manufacturer }}</p>
+    <h3 class="product-card__name">{{ gpu.name }}</h3>
+
+    <div class="product-card__specs-grid">
+      <div class="product-card__spec-item">
+        <p class="product-card__spec-label">Memória</p>
+        <p class="product-card__spec-value">{{ memory }}</p>
+      </div>
+      <div class="product-card__spec-item">
+        <p class="product-card__spec-label">Energia</p>
+        <p class="product-card__spec-value">{{ power }}</p>
+      </div>
+    </div>
+
+    <p class="product-card__price">
+      R$ {{ gpu.price | number:'1.0-2':'pt-BR' }}
+    </p>
+
+  </div>
+</div>

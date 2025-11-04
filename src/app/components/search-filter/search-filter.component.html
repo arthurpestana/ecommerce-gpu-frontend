@@ -1,0 +1,30 @@
+<!-- Bloco principal: search-filter -->
+<div class="search-filter">
+  
+  <!-- Elemento: Ícone de busca (decorativo) -->
+  <lucide-icon 
+    name="search" 
+    size="20"
+    class="search-filter__icon"
+  ></lucide-icon>
+
+  <!-- Elemento: Input principal -->
+  <input 
+    type="text" 
+    placeholder="Buscar por nome, marca ou especificações..."
+    class="search-filter__input"
+    [(ngModel)]="currentSearchText" 
+    (ngModelChange)="emitSearchText()" 
+  />
+
+  <!-- Elemento: Botão de limpar (condicional) -->
+  @if (currentSearchText) {
+    <button 
+      (click)="clearSearch()"
+      class="search-filter__clear-button"
+    >
+      <!-- O ícone 'x' está dentro do botão -->
+      <lucide-icon name="x" size="20"></lucide-icon>
+    </button>
+  }
+</div>
