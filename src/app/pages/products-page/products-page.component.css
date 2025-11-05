@@ -1,112 +1,85 @@
-/* --- Layout Principal da Página --- */
 
-/* Mapeamento de: flex flex-col min-h-screen */
 .products-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Mapeamento de: flex-1 w-full bg-background */
 .products-page__main {
   flex: 1 1 0%;
   width: 100%;
-  background-color: var(--color-background);
+  background-color: var(--background);
 }
 
-/* Mapeamento de: max-w-7xl mx-auto px-4 py-8 */
 .products-page__content-wrapper {
-  max-width: 80rem; /* max-w-7xl */
+  max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem 1rem; /* py-8 px-4 */
+  padding: 2rem 1rem;
 }
 
-/* --- Elementos da Página --- */
-
-/* Mapeamento de: mb-8 */
 .products-page__header {
   margin-bottom: 2rem;
 }
 
-/* Mapeamento de: text-4xl font-bold text-foreground mb-2 */
 .products-page__title {
-  font-size: 2.25rem; /* text-4xl */
+  font-size: 2.25rem;
   line-height: 2.5rem;
-  font-weight: 700; /* font-bold */
-  color: var(--color-foreground);
-  margin-bottom: 0.5rem; /* mb-2 */
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
 }
 
-/* Mapeamento de: text-muted-foreground */
 .products-page__subtitle {
-  color: var(--color-muted-foreground);
+  color: var(--muted-foreground);
 }
 
-/* Mapeamento de: mb-8 */
 .products-page__search-container {
   margin-bottom: 2rem;
 }
 
-/* --- Seção de Resultados --- */
-
-/* * Classe reutilizável para estados de 'loading' e 'empty'
- * Mapeamento de: text-center py-12 
- */
 .products-page__state-indicator {
   text-align: center;
-  padding-top: 3rem; /* py-12 */
-  padding-bottom: 3rem; /* py-12 */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-/* Mapeamento de: text-lg text-muted-foreground */
 .products-page__state-text {
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.125rem;
   line-height: 1.75rem;
-  color: var(--color-muted-foreground);
+  color: var(--muted-foreground);
 }
 
-/* Mapeamento de: mb-6 */
 .products-page__results-info {
   margin-bottom: 1.5rem;
 }
 
-/* Mapeamento de: text-sm text-muted-foreground */
 .products-page__results-text {
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem;
   line-height: 1.25rem;
-  color: var(--color-muted-foreground);
+  color: var(--muted-foreground);
 }
 
-/* * Mapeamento de: 
- * grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8
- */
 .products-page__product-grid {
   display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
-  gap: 1.5rem; /* gap-6 */
-  margin-bottom: 2rem; /* mb-8 */
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* Mapeamento de: md:grid-cols-2 */
 @media (min-width: 768px) {
   .products-page__product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Mapeamento de: lg:grid-cols-3 */
 @media (min-width: 1024px) {
   .products-page__product-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* * (Nota: O espaçamento para a paginação é dado pelo 'mb-8' 
- * da grid acima. Se você quiser um espaçamento específico 
- * para a paginação, pode usar esta classe.)
- */
+
 .products-page__pagination-container {
-  /* Ex: margin-top: 2rem; */
-  /* No seu código, o mb-8 do grid já faz esse espaçamento. */
+
 }

@@ -1,0 +1,24 @@
+<button
+  class="button"
+  [class]="
+     'button button--' + variant +
+     ' button--' + size +
+     (isIconOnly() ? ' button--icon-only' : '')
+  "
+  [disabled]="disabled"
+  (click)="onButtonClick()"
+>
+
+  @if (icon && iconPosition === 'left') {
+    <lucide-angular class="button__icon" [name]="icon" />
+  }
+
+  <span class="button__label">
+    <ng-content></ng-content>
+  </span>
+
+  @if (icon && iconPosition === 'right') {
+    <lucide-angular class="button__icon" [name]="icon" />
+  }
+
+</button>

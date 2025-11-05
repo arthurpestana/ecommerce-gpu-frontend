@@ -1,19 +1,23 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { GpuResponse } from '../../lib/interfaces/IGpu';
 
 @Component({
   selector: 'app-gpu-card',
   standalone: true,
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule],
   templateUrl: './gpu-card.component.html',
   styleUrls: ['./gpu-card.component.css'],
 })
 export class GpuCardComponent {
   @Input() gpu!: GpuResponse;
 
+
+
   get manufacturer(): string {
+    console.log(this.gpu);
     return this.gpu.model?.manufacturer.name ?? 'Desconhecido';
+
   }
 
   get image(): string {

@@ -11,6 +11,9 @@ import { LucideAngularModule, Search, X } from 'lucide-angular';
   styleUrls: ['./search-filter.component.css'],
 })
 export class SearchFilterComponent {
+  readonly searchIcon = Search;
+  readonly clearIcon = X;
+
   @Output() searchTextChange = new EventEmitter<string>();
 
   currentSearchText = '';

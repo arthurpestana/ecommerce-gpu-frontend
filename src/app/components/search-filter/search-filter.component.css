@@ -17,7 +17,7 @@
     /* left-3 */
     top: 50%;
     transform: translateY(-50%);
-    color: var(--color-muted-foreground);
+    color: var(--muted-foreground);
     /* Adicionado para garantir que não receba cliques */
     pointer-events: none;
 }
@@ -32,10 +32,10 @@
     width: 100%;
     /* py-3, pl-10, pr-10 */
     padding: 0.75rem 2.5rem 0.75rem 2.5rem;
-    background-color: var(--color-card);
-    border: 1px solid var(--color-border);
+    background-color: var(--card);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    color: var(--color-foreground);
+    color: var(--foreground);
     font-size: 1rem;
     /* Inputs devem ter um font-size base */
     line-height: 1.5rem;
@@ -52,7 +52,7 @@
  * placeholder:text-muted-foreground
  */
 .search-filter__input::placeholder {
-    color: var(--color-muted-foreground);
+    color: var(--muted-foreground);
 }
 
 /* * Mapeamento de:
@@ -81,7 +81,7 @@
     top: 50%;
     transform: translateY(-50%);
 
-    color: var(--color-muted-foreground);
+    color: var(--muted-foreground);
     transition: color 150ms ease-in-out;
 
     /* Reset de estilos de botão para parecer apenas um ícone */
@@ -100,5 +100,5 @@
  * hover:text-foreground
  */
 .search-filter__clear-button:hover {
-    color: var(--color-foreground);
+    color: var(--foreground);
 }

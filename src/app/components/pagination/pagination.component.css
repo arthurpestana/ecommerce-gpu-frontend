@@ -18,9 +18,9 @@
 .pagination__button {
   padding: 0.5rem 1rem; /* px-4 py-2 */
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   background-color: transparent;
-  color: var(--color-foreground);
+  color: var(--foreground);
   font-weight: 500; /* font-medium */
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
   cursor: pointer;
@@ -71,8 +71,8 @@
    * border border-border text-foreground
    */
   background-color: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-foreground);
+  border: 1px solid var(--border);
+  color: var(--foreground);
 }
 
 /* * Mapeamento de:
@@ -88,7 +88,7 @@
  * bg-primary text-primary-foreground
  */
 .pagination__item--active {
-  background-color: var(--color-primary);
-  color: var(--color-primary-foreground);
-  border-color: var(--color-primary); /* Garante que a borda mude também */
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary); /* Garante que a borda mude também */
 }
