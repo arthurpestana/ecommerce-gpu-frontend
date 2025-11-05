@@ -12,8 +12,6 @@ import { GpuResponse } from '../../lib/interfaces/IGpu';
 export class GpuCardComponent {
   @Input() gpu!: GpuResponse;
 
-
-
   get manufacturer(): string {
     console.log(this.gpu);
     return this.gpu.model?.manufacturer.name ?? 'Desconhecido';
@@ -33,12 +31,7 @@ export class GpuCardComponent {
   }
 
   get categoryLabel(): string {
-    if (!this.gpu.categories?.length) return 'MÉDIO';
-    const cat = this.gpu.categories[0].name.toLowerCase();
-    switch (cat) {
-      case 'flagship': return 'TOPO';
-      case 'high-end': return 'ALTO';
-      default: return 'MÉDIO';
-    }
+    const category = this.gpu.categories?.[0]?.name ?? 'Desconhecido';
+    return category.toUpperCase();
   }
 }

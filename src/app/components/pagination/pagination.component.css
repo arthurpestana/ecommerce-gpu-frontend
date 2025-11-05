@@ -1,94 +1,19 @@
-/* --- Bloco Principal: .pagination --- */
-
-/* Mapeamento de: flex items-center justify-center gap-2 mt-8 */
 .pagination {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* gap-2 */
-  margin-top: 2rem; /* mt-8 */
+  gap: 0.5rem;
+  margin-top: 2rem;
 }
 
-/* --- Elemento: .pagination__button (Anterior/Próxima) --- */
-
-/* * Mapeamento de:
- * px-4 py-2 rounded-lg border border-border text-foreground
- * transition-colors font-medium
- */
-.pagination__button {
-  padding: 0.5rem 1rem; /* px-4 py-2 */
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background-color: transparent;
-  color: var(--foreground);
-  font-weight: 500; /* font-medium */
-  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
-  cursor: pointer;
-}
-
-/* * Mapeamento de:
- * hover:bg-secondary/30
- */
-.pagination__button:not(:disabled):hover {
-  /* --secondary: oklch(0.85 0.06 142.5); */
-  background-color: oklch(0.85 0.06 142.5 / 0.3); /* = bg-secondary/30 */
-}
-
-/* * Mapeamento de:
- * disabled:opacity-50 disabled:cursor-not-allowed
- */
-.pagination__button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* --- Elemento: .pagination__list (container dos números) --- */
-
-/* Mapeamento de: flex items-center gap-1 */
 .pagination__list {
   display: flex;
   align-items: center;
-  gap: 0.25rem; /* gap-1 */
+  gap: 0.25rem;
 }
 
-/* --- Elemento: .pagination__item (botão de número) --- */
-
-/* * Estilos base (comuns a ambos os estados)
- * Mapeamento de:
- * w-10 h-10 rounded-lg font-medium transition-colors
- * (e também do estado inativo: border border-border text-foreground)
- */
-.pagination__item {
-  width: 2.5rem; /* w-10 */
-  height: 2.5rem; /* h-10 */
-  border-radius: var(--radius-lg);
-  font-weight: 500; /* font-medium */
-  transition: background-color 150ms ease-in-out, color 150ms ease-in-out, border-color 150ms ease-in-out;
-  cursor: pointer;
-
-  /* * Estilos do estado INATIVO (padrão)
-   * Mapeamento de:
-   * border border-border text-foreground
-   */
-  background-color: transparent;
-  border: 1px solid var(--border);
-  color: var(--foreground);
-}
-
-/* * Mapeamento de:
- * hover:bg-secondary/30 (para o botão inativo)
- */
-.pagination__item:not(.pagination__item--active):hover {
-  /* --secondary: oklch(0.85 0.06 142.5); */
-  background-color: oklch(0.85 0.06 142.5 / 0.3); /* = bg-secondary/30 */
-}
-
-/* * Modificador: .pagination__item--active
- * Mapeamento de:
- * bg-primary text-primary-foreground
- */
-.pagination__item--active {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  border-color: var(--primary); /* Garante que a borda mude também */
+.pagination__list__dots {
+  padding: 0 0.75rem;
+  color: var(--muted-foreground);
+  font-weight: 600;
 }

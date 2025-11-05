@@ -3,7 +3,7 @@ import { LucideAngularModule, icons } from 'lucide-angular';
 
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
-type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonSize = 'small' | 'medium' | 'large' | 'square';
 type IconPosition = 'left' | 'right';
 
 @Component({
@@ -14,7 +14,7 @@ type IconPosition = 'left' | 'right';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  @Output() clicked = new EventEmitter<void>();
+  @Output() click = new EventEmitter<void>();
 
   @Input() variant: ButtonVariant = 'primary';
   @Input() size: ButtonSize = 'medium';
@@ -30,7 +30,7 @@ export class ButtonComponent {
 
   onButtonClick() {
     if (!this.disabled) {
-      this.clicked.emit();
+      this.click.emit();
     }
   }
 

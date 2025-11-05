@@ -38,7 +38,7 @@ export class ProductsPageComponent implements OnInit {
     await this.loadProducts();
   }
 
-  async onSearchTextChanged(newSearchText: string): Promise<void> {
+  async onSearchText(newSearchText: string): Promise<void> {
     this.searchText = newSearchText;
     this.currentPage = 1;
     await this.loadProducts();
@@ -71,7 +71,7 @@ export class ProductsPageComponent implements OnInit {
 
       this.filteredProducts = response.items
       this.totalItems = response.total ?? this.filteredProducts.length;
-      this.totalPages = 10;
+      this.totalPages = Math.ceil(this.totalItems / ITEMS_PER_PAGE);
       this.paginatedProducts = this.filteredProducts;
     } catch (error) {
       console.error('Erro ao carregar GPUs:', error);

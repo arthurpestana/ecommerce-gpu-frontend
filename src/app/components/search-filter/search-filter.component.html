@@ -1,26 +1,19 @@
-
 <div class="search-filter">
-  
-  <lucide-icon 
-    [img]="searchIcon" 
-    size="20"
-    class="search-filter__icon"
-  ></lucide-icon>
 
-  <input 
-    type="text" 
-    placeholder="Buscar por nome, marca ou especificações..."
-    class="search-filter__input"
-    [(ngModel)]="currentSearchText" 
-    (ngModelChange)="emitSearchText()" 
-  />
+  <div class="search-filter__input-container">
+    <div class="search-filter__input-container__icon">
+      <lucide-icon [img]="searchIcon" size="20" class="search-filter__input-container__icon__lucide"></lucide-icon>
+    </div>
 
-  @if (currentSearchText) {
-    <button 
-      (click)="clearSearch()"
-      class="search-filter__clear-button"
-    >
-      <lucide-icon name="x" size="20"></lucide-icon>
-    </button>
-  }
+
+    <input type="text" placeholder="Buscar por nome, marca ou especificações..." class="search-filter__input-container__input"
+      [(ngModel)]="currentSearchText" (ngModelChange)="emitSearchText()" (keyup.enter)="emitSearchClicked()"/>
+
+    @if (currentSearchText) {
+    <app-button (click)="clearSearch()" class="search-filter__input-container__clear-button" variant="ghost" size="square" icon="x" />
+    }
+  </div>
+
+  <app-button class="search-filter__submit-button" variant="primary" size="square" icon="Search"
+    (click)="emitSearchClicked()" />
 </div>

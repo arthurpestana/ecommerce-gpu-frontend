@@ -1,30 +1,41 @@
 <div class="pagination">
-  
-  <button
+
+  <app-button 
+    [disabled]="currentPage === 1" 
+    variant="outline" 
+    size="small" 
     (click)="prevPage()"
-    [disabled]="currentPage === 1"
-    class="pagination__button pagination__button--prev"
   >
     Anterior
-  </button>
+  </app-button>
 
   <div class="pagination__list">
-    @for(page of pages; track page) {
-      <button
-        (click)="goToPage(page)"
-        class="pagination__item"
-        [class.pagination__item--active]="currentPage === page"
-      >
-        {{ page }}
-      </button>
+
+    @for (page of visiblePages; track page) {
+
+      @if (page === -1) {
+        <span class="pagination__list__dots">…</span>
+      } @else {
+        <app-button
+          [variant]="currentPage === page ? 'primary' : 'outline'"
+          size="square"
+          (click)="goToPage(page)"
+        >
+          {{ page }}
+        </app-button>
+      }
+
     }
+
   </div>
 
-  <button
+  <app-button 
+    [disabled]="currentPage === totalPages" 
+    variant="outline" 
+    size="small" 
     (click)="nextPage()"
-    [disabled]="currentPage === totalPages"
-    class="pagination__button pagination__button--next"
   >
     Próxima
-  </button>
+  </app-button>
+
 </div>

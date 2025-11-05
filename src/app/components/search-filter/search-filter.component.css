@@ -1,104 +1,77 @@
-/* --- Bloco Principal: .search-filter --- */
 
-/* Mapeamento de: relative */
 .search-filter {
-    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
 }
 
-/* --- Elemento: Ícone de Busca --- */
+.search-filter__input-container {
+    position: relative;
+    width: 100%;
+}
 
-/* * Mapeamento de:
- * absolute left-3 top-1/2 -translate-y-1/2 
- * text-muted-foreground
- */
-.search-filter__icon {
+.search-filter__input-container__icon {
     position: absolute;
     left: 0.75rem;
-    /* left-3 */
+    
     top: 50%;
     transform: translateY(-50%);
     color: var(--muted-foreground);
-    /* Adicionado para garantir que não receba cliques */
+    
     pointer-events: none;
 }
 
-/* --- Elemento: Input --- */
+.search-filter__input-container__icon__lucide {
+    width: 20px !important;
+    height: 20px !important;
+    stroke-width: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/* * Mapeamento de:
- * w-full pl-10 pr-10 py-3 bg-card border border-border 
- * rounded-lg text-foreground transition-all
- */
-.search-filter__input {
+.search-filter__input-container__input {
     width: 100%;
-    /* py-3, pl-10, pr-10 */
     padding: 0.75rem 2.5rem 0.75rem 2.5rem;
     background-color: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     color: var(--foreground);
     font-size: 1rem;
-    /* Inputs devem ter um font-size base */
     line-height: 1.5rem;
 
-    /* * Sendo mais específico que 'transition-all'
-   * Transiciona apenas as propriedades que mudam no :focus
-   */
     transition:
         border-color 150ms ease-in-out,
         box-shadow 150ms ease-in-out;
 }
 
-/* * Mapeamento de:
- * placeholder:text-muted-foreground
- */
-.search-filter__input::placeholder {
+.search-filter__input-container__input::placeholder {
     color: var(--muted-foreground);
 }
 
-/* * Mapeamento de:
- * focus:outline-none focus:ring-2 focus:ring-primary/50
- */
-.search-filter__input:focus {
+.search-filter__input-container__input:focus {
     outline: none;
-    /* --primary: oklch(0.48 0.13 142.5); */
-    /* Adiciona o 'ring' como um box-shadow com a cor e alfa corretos */
-    box-shadow: 0 0 0 2px oklch(0.48 0.13 142.5 / 0.5);
-    /* = ring-2 ring-primary/50 */
-    /* É uma boa prática também mudar a cor da borda para a primária */
+    box-shadow: 0 0 0 1px oklch(0.48 0.13 142.5 / 0.5);
     border-color: oklch(0.48 0.13 142.5 / 0.5);
 }
 
-/* --- Elemento: Botão de Limpar --- */
-
-/* * Mapeamento de:
- * absolute right-3 top-1/2 -translate-y-1/2
- * text-muted-foreground transition-colors
- */
-.search-filter__clear-button {
+.search-filter__input-container__clear-button {
     position: absolute;
     right: 0.75rem;
-    /* right-3 */
     top: 50%;
     transform: translateY(-50%);
-
     color: var(--muted-foreground);
     transition: color 150ms ease-in-out;
-
-    /* Reset de estilos de botão para parecer apenas um ícone */
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-
-    /* Garante que o ícone interno se alinhe (útil se você adicionar padding) */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* * Mapeamento de:
- * hover:text-foreground
- */
-.search-filter__clear-button:hover {
+.search-filter__input-container__clear-button:hover {
     color: var(--foreground);
 }

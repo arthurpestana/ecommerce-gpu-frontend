@@ -10,7 +10,7 @@
       </div>
 
       <div class="products-page__search-container">
-        <app-search-filter (searchTextChange)="onSearchTextChanged($event)" />
+        <app-search-filter (searchSubmit)="onSearchText($event)" />
       </div>
 
       <div class="products-page__results">
@@ -33,7 +33,7 @@
             }
           </div>
 
-          @if (totalPages > 1) {
+          @if (totalPages >= 1) {
             <div class="products-page__pagination-container">
               <app-pagination
                 [currentPage]="currentPage"
