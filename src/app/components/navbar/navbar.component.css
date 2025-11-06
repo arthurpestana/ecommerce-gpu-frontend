@@ -76,7 +76,7 @@
   color: var(--sidebar-foreground);
   text-decoration: none;
   border-radius: var(--radius);
-  transition: background-color 150ms ease;
+  transition: background-color 200ms ease;
   gap: 0.5rem;
 }
 
@@ -86,6 +86,15 @@
 
 .sidebar__nav__item:hover {
   background-color: var(--sidebar-accent);
+}
+
+.sidebar__nav__item--active {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.sidebar__nav__item--active:hover {
+  background-color: oklch(0.48 0.13 142.5 / 0.95) !important;
 }
 
 .sidebar__nav__item-icon {

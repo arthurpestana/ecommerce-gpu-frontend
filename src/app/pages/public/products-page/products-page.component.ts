@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SearchFilterComponent } from '../../../components/search-filter/search-filter.component';
@@ -7,84 +7,71 @@ import { GpuCardComponent } from '../../../components/gpu-card/gpu-card.componen
 import { GpuService } from '../../../services/api/gpu-service/gpu.service';
 import { GpuResponse } from '../../../lib/interfaces/IGpu';
 import { PaginationRequest } from '../../../lib/interfaces/IPagination';
+import { GpuQuery } from '../../../lib/hooks/GpuQuery.hook';
 
 const ITEMS_PER_PAGE = 10;
 
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    SearchFilterComponent,
-    PaginationComponent,
-    GpuCardComponent,
-  ],
+  imports: [CommonModule, SearchFilterComponent, PaginationComponent, GpuCardComponent],
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css'],
 })
-export class ProductsPageComponent implements OnInit {
-  private readonly gpuService = inject(GpuService);
+export class ProductsPageComponent {
+  private readonly gpuQuery = inject(GpuQuery);
 
-  searchText = '';
-  currentPage = 1;
+  listGpus = this.gpuQuery.getListGpus;
 
-  filteredProducts: GpuResponse[] = [];
-  paginatedProducts: GpuResponse[] = [];
-  totalPages = 1;
-  totalItems = 0;
-  loading = true;
+  get currentPage() {
+    const gpuData = this.listGpus.data();
+    if (!gpuData) return 1;
+    return gpuData.offset / gpuData.limit + 1;
+  }
 
-  async ngOnInit(): Promise<void> {
-    await this.loadProducts();
+  get paginatedProducts() {
+    return this.listGpus.data()?.items ?? [];
+  }
+
+  get totalItems() {
+    return this.listGpus.data()?.total ?? 0;
+  }
+
+  get limit() {
+    const gpuData = this.listGpus.data();
+    if (!gpuData) return ITEMS_PER_PAGE;
+    return gpuData.limit;
+  }
+
+  get totalPages() {
+    const gpuData = this.listGpus.data();
+    if (!gpuData) return 1;
+    return Math.ceil(gpuData.total / gpuData.limit);
+  }
+
+  get isLoading() {
+    return this.listGpus.isLoading();
+  }
+
+  get isError() {
+    return this.listGpus.isError();
   }
 
   async onSearchText(newSearchText: string): Promise<void> {
-    this.searchText = newSearchText;
-    this.currentPage = 1;
-    await this.loadProducts();
+    this.gpuQuery.setParams({ search: newSearchText, page: 1 });
+    console.log('Search text updated to:', newSearchText);
+    console.log(this.paginatedProducts);
   }
 
   async onPageChanged(newPage: number): Promise<void> {
-    this.currentPage = newPage;
-    await this.loadProducts();
+    this.gpuQuery.setParams({ page: newPage });
   }
 
-  private async loadProducts(): Promise<void> {
-    try {
-      this.loading = true;
-
-      const pagination: PaginationRequest = {
-        offset: (this.currentPage - 1) * ITEMS_PER_PAGE,
-        limit: ITEMS_PER_PAGE,
-      };
-
-      let response;
-      if (this.searchText.trim() !== '') {
-        response = await this.gpuService.filterGpus({
-          name: this.searchText.trim(),
-          offset: pagination.offset,
-          limit: pagination.limit,
-        });
-      } else {
-        response = await this.gpuService.findAllGpus(pagination);
-      }
-
-      this.filteredProducts = response.items
-      this.totalItems = response.total ?? this.filteredProducts.length;
-      this.totalPages = Math.ceil(this.totalItems / ITEMS_PER_PAGE);
-      this.paginatedProducts = this.filteredProducts;
-    } catch (error) {
-      console.error('Erro ao carregar GPUs:', error);
-    } finally {
-      this.loading = false;
-    }
+  getProductsRangeStart() {
+    return (this.currentPage - 1) * this.limit + 1;
   }
 
-  getProductsRangeStart(): number {
-    return (this.currentPage - 1) * ITEMS_PER_PAGE + 1;
-  }
-
-  getProductsRangeEnd(): number {
-    return Math.min(this.currentPage * ITEMS_PER_PAGE, this.totalItems);
+  getProductsRangeEnd() {
+    return Math.min(this.currentPage * this.limit, this.totalItems);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LucideAngularModule, icons } from 'lucide-angular';
+import { LucideIconComponent } from '../lucide-icon/lucide-icon.component';
 
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
@@ -9,7 +9,7 @@ type IconPosition = 'left' | 'right';
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideIconComponent],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css']
 })

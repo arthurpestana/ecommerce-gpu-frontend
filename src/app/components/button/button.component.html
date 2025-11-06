@@ -10,7 +10,7 @@
 >
 
   @if (icon && iconPosition === 'left') {
-    <lucide-angular class="button__icon" [name]="icon"/>
+    <app-lucide-icon [icon]="icon"/>
   }
 
   <span class="button__label">
@@ -18,7 +18,7 @@
   </span>
 
   @if (icon && iconPosition === 'right') {
-    <lucide-angular class="button__icon" [name]="icon" />
+    <app-lucide-icon [icon]="icon"/>
   }
 
 </button>

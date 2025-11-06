@@ -3,13 +3,14 @@ import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { GpuResponse } from '../../../lib/interfaces/IGpu';
 import { PaginationRequest, PaginationResponse } from '../../../lib/interfaces/IPagination';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GpuService {
   private readonly httpClient = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/gpu';
+  private readonly apiUrl = `${environment.apiUrl}/gpu`;
 
   async findAllGpus(paginationParams: PaginationRequest): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
@@ -109,15 +110,15 @@ export class GpuService {
     return firstValueFrom(this.httpClient.get<GpuResponse>(`${this.apiUrl}/${id}`));
   }
 
-  // async createGpu(payload: Partial<GpuResponse>): Promise<GpuResponse> {
-  //   return firstValueFrom(this.httpClient.post<GpuResponse>(`${this.apiUrl}`, payload));
-  // }
+  async createGpu(payload: Partial<GpuResponse>): Promise<GpuResponse> {
+    return firstValueFrom(this.httpClient.post<GpuResponse>(`${this.apiUrl}`, payload));
+  }
 
-  // async updateGpu(id: number, payload: Partial<GpuResponse>): Promise<GpuResponse> {
-  //   return firstValueFrom(this.httpClient.put<GpuResponse>(`${this.apiUrl}/${id}`, payload));
-  // }
+  async updateGpu(id: number, payload: Partial<GpuResponse>): Promise<GpuResponse> {
+    return firstValueFrom(this.httpClient.put<GpuResponse>(`${this.apiUrl}/${id}`, payload));
+  }
 
-  // async deleteGpu(id: number): Promise<void> {
-  //   return firstValueFrom(this.httpClient.delete<void>(`${this.apiUrl}/${id}`));
-  // }
+  async deleteGpu(id: number): Promise<void> {
+    return firstValueFrom(this.httpClient.delete<void>(`${this.apiUrl}/${id}`));
+  }
 }
