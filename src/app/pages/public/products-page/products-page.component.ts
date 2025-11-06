@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SearchFilterComponent } from '../../components/search-filter/search-filter.component';
-import { PaginationComponent } from '../../components/pagination/pagination.component';
-import { GpuCardComponent } from '../../components/gpu-card/gpu-card.component';
-import { GpuService } from '../../services/api/gpu-service/gpu.service';
-import { GpuResponse } from '../../lib/interfaces/IGpu';
-import { PaginationRequest } from '../../lib/interfaces/IPagination';
+import { SearchFilterComponent } from '../../../components/search-filter/search-filter.component';
+import { PaginationComponent } from '../../../components/pagination/pagination.component';
+import { GpuCardComponent } from '../../../components/gpu-card/gpu-card.component';
+import { GpuService } from '../../../services/api/gpu-service/gpu.service';
+import { GpuResponse } from '../../../lib/interfaces/IGpu';
+import { PaginationRequest } from '../../../lib/interfaces/IPagination';
 
 const ITEMS_PER_PAGE = 10;
 

@@ -10,10 +10,10 @@
       [(ngModel)]="currentSearchText" (ngModelChange)="emitSearchText()" (keyup.enter)="emitSearchClicked()"/>
 
     @if (currentSearchText) {
-    <app-button (click)="clearSearch()" class="search-filter__input-container__clear-button" variant="ghost" size="square" icon="x" />
+    <app-button (clicked)="clearSearch()" class="search-filter__input-container__clear-button" variant="ghost" size="square" icon="x" />
     }
   </div>
 
   <app-button class="search-filter__submit-button" variant="primary" size="square" icon="Search"
-    (click)="emitSearchClicked()" />
+    (clicked)="emitSearchClicked()" />
 </div>

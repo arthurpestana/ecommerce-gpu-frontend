@@ -4,7 +4,7 @@
     [disabled]="currentPage === 1" 
     variant="outline" 
     size="small" 
-    (click)="prevPage()"
+    (clicked)="prevPage()"
   >
     Anterior
   </app-button>
@@ -19,7 +19,7 @@
         <app-button
           [variant]="currentPage === page ? 'primary' : 'outline'"
           size="square"
-          (click)="goToPage(page)"
+          (clicked)="goToPage(page)"
         >
           {{ page }}
         </app-button>
@@ -33,7 +33,7 @@
     [disabled]="currentPage === totalPages" 
     variant="outline" 
     size="small" 
-    (click)="nextPage()"
+    (clicked)="nextPage()"
   >
     Próxima
   </app-button>

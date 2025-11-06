@@ -1,0 +1,120 @@
+.sidebar {
+  width: 16rem;
+  background-color: var(--sidebar);
+  color: var(--sidebar-foreground);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--sidebar-border);
+  overflow: hidden;
+  transition: width 200ms ease;
+  padding: 1rem 0.5rem;
+}
+
+.sidebar--collapsed {
+  transition: width 200ms ease;
+  width: 5rem;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.sidebar__header__brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+  opacity: 1;
+  transition: opacity 150ms ease;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+.sidebar__header__version {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  display: block;
+  margin-top: 0.25rem;
+  opacity: 1;
+  transition: opacity 150ms ease;
+  white-space: nowrap;
+}
+
+.sidebar--collapsed .sidebar__header__brand,
+.sidebar--collapsed .sidebar__header__version {
+  display: none;
+  opacity: 0;
+  max-width: 0;
+}
+
+.sidebar__header__toggle {
+  background: none;
+  border: none;
+  color: var(--sidebar-foreground);
+  cursor: pointer;
+}
+
+.sidebar--collapsed .sidebar__header__toggle {
+  margin: auto;
+}
+
+.sidebar__nav {
+  padding: 1rem 0;
+  border-top: 1px solid var(--sidebar-border);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar__nav__item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: var(--sidebar-foreground);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: background-color 150ms ease;
+  gap: 0.5rem;
+}
+
+.sidebar--collapsed .sidebar__nav__item {
+  justify-content: center;
+}
+
+.sidebar__nav__item:hover {
+  background-color: var(--sidebar-accent);
+}
+
+.sidebar__nav__item-icon {
+  width: 20px !important;
+  height: 20px !important;
+  stroke-width: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+}
+
+.sidebar__nav__item-label {
+  opacity: 1;
+  transform: translateX(0);
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 200ms ease, transform 200ms ease, max-width 200ms ease;
+}
+
+.sidebar--collapsed .sidebar__nav__item-label {
+  opacity: 0;
+  transform: translateX(-10px);
+  max-width: 0;
+  display: none;
+}
+
+.sidebar__footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--sidebar-border);
+}
