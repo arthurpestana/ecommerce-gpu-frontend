@@ -1,0 +1,73 @@
+.input-number {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-number__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.input-number__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-number__wrapper__input {
+  width: 100%;
+  padding: 0.675rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  color: var(--foreground);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.input-number__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.input-number__btn:hover {
+  background: var(--secondary);
+}
+
+.input-number__wrapper__input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.input-number__wrapper__input:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 0.5px var(--ring);
+}
+
+.input-number__wrapper__input--error {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 1px var(--destructive);
+}
+
+.input-number__error {
+  font-size: 0.85rem;
+  color: var(--destructive);
+  margin: 0;
+}
+
+.input-number__description {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}

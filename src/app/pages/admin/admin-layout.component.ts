@@ -7,5 +7,6 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
   standalone: true,
   imports: [RouterOutlet, NavbarComponent],
   templateUrl: './admin-layout.component.html',
+  styleUrls: ['./admin-layout.component.css'],
 })
 export class AdminLayoutComponent {}

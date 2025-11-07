@@ -1,0 +1,24 @@
+<div class="textarea-field">
+  @if (label) {
+  <label class="textarea-field__label">{{ label }}</label>
+  }
+
+  <div class="textarea-field__control">
+    <textarea
+      class="textarea-field__control__textarea"
+      [class.textarea-field__control__textarea--error]="error"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [rows]="rows"
+      [maxLength]="maxLength || null"
+      [style.resize]="resize"
+      [(ngModel)]="model"
+      (ngModelChange)="onInput($event)"
+    ></textarea>
+  </div>
+</div>
+@if (error) {
+<p class="textarea-field__error">{{ error }}</p>
+} @else if (description) {
+<p class="textarea-field__description">{{ description }}</p>
+}

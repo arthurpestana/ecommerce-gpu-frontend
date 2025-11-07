@@ -1,1 +1,96 @@
-<p>gpu-page works!</p>
+<app-form-dialog
+  [open]="createOrEditDialogOpen"
+  [title]="selectedGpu ? 'Editar Placa de Vídeo' : 'Nova Placa de Vídeo'"
+  [subtitle]="selectedGpu ? 'Modifique os detalhes da placa de vídeo selecionada.' : 'Preencha os detalhes para criar uma nova placa de vídeo.'"
+  [cancelText]="'Cancelar'"
+  [submitText]="selectedGpu ? 'Salvar' : 'Criar'"
+  (closed)="createOrEditDialogOpen = false"
+  (submitted)="onSubmitForm()"
+>
+  <app-container-div [direction]="'column'" gap="0.75rem">
+    <app-input-text label="Nome" [(model)]="form.name" placeholder="Escreva o nome da placa de vídeo..."></app-input-text>
+    <app-textarea
+      label="Descrição detalhada"
+      placeholder="Escreva algo..."
+      [(model)]="form.description"
+      [rows]="6"
+      [maxLength]="500"
+      description="Máximo de 500 caracteres"
+    ></app-textarea>
+    <app-container-div [direction]="'row'" gap="1rem">
+      <app-input-number
+        label="Preço"
+        [(model)]="form.price"
+        [min]="0"
+        [step]="0.01"
+      ></app-input-number>
+      <app-input-number
+        label="Quantidade"
+        [(model)]="form.availableQuantity"
+        [min]="0"
+      ></app-input-number>
+    </app-container-div>
+    <app-input-number label="Memória" [(model)]="form.memory" [min]="0"></app-input-number>
+    <app-input-text label="Arquitetura" [(model)]="form.architecture" placeholder="Escreva a arquitetura da placa de vídeo..."></app-input-text>
+    <app-select-input
+      label="Marca"
+      [(model)]="form.modelId"
+      [options]="modelOptions"
+      placeholder="Selecione a marca..."
+    ></app-select-input>
+  </app-container-div>
+</app-form-dialog>
+
+<app-alert-dialog
+  [open]="deleteDialogOpen"
+  title="Confirmar Exclusão"
+  message="Tem certeza de que deseja excluir esta placa de vídeo?"
+  [cancelText]="'Cancelar'"
+  [confirmText]="'Excluir'"
+  (closed)="deleteDialogOpen = false"
+  (confirm)="onConfirmDelete()"
+>
+</app-alert-dialog>
+
+<div class="page-admin">
+  <div class="page-admin__header">
+    <div class="page-admin__header__group">
+      <h1 class="page-admin__header__group-title">Gerenciamento de GPUs</h1>
+      <p class="page-admin__header__group-subtitle">
+        Adicione, edite ou remova placas de vídeo na tabela abaixo.
+      </p>
+    </div>
+    <app-button variant="primary" size="medium" icon="plus" (clicked)="openCreateOrEditDialog(null)"
+      >Nova Placa</app-button
+    >
+  </div>
+  <app-search-filter
+    (searchSubmit)="onSearchText($event)"
+    placeholderText="Buscar por placas de vídeo..."
+  />
+
+  <app-table
+    [data]="dataGpus"
+    [actions]="true"
+    [columns]="columnsTable"
+    [pageSize]="10"
+    [actions]="true"
+    (pageChange)="onPageChanged($event)"
+  >
+    <ng-template #tableActions let-row>
+      <app-button
+        variant="outline"
+        size="square-small"
+        icon="pencil"
+        (clicked)="openCreateOrEditDialog(row)"
+      ></app-button>
+
+      <app-button
+        variant="outline"
+        size="square-small"
+        icon="trash"
+        (clicked)="openDeleteDialog(row)"
+      ></app-button>
+    </ng-template>
+  </app-table>
+</div>

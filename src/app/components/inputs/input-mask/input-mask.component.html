@@ -1,0 +1,19 @@
+<div class="input-mask">
+  @if (label) {
+    <label class="input-mask__label">{{ label }}</label>
+  }
+
+  <input
+    class="input-mask__input"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="model"
+    (input)="handleInput($event.target.value)"
+  />
+
+  @if (error) {
+    <p class="input-mask__error">{{ error }}</p>
+  } @else if (description) {
+    <p class="input-mask__description">{{ description }}</p>
+  }
+</div>

@@ -1,0 +1,33 @@
+@if (open) {
+<div
+  class="dialog__overlay"
+  [class.show]="open"
+  (click)="!disableBackdropClose && closeDialog()"
+></div>
+
+<div class="dialog__container" [style.width]="width">
+  <div class="dialog__container__header">
+    @if (title) {
+    <div class="dialog__container__header-group">
+      <h2 class="dialog__container__header-title">{{ title }}</h2>
+        @if (subtitle) {
+            <p class="dialog__container__header-subtitle">{{ subtitle }}</p>
+        }
+    </div>
+    }
+
+    <app-button
+      type="button"
+      variant="ghost"
+      size="square-small"
+      icon="X"
+      (clicked)="closeDialog()"
+      aria-label="Close dialog"
+    />
+  </div>
+
+  <div class="dialog__container__body">
+    <ng-content></ng-content>
+  </div>
+</div>
+}

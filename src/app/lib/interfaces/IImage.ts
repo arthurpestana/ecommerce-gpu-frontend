@@ -3,3 +3,8 @@ export interface ImageResponse {
     url: string;
     altText: string;
 }
+
+export interface ImageRequest {
+  url: string;
+  alt?: string;
+}

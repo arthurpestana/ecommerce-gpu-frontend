@@ -1,16 +1,14 @@
 <button
+  [attr.type]="type"
   class="button"
   [class]="
-     'button button--' + variant +
-     ' button--' + size +
-     (isIconOnly() ? ' button--icon-only' : '')
+    'button button--' + variant + ' button--' + size + (isIconOnly() ? ' button--icon-only' : '')
   "
   [disabled]="disabled"
   (click)="onButtonClick()"
 >
-
   @if (icon && iconPosition === 'left') {
-    <app-lucide-icon [icon]="icon"/>
+  <app-lucide-icon [icon]="icon" />
   }
 
   <span class="button__label">
@@ -18,7 +16,6 @@
   </span>
 
   @if (icon && iconPosition === 'right') {
-    <app-lucide-icon [icon]="icon"/>
+  <app-lucide-icon [icon]="icon" />
   }
-
 </button>

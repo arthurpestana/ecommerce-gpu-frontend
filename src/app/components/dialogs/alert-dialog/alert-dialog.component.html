@@ -1,0 +1,27 @@
+<app-dialog
+  [open]="open"
+  [title]="title"
+  [subtitle]="subtitle"
+  (closed)="onCancel()"
+  width="420px"
+>
+  <div class="alert-dialog__body">
+    {{ message }}
+  </div>
+
+  <div class="alert-dialog__footer">
+    <app-button
+      type="button"
+      variant="outline"
+      size="large"
+      (clicked)="onCancel()"
+    >{{ cancelText }}</app-button>
+
+    <app-button
+      type="submit"
+      variant="destructive"
+      size="large"
+      (clicked)="onConfirm()"
+    >{{ confirmText }}</app-button>
+  </div>
+</app-dialog>

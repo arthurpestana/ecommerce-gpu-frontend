@@ -1,0 +1,80 @@
+.dialog__overlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.6;
+  background: color-mix(in oklch, var(--background) 60%, black 40%);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  transition: opacity .2s ease;
+}
+
+.dialog__overlay.show {
+  opacity: 0.6;
+}
+
+.dialog__container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: var(--card);
+  color: var(--card-foreground);
+
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+
+  z-index: 1000;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.10);
+
+  animation: dialog-scale-in .25s ease;
+}
+
+.dialog__container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dialog__container__header-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dialog__container__header-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.dialog__container__header-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+.dialog__container__body {
+  color: var(--foreground);
+}
+
+.dialog__container__body-content {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@keyframes dialog-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialog-scale-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}

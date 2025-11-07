@@ -1,12 +1,11 @@
-<div class="search-filter">
+<div class="search-filter" [class.search-filter--compact]="variant === 'compact'">
 
   <div class="search-filter__input-container">
     <div class="search-filter__input-container__icon">
-      <lucide-icon [img]="searchIcon" size="20" class="search-filter__input-container__icon__lucide"></lucide-icon>
+      <app-lucide-icon icon="search"></app-lucide-icon>
     </div>
 
-
-    <input type="text" placeholder="Buscar por nome, marca ou especificações..." class="search-filter__input-container__input"
+    <input type="text" [placeholder]="placeholderText" class="search-filter__input-container__input"
       [(ngModel)]="currentSearchText" (ngModelChange)="emitSearchText()" (keyup.enter)="emitSearchClicked()"/>
 
     @if (currentSearchText) {
@@ -14,6 +13,8 @@
     }
   </div>
 
+  @if (showSubmitButton) {
   <app-button class="search-filter__submit-button" variant="primary" size="square" icon="Search"
     (clicked)="emitSearchClicked()" />
+  }
 </div>

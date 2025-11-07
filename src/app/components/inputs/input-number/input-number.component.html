@@ -1,0 +1,40 @@
+<div class="input-number">
+  @if (label) {
+  <label class="input-number__label">{{ label }}</label>
+  }
+
+  <div class="input-number__wrapper">
+    <app-button
+      type="button"
+      (click)="onDecrement()"
+      variant="outline"
+      size="square-small"
+      icon="minus"
+    />
+
+    <input
+      class="input-number__wrapper__input"
+      type="number"
+      [disabled]="disabled"
+      [value]="model"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      (input)="updateValue($any($event.target).valueAsNumber)"
+    />
+
+    <app-button
+      type="button"
+      (click)="onIncrement()"
+      variant="outline"
+      size="square-small"
+      icon="plus"
+    />
+  </div>
+
+  @if (error) {
+  <p class="input-number__error">{{ error }}</p>
+  } @else if (description) {
+  <p class="input-number__description">{{ description }}</p>
+  }
+</div>

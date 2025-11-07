@@ -1,0 +1,63 @@
+.textarea-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.textarea-field__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.textarea-field__control {
+  width: 100%;
+  position: relative;
+}
+
+.textarea-field__control__textarea {
+  width: 100%;
+  padding: 0.675rem;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  color: var(--foreground);
+  font-size: 0.9rem;
+
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+
+  resize: vertical;
+  min-height: 80px;
+  height: 80px;
+}
+
+.textarea-field__control__textarea::placeholder {
+  color: var(--muted-foreground);
+}
+
+.textarea-field__control__textarea:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 1px var(--ring);
+}
+
+.textarea-field__control__textarea--error {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 1px var(--destructive);
+}
+
+.textarea-field__error {
+  font-size: 0.8rem;
+  color: var(--destructive);
+  margin: 0;
+}
+
+.textarea-field__description {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}

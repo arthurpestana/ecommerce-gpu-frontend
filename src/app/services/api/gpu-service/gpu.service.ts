@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { GpuResponse } from '../../../lib/interfaces/IGpu';
+import { GpuRequest, GpuResponse } from '../../../lib/interfaces/IGpu';
 import { PaginationRequest, PaginationResponse } from '../../../lib/interfaces/IPagination';
 import { environment } from '../../../../environments/environment';
 
@@ -110,11 +110,11 @@ export class GpuService {
     return firstValueFrom(this.httpClient.get<GpuResponse>(`${this.apiUrl}/${id}`));
   }
 
-  async createGpu(payload: Partial<GpuResponse>): Promise<GpuResponse> {
+  async createGpu(payload: GpuRequest): Promise<GpuResponse> {
     return firstValueFrom(this.httpClient.post<GpuResponse>(`${this.apiUrl}`, payload));
   }
 
-  async updateGpu(id: number, payload: Partial<GpuResponse>): Promise<GpuResponse> {
+  async updateGpu(id: number, payload: Partial<GpuRequest>): Promise<GpuResponse> {
     return firstValueFrom(this.httpClient.put<GpuResponse>(`${this.apiUrl}/${id}`, payload));
   }
 

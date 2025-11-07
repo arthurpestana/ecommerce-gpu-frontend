@@ -2,6 +2,7 @@ import { Component, computed, inject, Injectable, signal } from '@angular/core';
 import { GpuService } from '../../services/api/gpu-service/gpu.service';
 import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { PaginationRequest } from '../interfaces/IPagination';
+import { GpuRequest } from '../interfaces/IGpu';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -94,12 +95,12 @@ export class GpuQuery {
   }
 
   createGpu = injectMutation(() => ({
-    mutationFn: (data: any) => this.gpuService.createGpu(data),
+    mutationFn: (data: GpuRequest) => this.gpuService.createGpu(data),
     onSuccess: () => this.queryClient.invalidateQueries({ queryKey: ['gpus'] }),
   }));
 
   updateGpu = injectMutation(() => ({
-    mutationFn: ({ id, data }: any) => this.gpuService.updateGpu(id, data),
+    mutationFn: ({ id, data }: { id: number; data: GpuRequest }) => this.gpuService.updateGpu(id, data),
     onSuccess: () => this.queryClient.invalidateQueries({ queryKey: ['gpus'] }),
   }));
 

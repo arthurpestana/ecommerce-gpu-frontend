@@ -1,0 +1,39 @@
+<div class="input-field">
+  
+  @if (label) {
+    <label class="input-field__label">{{ label }}</label>
+  }
+
+  <div class="input-field__wrapper">
+
+    @if (iconLeft) {
+      <div class="input-field__wrapper__icon input-field__wrapper__icon--left">
+        <lucide-icon [img]="iconLeft" size="18"></lucide-icon>
+      </div>
+    }
+
+    <input
+      [class]="'input-field__wrapper__input' + (iconLeft ? ' input-field__wrapper__input--with-icon-left' : '') + (iconRight ? ' input-field__wrapper__input--with-icon-right' : '')" 
+      [placeholder]="placeholder"
+      [type]="type"
+      [disabled]="disabled"
+      [(ngModel)]="model"
+      (ngModelChange)="onInput($event)"
+      [class.input-field__wrapper__input--error]="error"
+    />
+
+    @if (iconRight) {
+      <div class="input-field__wrapper__icon input-field__wrapper__icon--right">
+        <lucide-icon [img]="iconRight" size="18"></lucide-icon>
+      </div>
+    }
+
+  </div>
+
+  @if (error) {
+    <p class="input-field__error">{{ error }}</p>
+  } @else if (description) {
+    <p class="input-field__description">{{ description }}</p>
+  }
+
+</div>

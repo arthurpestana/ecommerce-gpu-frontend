@@ -1,54 +1,53 @@
 <div class="table__wrapper">
   <table class="table__wrapper__table">
-
     <thead class="table__wrapper__table__head">
       <tr class="table__wrapper__table__head__row">
         @for (col of columns; track col.key) {
-          <th
-            class="
+        <th
+          class="
               table__wrapper__table__head__cell
               {{ col.align === 'right' ? 'table__wrapper__table__head__cell--right' : '' }}
               {{ col.align === 'center' ? 'table__wrapper__table__head__cell--center' : '' }}
             "
-            [style.width]="col.width"
-          >
-            {{ col.label }}
-          </th>
-        }
-
-        @if (actions) {
-          <th class="table__wrapper__table__head__cell table__wrapper__table__head__cell--actions">
-            Ações
-          </th>
+          [style.width]="col.width"
+        >
+          {{ col.label }}
+        </th>
+        } @if (actions) {
+        <th class="table__wrapper__table__head__cell table__wrapper__table__head__cell--actions">
+          Ações
+        </th>
         }
       </tr>
     </thead>
 
     <tbody class="table__wrapper__table__body">
       @for (row of data; track row.id) {
-        <tr class="table__wrapper__table__body__row">
-
-          @for (col of columns; track col.key) {
-            <td
-              class="
+      <tr class="table__wrapper__table__body__row">
+        @for (col of columns; track col.key) {
+        <td
+          class="
                 table__wrapper__table__body__cell
                 {{ col.align === 'right' ? 'table__wrapper__table__body__cell--right' : '' }}
                 {{ col.align === 'center' ? 'table__wrapper__table__body__cell--center' : '' }}
               "
-            >
-              {{ row[col.key] }}
-            </td>
-          }
-
-          @if (actions) {
-            <td class="table__wrapper__table__body__cell table__wrapper__table__body__cell--actions">
-              <ng-content select="[table-actions]"></ng-content>
-            </td>
-          }
-
-        </tr>
+        >
+          {{ col.formatter ? col.formatter(row, row[col.key]) : row[col.key] }}
+        </td>
+        } @if (actions) {
+        <td class="table__wrapper__table__body__cell table__wrapper__table__body__cell--actions">
+          <ng-container
+            *ngTemplateOutlet="actionTemplate; context: { $implicit: row }"
+          ></ng-container>
+        </td>
+        }
+      </tr>
       }
     </tbody>
-
   </table>
 </div>
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="handlePageChange($event)"
+/>

@@ -1,0 +1,48 @@
+<div class="select-field" #dropdownRoot>
+  @if (label) {
+  <label class="select-field__label">{{ label }}</label>
+  }
+
+  <div
+    class="select-field__control"
+    [class.select-field__control--error]="error"
+    [class.select-field__control--disabled]="disabled"
+    (click)="onToggle()"
+  >
+    <span
+      class="select-field__control__value"
+      [class.select-field__control__value--placeholder]="!model"
+    >
+      {{ selectedLabel }}
+    </span>
+
+    <lucide-icon [img]="chevronIcon" size="18" class="select-field__control__icon"></lucide-icon>
+  </div>
+
+  @if (isOpen) {
+  <div class="select-field__dropdown">
+    <div class="select-field__dropdown__search">
+      <app-search-filter
+        placeholderText="Buscar..."
+        (searchTextChange)="handleSearch($event)"
+        [showSubmitButton]="false"
+        [variant]="'compact'"
+      ></app-search-filter>
+    </div>
+
+    <div class="select-field__options">
+      @for (option of filteredOptions; track option.value) {
+      <div class="select-field__option" (click)="selectOption(option)">
+        {{ option.label }}
+      </div>
+      } @if (filteredOptions.length === 0) {
+      <p class="select-field__no-results">Nenhum resultado encontrado</p>
+      }
+    </div>
+  </div>
+  } @if (error) {
+  <p class="select-field__error">{{ error }}</p>
+  } @else if (description) {
+  <p class="select-field__description">{{ description }}</p>
+  }
+</div>

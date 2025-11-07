@@ -1,0 +1,43 @@
+.input-mask {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-mask__label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.input-mask__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  color: var(--foreground);
+  font-size: 1rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.input-mask__input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.input-mask__input:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 1px var(--ring);
+}
+
+.input-mask__error {
+  font-size: 0.85rem;
+  color: var(--destructive);
+}
+
+.input-mask__description {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}

@@ -4,19 +4,25 @@ import { AdminLayoutComponent } from './pages/admin/admin-layout.component';
 import { GpuPageComponent } from './pages/admin/gpu-page/gpu-page.component';
 
 export const routes: Routes = [
-    {
+  {
+    path: '',
+    component: ProductsPageComponent,
+    title: 'Produtos - GPU E-commerce',
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      {
         path: '',
-        component: ProductsPageComponent,
-        title: 'Produtos - GPU E-commerce'
-    },
-    {
-        path: 'admin',
-        component: AdminLayoutComponent,
-        children: [
-            {
-                path: 'gpus',
-                loadComponent: () => import('./pages/admin/gpu-page/gpu-page.component').then(m => m.GpuPageComponent)
-            }
-        ]
-    }
+        redirectTo: 'gpus',
+        pathMatch: 'full',
+      },
+      {
+        path: 'gpus',
+        component: GpuPageComponent,
+        title: 'Admin - GPUs',
+      },
+    ],
+  },
 ];

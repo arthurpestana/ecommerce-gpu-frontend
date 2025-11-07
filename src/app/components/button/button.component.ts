@@ -3,7 +3,7 @@ import { LucideIconComponent } from '../lucide-icon/lucide-icon.component';
 
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
-type ButtonSize = 'small' | 'medium' | 'large' | 'square' | 'none';
+type ButtonSize = 'small' | 'medium' | 'large' | 'square' | 'none' | 'square-small';
 type IconPosition = 'left' | 'right';
 
 @Component({
@@ -21,6 +21,7 @@ export class ButtonComponent {
   @Input() disabled = false;
   @Input() icon?: string;
   @Input() iconPosition: IconPosition = 'left';
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
 
   public isIconOnly(): boolean {
     return !!this.icon && !this.hasContent;

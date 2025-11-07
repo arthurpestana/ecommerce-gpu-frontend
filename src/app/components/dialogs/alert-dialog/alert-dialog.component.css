@@ -1,0 +1,12 @@
+.alert-dialog__body {
+  padding: 8px 4px 20px;
+  font-size: 1rem;
+  color: var(--foreground);
+}
+
+.alert-dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
