@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
@@ -18,6 +18,7 @@ type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
   imports: [CommonModule],
   templateUrl: './container-div.component.html',
   styleUrls: ['./container-div.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ContainerDivComponent {
   @Input() direction: FlexDirection = 'column';

@@ -27,7 +27,7 @@ export interface GpuRequest {
   availableQuantity: number;
   memory: number;
   architecture: string;
-  energyConsumption?: number | null;
+  energyConsumption: number;
   modelId: string;
   images?: ImageRequest[]; 
   technologies?: TechnologyRequest[];

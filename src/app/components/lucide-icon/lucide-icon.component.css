@@ -1,6 +1,6 @@
 .icon {
-    width: 20px !important;
-    height: 20px !important;
+    width: 20px;
+    height: 20px;
     stroke-width: 3px;
     display: flex;
     align-items: center;

@@ -8,7 +8,7 @@
   (click)="onButtonClick()"
 >
   @if (icon && iconPosition === 'left') {
-  <app-lucide-icon [icon]="icon" />
+  <app-lucide-icon [icon]="icon" [size]="iconSize" />
   }
 
   <span class="button__label">
@@ -16,6 +16,6 @@
   </span>
 
   @if (icon && iconPosition === 'right') {
-  <app-lucide-icon [icon]="icon" />
+  <app-lucide-icon [icon]="icon" [size]="iconSize" />
   }
 </button>

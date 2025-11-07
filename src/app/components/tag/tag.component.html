@@ -1,0 +1,10 @@
+<div class="tag tag--{{ color }} tag--{{ size }}" (click)="clicked.emit()">
+
+  <span class="tag__label">{{ label }}</span>
+
+  @if (removable) {
+    <button class="tag__remove-btn" (click)="onRemove($event)" type="button">
+      <app-lucide-icon icon="x" size="14"></app-lucide-icon>
+    </button>
+  }
+</div>

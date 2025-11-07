@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { TableColumn, TableComponent } from '../../../components/table/table.component';
-import { GpuQuery } from '../../../lib/hooks/GpuQuery.hook';
 import { GpuRequest, GpuResponse } from '../../../lib/interfaces/IGpu';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { SearchFilterComponent } from '../../../components/search-filter/search-filter.component';
@@ -12,6 +11,8 @@ import { InputNumberComponent } from '../../../components/inputs/input-number/in
 import { ContainerDivComponent } from '../../../components/container-div/container-div.component';
 import { TextAreaComponent } from '../../../components/textarea/textarea.component';
 import { SelectInputComponent } from '../../../components/inputs/select-input/select-input.component';
+import { GpuQueryService } from '../../../services/api/gpu/gpu-query/gpu-query.service';
+import { SelectInputMultiComponent } from '../../../components/inputs/select-input-multi/select-input-multi.component';
 
 @Component({
   selector: 'app-gpu-page',
@@ -26,12 +27,13 @@ import { SelectInputComponent } from '../../../components/inputs/select-input/se
     InputNumberComponent,
     TextAreaComponent,
     SelectInputComponent,
+    SelectInputMultiComponent,
   ],
   templateUrl: './gpu-page.component.html',
   styleUrl: './gpu-page.component.css',
 })
 export class GpuPageComponent {
-  private readonly gpuQuery = inject(GpuQuery);
+  private readonly gpuQuery = inject(GpuQueryService);
 
   createDialogOpen = false;
   editDialogOpen = false;
@@ -46,6 +48,13 @@ export class GpuPageComponent {
     { value: 3, label: 'RX 6600 XT' },
   ];
 
+  listaCategorias = [
+    { value: '1', label: 'Gaming' },
+    { value: '2', label: 'Workstation' },
+    { value: '3', label: 'Budget' },
+    { value: '4', label: 'High-End' },
+  ];
+
   form: GpuRequest = {
     name: '',
     description: '',
@@ -54,12 +63,20 @@ export class GpuPageComponent {
     availableQuantity: 0,
     memory: 0,
     architecture: '',
-    energyConsumption: null,
+    energyConsumption: 0,
     modelId: '',
     images: [],
     technologies: [],
     categoryIds: [],
   };
+
+  get categoryIds() {
+    return this.form.categoryIds ?? [];
+  }
+
+  set categoryIds(value: string[]) {
+    this.form.categoryIds = value;
+  }
 
   columnsTable: TableColumn<GpuResponse>[] = [
     { key: 'id', label: 'ID', width: '100px' },
@@ -141,7 +158,7 @@ export class GpuPageComponent {
         availableQuantity: 0,
         memory: 0,
         architecture: '',
-        energyConsumption: null,
+        energyConsumption: 0,
         modelId: '',
         images: [],
         technologies: [],

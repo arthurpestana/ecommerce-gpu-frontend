@@ -14,10 +14,11 @@ type IconPosition = 'left' | 'right';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  @Output() clicked = new EventEmitter<void>();
+  @Output() clicked = new EventEmitter<Event>();
 
   @Input() variant: ButtonVariant = 'primary';
   @Input() size: ButtonSize = 'medium';
+  @Input() iconSize: number | string = 20;
   @Input() disabled = false;
   @Input() icon?: string;
   @Input() iconPosition: IconPosition = 'left';

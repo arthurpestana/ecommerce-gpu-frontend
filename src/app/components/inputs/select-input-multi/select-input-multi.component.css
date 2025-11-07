@@ -1,0 +1,128 @@
+.select-multi {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.select-multi__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.select-multi__control {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 0.675rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: border-color 150ms ease;
+}
+
+.select-multi__control:hover {
+  border-color: var(--muted-foreground);
+}
+
+.select-multi__control--error {
+  border-color: var(--destructive);
+}
+
+.select-multi__control__tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  width: 100%;
+  color: var(--foreground);
+}
+
+.select-multi__control__placeholder {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+.select-multi__control__buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+}
+
+.select-multi__control__buttons__icon {
+  color: var(--muted-foreground);
+  transition: 150ms ease;
+}
+
+.select-multi__control__buttons__icon--open {
+  transform: rotateX(-180deg);
+}
+
+
+.select-multi__dropdown {
+  position: absolute;
+  width: 100%;
+  top: calc(100% + 6px);
+  background: var(--card);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.12);
+
+  animation: scale-in 0.15s ease;
+
+  z-index: 999;
+}
+
+.select-multi__dropdown__search {
+  margin-bottom: 0.5rem;
+}
+
+.select-multi__dropdown__options {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.select-multi__dropdown__options__option {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: background 150ms;
+}
+
+.select-multi__dropdown__options__option:hover {
+  background: var(--muted);
+}
+
+.select-multi__dropdown__options__option--selected {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.select-multi__option--selected:hover {
+  background: var(--primary-hover);
+}
+
+.select-multi__dropdown__options__no-results {
+  padding: 1rem;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.select-multi__error {
+  color: var(--destructive);
+  font-size: 0.85rem;
+}
+
+.select-multi__description {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}

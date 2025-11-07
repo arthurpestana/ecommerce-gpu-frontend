@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { GpuRequest, GpuResponse } from '../../../lib/interfaces/IGpu';
-import { PaginationRequest, PaginationResponse } from '../../../lib/interfaces/IPagination';
-import { environment } from '../../../../environments/environment';
+import { GpuRequest, GpuResponse } from '../../../../lib/interfaces/IGpu';
+import { PaginationRequest, PaginationResponse } from '../../../../lib/interfaces/IPagination';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -47,23 +47,34 @@ export class GpuService {
     );
   }
 
-  async findByModel(modelId: number, paginationParams: PaginationRequest): Promise<PaginationResponse<GpuResponse>> {
+  async findByModel(
+    modelId: number,
+    paginationParams: PaginationRequest
+  ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
       .set('offset', paginationParams.offset)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
-      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/model/${modelId}`, { params })
+      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/model/${modelId}`, {
+        params,
+      })
     );
   }
 
-  async findByManufacturer(manufacturerId: number, paginationParams: PaginationRequest): Promise<PaginationResponse<GpuResponse>> {
+  async findByManufacturer(
+    manufacturerId: number,
+    paginationParams: PaginationRequest
+  ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
       .set('offset', paginationParams.offset)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
-      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/manufacturer/${manufacturerId}`, { params })
+      this.httpClient.get<PaginationResponse<GpuResponse>>(
+        `${this.apiUrl}/manufacturer/${manufacturerId}`,
+        { params }
+      )
     );
   }
 
@@ -76,9 +87,7 @@ export class GpuService {
     if (min !== undefined) params = params.set('min', min);
     if (max !== undefined) params = params.set('max', max);
     if (paginationParams) {
-      params = params
-        .set('offset', paginationParams.offset)
-        .set('limit', paginationParams.limit);
+      params = params.set('offset', paginationParams.offset).set('limit', paginationParams.limit);
     }
 
     return firstValueFrom(
@@ -86,23 +95,33 @@ export class GpuService {
     );
   }
 
-  async findByTechnology(tech: string, paginationParams: PaginationRequest): Promise<PaginationResponse<GpuResponse>> {
+  async findByTechnology(
+    tech: string,
+    paginationParams: PaginationRequest
+  ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
       .set('offset', paginationParams.offset)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
-      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/technology/${tech}`, { params })
+      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/technology/${tech}`, {
+        params,
+      })
     );
   }
 
-  async findByCategory(category: string, paginationParams: PaginationRequest): Promise<PaginationResponse<GpuResponse>> {
+  async findByCategory(
+    category: string,
+    paginationParams: PaginationRequest
+  ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
       .set('offset', paginationParams.offset)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
-      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/category/${category}`, { params })
+      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/category/${category}`, {
+        params,
+      })
     );
   }
 

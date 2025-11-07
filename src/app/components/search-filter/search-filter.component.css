@@ -6,7 +6,7 @@
 }
 
 .search-filter--compact .search-filter__input-container__input {
-  padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+  padding: 0.675rem 2.5rem 0.675rem 2.5rem;
   font-size: 0.95rem;
   border: transparent;
   border-bottom: 2px solid var(--border);

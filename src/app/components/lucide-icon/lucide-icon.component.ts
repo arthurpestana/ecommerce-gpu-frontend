@@ -9,4 +9,5 @@ import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 })
 export class LucideIconComponent {
   @Input() icon?: string | LucideIconData;
+  @Input() size: number | string = 20;
 }

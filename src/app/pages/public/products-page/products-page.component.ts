@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { SearchFilterComponent } from '../../../components/search-filter/search-filter.component';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
 import { GpuCardComponent } from '../../../components/gpu-card/gpu-card.component';
-import { GpuService } from '../../../services/api/gpu-service/gpu.service';
+import { GpuService } from '../../../services/api/gpu/gpu-service/gpu.service';
 import { GpuResponse } from '../../../lib/interfaces/IGpu';
 import { PaginationRequest } from '../../../lib/interfaces/IPagination';
-import { GpuQuery } from '../../../lib/hooks/GpuQuery.hook';
+import { GpuQueryService } from '../../../services/api/gpu/gpu-query/gpu-query.service';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -19,7 +19,7 @@ const ITEMS_PER_PAGE = 10;
   styleUrls: ['./products-page.component.css'],
 })
 export class ProductsPageComponent {
-  private readonly gpuQuery = inject(GpuQuery);
+  private readonly gpuQuery = inject(GpuQueryService);
 
   listGpus = this.gpuQuery.getListGpus;
 

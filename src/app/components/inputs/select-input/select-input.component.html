@@ -7,7 +7,7 @@
     class="select-field__control"
     [class.select-field__control--error]="error"
     [class.select-field__control--disabled]="disabled"
-    (click)="onToggle()"
+    (click)="toggleDropdown()"
   >
     <span
       class="select-field__control__value"
@@ -16,7 +16,7 @@
       {{ selectedLabel }}
     </span>
 
-    <lucide-icon [img]="chevronIcon" size="18" class="select-field__control__icon"></lucide-icon>
+    <app-lucide-icon [icon]="'chevron-down'" class="select-field__control__icon" [class]="isOpen ? 'select-field__control__icon--open' : 'select-field__control__icon--closed'"></app-lucide-icon>
   </div>
 
   @if (isOpen) {

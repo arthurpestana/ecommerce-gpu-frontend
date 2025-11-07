@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LucideAngularModule, ChevronDown } from 'lucide-angular';
 import { SearchFilterComponent } from '../../search-filter/search-filter.component';
+import { LucideIconComponent } from '../../lucide-icon/lucide-icon.component';
 
 export interface SelectOption {
   value: string | number;
@@ -20,13 +20,11 @@ export interface SelectOption {
 @Component({
   selector: 'app-select-input',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule, SearchFilterComponent],
+  imports: [CommonModule, FormsModule, LucideIconComponent, SearchFilterComponent],
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.css'],
 })
 export class SelectInputComponent {
-  readonly chevronIcon = ChevronDown;
-
   @Input() label = '';
   @Input() placeholder = 'Selecione...';
   @Input() description = '';
@@ -47,7 +45,7 @@ export class SelectInputComponent {
     this.filteredOptions = this.options;
   }
 
-  onToggle() {
+  toggleDropdown() {
     if (!this.disabled) {
       this.isOpen = !this.isOpen;
     }

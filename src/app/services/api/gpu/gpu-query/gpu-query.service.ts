@@ -1,8 +1,7 @@
 import { Component, computed, inject, Injectable, signal } from '@angular/core';
-import { GpuService } from '../../services/api/gpu-service/gpu.service';
 import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
-import { PaginationRequest } from '../interfaces/IPagination';
-import { GpuRequest } from '../interfaces/IGpu';
+import { GpuService } from '../gpu-service/gpu.service';
+import { GpuRequest } from '../../../../lib/interfaces/IGpu';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -21,7 +20,7 @@ type GpuQueryParams = {
 @Injectable({
   providedIn: 'root',
 })
-export class GpuQuery {
+export class GpuQueryService {
   private readonly gpuService = inject(GpuService);
   private readonly queryClient = inject(QueryClient);
 
@@ -100,7 +99,8 @@ export class GpuQuery {
   }));
 
   updateGpu = injectMutation(() => ({
-    mutationFn: ({ id, data }: { id: number; data: GpuRequest }) => this.gpuService.updateGpu(id, data),
+    mutationFn: ({ id, data }: { id: number; data: GpuRequest }) =>
+      this.gpuService.updateGpu(id, data),
     onSuccess: () => this.queryClient.invalidateQueries({ queryKey: ['gpus'] }),
   }));
 
