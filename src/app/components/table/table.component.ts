@@ -9,6 +9,7 @@ export interface TableColumn<T> {
   width?: string;
   align?: 'left' | 'center' | 'right';
   formatter?: (row: T, value: any) => string | number;
+  template?: TemplateRef<any>;
 }
 
 @Component({

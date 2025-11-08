@@ -137,7 +137,13 @@ export class GpuService {
     return firstValueFrom(this.httpClient.put<GpuResponse>(`${this.apiUrl}/${id}`, payload));
   }
 
-  async deleteGpu(id: number): Promise<void> {
-    return firstValueFrom(this.httpClient.delete<void>(`${this.apiUrl}/${id}`));
+  async updateGpuStatus(id: number, isActive: boolean): Promise<GpuResponse> {
+    return firstValueFrom(
+      this.httpClient.patch<GpuResponse>(`${this.apiUrl}/${id}/status`, { isActive })
+    );
+  }
+
+  async deleteGpu(id: number): Promise<number> {
+    return firstValueFrom(this.httpClient.delete<number>(`${this.apiUrl}/${id}`));
   }
 }

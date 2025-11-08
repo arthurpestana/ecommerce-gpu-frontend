@@ -32,7 +32,18 @@
                 {{ col.align === 'center' ? 'table__wrapper__table__body__cell--center' : '' }}
               "
         >
-          {{ col.formatter ? col.formatter(row, row[col.key]) : row[col.key] }}
+          @if (col.template) {
+          <ng-container
+            [ngTemplateOutlet]="col.template"
+            [ngTemplateOutletContext]="{ 
+              $implicit: row[col.key],
+              value: row[col.key],
+              row: row 
+            }">
+          </ng-container>
+          } @else {
+            {{ col.formatter ? col.formatter(row, row[col.key]) : row[col.key] }}
+          }
         </td>
         } @if (actions) {
         <td class="table__wrapper__table__body__cell table__wrapper__table__body__cell--actions">

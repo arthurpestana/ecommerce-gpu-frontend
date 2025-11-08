@@ -15,7 +15,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
-
   padding: 0.675rem;
   background: var(--card);
   border: 1px solid var(--border);
@@ -40,9 +39,15 @@
   background: transparent;
   outline: none;
   color: var(--foreground);
+  line-height: 1.5rem;
   flex: 1;
   min-width: 120px;
   font-size: 0.9rem;
+}
+
+.tag-input__control:focus-within {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 0.5px var(--ring);
 }
 
 .tag-input__control__input::placeholder {
@@ -50,11 +55,11 @@
 }
 
 .tag-input__error {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--destructive);
 }
 
 .tag-input__description {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--muted-foreground);
 }

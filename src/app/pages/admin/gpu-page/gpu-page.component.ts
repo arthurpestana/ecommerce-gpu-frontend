@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { TableColumn, TableComponent } from '../../../components/table/table.component';
 import { GpuRequest, GpuResponse } from '../../../lib/interfaces/IGpu';
 import { ButtonComponent } from '../../../components/button/button.component';
@@ -16,6 +16,7 @@ import { SelectInputMultiComponent } from '../../../components/inputs/select-inp
 import { ToggleInputComponent } from '../../../components/inputs/toggle-input/toggle-input.component';
 import { FileInputComponent } from '../../../components/inputs/file-input/file-input.component';
 import { TagInputComponent } from '../../../components/inputs/tag-input/tag-input.component';
+import { FileDownloadService } from '../../../services/file-download/file-download.service';
 
 @Component({
   selector: 'app-gpu-page',
@@ -40,6 +41,42 @@ import { TagInputComponent } from '../../../components/inputs/tag-input/tag-inpu
 })
 export class GpuPageComponent {
   private readonly gpuQuery = inject(GpuQueryService);
+  @ViewChild('toggleTemplate', { static: true }) toggleTemplate!: TemplateRef<any>;
+
+  columnsTable: TableColumn<GpuResponse>[] = [];
+
+  ngOnInit() {
+    this.columnsTable = [
+      { key: 'id', label: 'ID', width: '100px' },
+      { key: 'name', label: 'Nome', width: '200px' },
+      {
+        key: 'categories',
+        label: 'Categorias',
+        width: '250px',
+        formatter: (row, value) => value[0]?.name,
+      },
+      {
+        key: 'price',
+        label: 'Preço',
+        align: 'center',
+        formatter: (row, value) =>
+          `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+      },
+      { key: 'availableQuantity', label: 'Estoque', align: 'center' },
+      {
+        key: 'isActive',
+        label: 'Status',
+        align: 'center',
+        template: this.toggleTemplate,
+      },
+      {
+        key: 'memory',
+        label: 'Memória RAM',
+        width: '200px',
+        formatter: (row, value) => `${value} GB`,
+      },
+    ];
+  }
 
   createDialogOpen = false;
   editDialogOpen = false;
@@ -87,37 +124,6 @@ export class GpuPageComponent {
     this.form.categoryIds = value;
   }
 
-  columnsTable: TableColumn<GpuResponse>[] = [
-    { key: 'id', label: 'ID', width: '100px' },
-    { key: 'name', label: 'Nome', width: '200px' },
-    {
-      key: 'categories',
-      label: 'Categorias',
-      width: '250px',
-      formatter: (row, value) => value[0]?.name,
-    },
-    {
-      key: 'price',
-      label: 'Preço',
-      align: 'center',
-      formatter: (row, value) =>
-        `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-    },
-    { key: 'availableQuantity', label: 'Estoque', align: 'center' },
-    {
-      key: 'isActive',
-      label: 'Status',
-      align: 'center',
-      formatter: (row, value) => (value ? 'Ativo' : 'Inativo'),
-    },
-    {
-      key: 'memory',
-      label: 'Memória RAM',
-      width: '200px',
-      formatter: (row, value) => `${value} GB`,
-    },
-  ];
-
   listGpus = this.gpuQuery.getListGpus;
 
   get dataGpus() {
@@ -160,6 +166,7 @@ export class GpuPageComponent {
       };
 
       this.technologyTags = gpu.technologies.map((tech) => tech.name) ?? [];
+      this.uploadImages = gpu.images.map((img) => new File([img.url], img.altText)) ?? [];
     } else {
       this.form = {
         name: '',
@@ -188,6 +195,7 @@ export class GpuPageComponent {
   }
 
   onConfirmDelete() {
+    console.log('Deleting GPU:', this.selectedGpu);
     if (!this.selectedGpu) return;
 
     this.gpuQuery.deleteGpu.mutate(this.selectedGpu.id, {
@@ -197,16 +205,34 @@ export class GpuPageComponent {
     });
   }
 
+  onToggleStatus(row: GpuResponse, newValue: boolean) {
+    this.gpuQuery.updateGpuStatus.mutate(
+      {
+        id: row.id,
+        isActive: newValue,
+      },
+      {
+        onSuccess: () => {
+          console.log('Status atualizado.');
+        },
+      }
+    );
+  }
+
   onSubmitForm() {
     const payload: GpuRequest = {
       ...this.form,
+      images: this.form.images?.map((image) => ({
+        url: image.url,
+        altText: image.altText,
+      })),
       technologies: this.technologyTags.map((techTag) => ({
         name: techTag,
         description: '',
       })),
     };
 
-    console.log('Submitting form:', this.form);
+    console.log('Submitting form:', payload);
     if (this.selectedGpu) {
       this.gpuQuery.updateGpu.mutate(
         {

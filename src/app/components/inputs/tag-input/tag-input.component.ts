@@ -27,11 +27,14 @@ export class TagInputComponent {
     const tag = this.newTag.trim();
 
     if (!tag || this.disabled) return;
-    if (this.model.includes(tag)) return;
+    if (this.model.includes(tag)) {
+      this.error = 'Tag já adicionada.';
+      return;
+    };
 
     this.model = [...this.model, tag];
     this.modelChange.emit(this.model);
-
+    this.error = '';
     this.newTag = '';
   }
 

@@ -24,9 +24,8 @@
   border-radius: var(--radius-lg);
   font-size: 0.9rem;
   color: var(--foreground);
-  transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+  line-height: 1.5rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .input-number__btn {

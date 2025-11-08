@@ -96,16 +96,34 @@ export class GpuQueryService {
   createGpu = injectMutation(() => ({
     mutationFn: (data: GpuRequest) => this.gpuService.createGpu(data),
     onSuccess: () => this.queryClient.invalidateQueries({ queryKey: ['gpus'] }),
+    onError: (error) => {
+      console.error(error);
+    },
   }));
 
   updateGpu = injectMutation(() => ({
     mutationFn: ({ id, data }: { id: number; data: GpuRequest }) =>
       this.gpuService.updateGpu(id, data),
     onSuccess: () => this.queryClient.invalidateQueries({ queryKey: ['gpus'] }),
+    onError: (error) => {
+      console.error(error);
+    },
+  }));
+
+  updateGpuStatus = injectMutation(() => ({
+    mutationFn: ({ id, isActive }: { id: number; isActive: boolean }) =>
+      this.gpuService.updateGpuStatus(id, isActive),
+    onSuccess: () => this.queryClient.invalidateQueries({ queryKey: [''] }),
+    onError: (error) => {
+      console.error(error);
+    },
   }));
 
   deleteGpu = injectMutation(() => ({
     mutationFn: (id: number) => this.gpuService.deleteGpu(id),
     onSuccess: () => this.queryClient.invalidateQueries({ queryKey: ['gpus'] }),
+    onError: (error) => {
+      console.error(error);
+    },
   }));
 }

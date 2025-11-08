@@ -41,10 +41,9 @@
 
   color: var(--foreground);
   font-size: 0.9rem;
+  line-height: 1.5rem;
 
-  transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .input-field__wrapper__input--with-icon-left {

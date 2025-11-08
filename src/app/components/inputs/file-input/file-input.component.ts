@@ -38,11 +38,6 @@ export class FileInputComponent {
     this.modelChange.emit(this.model);
   }
 
-  clearAll() {
-    this.model = [];
-    this.modelChange.emit(this.model);
-  }
-
   isImage(file: File): boolean {
     return file.type.startsWith('image/');
   }

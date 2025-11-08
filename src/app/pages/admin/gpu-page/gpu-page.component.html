@@ -1,3 +1,10 @@
+<ng-template #toggleTemplate let-value let-row="row">
+  <app-toggle-input
+    [model]="value"
+    (modelChange)="onToggleStatus(row, $event)"
+  ></app-toggle-input>
+</ng-template>
+
 <app-form-dialog
   [open]="createOrEditDialogOpen"
   [title]="selectedGpu ? 'Editar Placa de Vídeo' : 'Nova Placa de Vídeo'"
@@ -84,7 +91,7 @@
   [cancelText]="'Cancelar'"
   [confirmText]="'Excluir'"
   (closed)="deleteDialogOpen = false"
-  (confirm)="onConfirmDelete()"
+  (confirmed)="onConfirmDelete()"
 >
 </app-alert-dialog>
 

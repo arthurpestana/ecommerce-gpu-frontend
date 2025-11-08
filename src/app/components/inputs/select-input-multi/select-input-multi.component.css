@@ -17,6 +17,7 @@
   border-radius: var(--radius-md);
   cursor: pointer;
   padding: 0.675rem;
+  line-height: 1.5rem;
 
   display: flex;
   justify-content: space-between;
@@ -62,7 +63,6 @@
   transform: rotateX(-180deg);
 }
 
-
 .select-multi__dropdown {
   position: absolute;
   width: 100%;
@@ -71,7 +71,7 @@
 
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.12);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.12);
 
   animation: scale-in 0.15s ease;
 
@@ -123,6 +123,12 @@
 }
 
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.97); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
