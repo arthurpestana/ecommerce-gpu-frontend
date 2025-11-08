@@ -1,0 +1,87 @@
+.file-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.file-input__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.file-input__control {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 0.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+  position: relative;
+
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.file-input__control--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.file-input__control--error {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 1px var(--destructive);
+}
+
+.file-input__control__native {
+  display: none;
+}
+
+.file-input__control__placeholder {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+.file-input__control__files {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+}
+
+.file-input__control__files__file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+}
+
+.file-input__control__files__file-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--foreground);
+}
+
+.file-input__control__files__file-preview {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.file-input__error {
+  font-size: 0.8rem;
+  color: var(--destructive);
+}
+
+.file-input__description {
+  margin-top: -2px;
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}

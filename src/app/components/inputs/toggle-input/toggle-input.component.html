@@ -1,1 +1,27 @@
-<p>toggle-input works!</p>
+<div class="toggle-input">
+
+  @if (label) {
+    <label class="toggle-input__label">{{ label }}</label>
+  }
+
+  <div
+    class="toggle-input__control"
+    [class.toggle-input__control--checked]="model"
+    [class.toggle-input__control--disabled]="disabled"
+    (click)="onToggleInput()"
+    tabindex="0"
+    role="switch"
+    [attr.aria-checked]="model"
+    (keydown.space)="onToggleInput()"
+    (keydown.enter)="onToggleInput()"
+  >
+    <div class="toggle-input__control__thumb"></div>
+  </div>
+
+  @if (error) {
+    <p class="toggle-input__error">{{ error }}</p>
+  } @else if (description) {
+    <p class="toggle-input__description">{{ description }}</p>
+  }
+
+</div>

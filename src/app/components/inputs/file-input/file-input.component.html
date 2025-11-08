@@ -1,0 +1,69 @@
+<div class="file-input">
+
+  @if (label) {
+    <label class="file-input__label">{{ label }}</label>
+  }
+  @if (error) {
+    <p class="file-input__error">{{ error }}</p>
+  } @else if (description) {
+    <p class="file-input__description">{{ description }}</p>
+  }
+
+
+  <label
+    class="file-input__control"
+    [class.file-input__control--disabled]="disabled"
+    [class.file-input__control--error]="error"
+  >
+    <input
+      type="file"
+      [accept]="accept"
+      [multiple]="multiple"
+      [disabled]="disabled"
+      class="file-input__control__native"
+      (change)="onFileChange($event)"
+    />
+
+    <span class="file-input__control__placeholder">
+      Clique para selecionar {{ multiple ? 'arquivos' : 'um arquivo' }}
+    </span>
+
+    <app-lucide-icon icon="upload" size="18"></app-lucide-icon>
+  </label>
+
+  @if (model.length > 0) {
+    <div class="file-input__control__files">
+
+      @for (file of model; track file.name) {
+        <div class="file-input__control__files__file">
+
+          @if (preview && isImage(file)) {
+            <img
+              [src]="file ? (file | filePreview) : null"
+              alt="preview"
+              class="file-input__control__files__file-preview"
+            />
+          }
+
+          <span class="file-input__control__files__file-name">{{ file.name }}</span>
+
+          <app-button
+            variant="ghost"
+            size="square-small"
+            icon="x"
+            (click)="removeFile(file)"
+          ></app-button>
+        </div>
+      }
+
+      @if (model.length > 1) {
+        <app-button
+          variant="ghost"
+          icon="trash"
+          size="small"
+          (click)="clearAll()"
+        >Remover todos</app-button>
+      }
+    </div>
+  }
+</div>

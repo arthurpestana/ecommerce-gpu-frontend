@@ -62,6 +62,18 @@
       [options]="listaCategorias"
       [(model)]="categoryIds"
     ></app-select-input-multi>
+    <app-tag-input
+      label="Tecnologias"
+      placeholder="Adicione tecnologias..."
+      [(model)]="technologyTags"
+    ></app-tag-input>
+    <app-file-input
+      label="Imagens"
+      accept="image/*"
+      [multiple]="true"
+      description="Upload de imagens da GPU"
+      [(model)]="uploadImages"
+    ></app-file-input>
   </app-container-div>
 </app-form-dialog>
 

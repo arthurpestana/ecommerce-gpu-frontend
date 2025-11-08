@@ -1,0 +1,36 @@
+<div class="tag-input">
+  @if (label) {
+  <label class="tag-input__label">{{ label }}</label>
+  }
+
+  <div class="tag-input__control" [class.tag-input__control--error]="error">
+    @if (model.length > 0) {
+    <div class="tag-input__control__tags">
+      @for (tag of model; track tag) {
+      <app-tag
+        [label]="tag"
+        size="medium"
+        (remove)="removeTag(tag)"
+        class="tag-input__tag"
+      ></app-tag>
+      }
+    </div>
+    }
+
+    <input
+      class="tag-input__control__input"
+      type="text"
+      [placeholder]="model.length === 0 ? placeholder : ''"
+      [(ngModel)]="newTag"
+      (keydown)="onKey($event)"
+      (blur)="addTag()"
+      [disabled]="disabled"
+    />
+  </div>
+
+  @if (error) {
+  <p class="tag-input__error">{{ error }}</p>
+  } @else if (description) {
+  <p class="tag-input__description">{{ description }}</p>
+  }
+</div>

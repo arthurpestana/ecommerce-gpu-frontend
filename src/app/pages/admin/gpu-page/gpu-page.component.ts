@@ -13,6 +13,9 @@ import { TextAreaComponent } from '../../../components/textarea/textarea.compone
 import { SelectInputComponent } from '../../../components/inputs/select-input/select-input.component';
 import { GpuQueryService } from '../../../services/api/gpu/gpu-query/gpu-query.service';
 import { SelectInputMultiComponent } from '../../../components/inputs/select-input-multi/select-input-multi.component';
+import { ToggleInputComponent } from '../../../components/inputs/toggle-input/toggle-input.component';
+import { FileInputComponent } from '../../../components/inputs/file-input/file-input.component';
+import { TagInputComponent } from '../../../components/inputs/tag-input/tag-input.component';
 
 @Component({
   selector: 'app-gpu-page',
@@ -28,6 +31,9 @@ import { SelectInputMultiComponent } from '../../../components/inputs/select-inp
     TextAreaComponent,
     SelectInputComponent,
     SelectInputMultiComponent,
+    ToggleInputComponent,
+    FileInputComponent,
+    TagInputComponent,
   ],
   templateUrl: './gpu-page.component.html',
   styleUrl: './gpu-page.component.css',
@@ -54,6 +60,9 @@ export class GpuPageComponent {
     { value: '3', label: 'Budget' },
     { value: '4', label: 'High-End' },
   ];
+
+  uploadImages: File[] = [];
+  technologyTags: string[] = [];
 
   form: GpuRequest = {
     name: '',
@@ -149,6 +158,8 @@ export class GpuPageComponent {
         technologies: gpu.technologies ?? [],
         categoryIds: gpu.categories?.map((c) => String(c.id)) ?? [],
       };
+
+      this.technologyTags = gpu.technologies.map((tech) => tech.name) ?? [];
     } else {
       this.form = {
         name: '',
@@ -164,6 +175,8 @@ export class GpuPageComponent {
         technologies: [],
         categoryIds: [],
       };
+
+      this.technologyTags = [];
     }
 
     this.createOrEditDialogOpen = true;
@@ -185,10 +198,21 @@ export class GpuPageComponent {
   }
 
   onSubmitForm() {
+    const payload: GpuRequest = {
+      ...this.form,
+      technologies: this.technologyTags.map((techTag) => ({
+        name: techTag,
+        description: '',
+      })),
+    };
+
     console.log('Submitting form:', this.form);
     if (this.selectedGpu) {
       this.gpuQuery.updateGpu.mutate(
-        { id: this.selectedGpu.id, data: this.form },
+        {
+          id: this.selectedGpu.id,
+          data: payload,
+        },
         {
           onSuccess: () => {
             this.createOrEditDialogOpen = false;
@@ -196,7 +220,7 @@ export class GpuPageComponent {
         }
       );
     } else {
-      this.gpuQuery.createGpu.mutate(this.form, {
+      this.gpuQuery.createGpu.mutate(payload, {
         onSuccess: () => {
           this.createOrEditDialogOpen = false;
         },

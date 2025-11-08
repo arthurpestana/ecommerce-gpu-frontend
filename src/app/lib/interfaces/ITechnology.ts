@@ -5,7 +5,6 @@ export interface TechnologyResponse {
 }
 
 export interface TechnologyRequest {
-  id?: number;
   name?: string;
   description?: string;
 }

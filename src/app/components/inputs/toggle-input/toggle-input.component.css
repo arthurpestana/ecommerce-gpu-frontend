@@ -1,0 +1,61 @@
+.toggle-input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toggle-input__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.toggle-input__control {
+  width: 44px;
+  height: 24px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  position: relative;
+  cursor: pointer;
+
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.toggle-input__control--checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.toggle-input__control--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggle-input__control__thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--card);
+  border-radius: 50%;
+
+  position: absolute;
+  top: 2px;
+  left: 2px;
+
+  transition: transform 150ms ease;
+}
+
+.toggle-input__control--checked .toggle-input__control__thumb {
+  transform: translateX(20px);
+}
+
+.toggle-input__error {
+  font-size: 0.85rem;
+  color: var(--destructive);
+}
+
+.toggle-input__description {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}
