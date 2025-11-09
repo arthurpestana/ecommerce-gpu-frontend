@@ -64,9 +64,9 @@ export class ModelTableComponent {
   }
 
   get currentPage() {
-    const m = this.listModels.data();
-    if (!m) return 1;
-    return m.offset / m.limit + 1;
+    const data = this.listModels.data();
+    if (!data) return 1;
+    return data.offset;
   }
 
   get totalPages() {

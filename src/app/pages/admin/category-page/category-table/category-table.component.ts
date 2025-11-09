@@ -57,11 +57,10 @@ export class CategoryTableComponent {
   get currentPage() {
     const data = this.listCategories.data();
     if (!data) return 1;
-    return data.offset / data.limit + 1;
+    return data.offset;
   }
 
   get totalPages() {
-    const data = this.listCategories.data();
-    return data ? Math.ceil(data.total / data.limit) : 1;
+    return Math.ceil(this.totalItems / this.limit);
   }
 }

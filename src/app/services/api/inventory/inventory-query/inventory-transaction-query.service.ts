@@ -46,7 +46,7 @@ export class InventoryTransactionQueryService {
   get pagination() {
     const p = this.params();
     return {
-      offset: (p.page - 1) * p.limit,
+      offset: (p.page - 1),
       limit: p.limit,
     };
   }

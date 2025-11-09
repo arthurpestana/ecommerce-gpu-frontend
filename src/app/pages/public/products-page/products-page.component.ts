@@ -27,7 +27,7 @@ export class ProductsPageComponent {
   get currentPage() {
     const gpuData = this.listGpus.data();
     if (!gpuData) return 1;
-    return gpuData.offset / gpuData.limit + 1;
+    return gpuData.offset;
   }
 
   get paginatedProducts() {
@@ -45,9 +45,7 @@ export class ProductsPageComponent {
   }
 
   get totalPages() {
-    const gpuData = this.listGpus.data();
-    if (!gpuData) return 1;
-    return Math.ceil(gpuData.total / gpuData.limit);
+    return Math.ceil(this.totalItems / this.limit);
   }
 
   get isLoading() {

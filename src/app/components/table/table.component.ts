@@ -25,15 +25,12 @@ export class TableComponent {
 
   @Input() pageSize = 10;
   @Input() currentPage = 1;
+  @Input() totalPages = 1;
 
   @Output() pageChange = new EventEmitter<number>();
 
   @ContentChild('tableActions', { read: TemplateRef })
   actionTemplate!: TemplateRef<any>;
-
-  get totalPages(): number {
-    return Math.ceil(this.data.length / this.pageSize);
-  }
 
   get paginatedData(): any[] {
     const start = (this.currentPage - 1) * this.pageSize;

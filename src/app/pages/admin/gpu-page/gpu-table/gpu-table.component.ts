@@ -97,20 +97,18 @@ export class GpuTableComponent {
   }
 
   get limit() {
-    const gpuData = this.listGpus.data();
-    if (!gpuData) return 10;
-    return gpuData.limit;
+    const data = this.listGpus.data();
+    if (!data) return 10;
+    return data.limit;
   }
 
   get currentPage() {
-    const gpuData = this.listGpus.data();
-    if (!gpuData) return 1;
-    return gpuData.offset / gpuData.limit + 1;
+    const data = this.listGpus.data();
+    if (!data) return 1;
+    return data.offset;
   }
 
   get totalPages() {
-    const gpuData = this.listGpus.data();
-    if (!gpuData) return 1;
-    return Math.ceil(gpuData.total / gpuData.limit);
+    return Math.ceil(this.totalItems / this.limit);
   }
 }

@@ -12,10 +12,11 @@ export class PageRangeComponent {
   @Input() totalItems: number = 0;
 
   getProductsRangeStart() {
-    return (this.currentPage - 1) * this.limit + 1;
+    console.log(this.currentPage, this.limit);
+    return (this.currentPage) * this.limit + 1;
   }
 
   getProductsRangeEnd() {
-    return Math.min(this.currentPage * this.limit, this.totalItems);
+    return Math.min((this.currentPage + 1) * this.limit, this.totalItems);
   }
 }

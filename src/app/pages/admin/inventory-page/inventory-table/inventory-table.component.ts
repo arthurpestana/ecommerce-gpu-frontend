@@ -81,8 +81,12 @@ export class InventoryTableComponent {
   }
 
   get currentPage() {
-    const d = this.listTransactions.data();
-    if (!d) return 1;
-    return d.offset / d.limit + 1;
+    const data = this.listTransactions.data();
+    if (!data) return 1;
+    return data.offset;
+  }
+
+  get totalPages() {
+    return Math.ceil(this.totalItems / this.limit);
   }
 }

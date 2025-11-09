@@ -43,9 +43,10 @@ export class GpuQueryService {
   }
 
   get pagination() {
+    const p = this.params();
     return {
-      offset: (this.params().page - 1) * this.params().limit,
-      limit: this.params().limit,
+      offset: (p.page - 1),
+      limit: p.limit,
     };
   }
 

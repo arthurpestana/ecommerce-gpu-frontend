@@ -63,9 +63,13 @@ export class ManufacturerTableComponent {
     return this.listManufacturers.data()?.limit ?? 10;
   }
 
+  get totalPages() {
+    return Math.ceil(this.totalItems / this.limit);
+  }
+
   get currentPage() {
-    const res = this.listManufacturers.data();
-    if (!res) return 1;
-    return res.offset / res.limit + 1;
+    const data = this.listManufacturers.data();
+    if (!data) return 1;
+    return data.offset;
   }
 }

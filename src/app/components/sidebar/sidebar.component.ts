@@ -5,13 +5,13 @@ import { ButtonComponent } from '../button/button.component';
 import { LucideIconComponent } from '../lucide-icon/lucide-icon.component';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-sidebar',
   standalone: true,
   imports: [RouterModule, LucideAngularModule, ButtonComponent, LucideIconComponent],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css'],
 })
-export class NavbarComponent {
+export class SidebarComponent {
   icons = { House, Users, Settings, LogOut, ChevronLeft, ChevronRight, Menu, PackageSearch, Factory, ChartBarStacked, Cpu, ComponentIcon, Gpu };
 
   isCollapsed = signal(false);
@@ -25,7 +25,7 @@ export class NavbarComponent {
     console.log('Sidebar collapsed:', this.isCollapsed());
   }
 
-  navbarItems = [
+  sidebarItems = [
     // { label: 'Dashboard', icon: this.icons.House, route: '/admin' },
     { label: 'Gpus', icon: this.icons.Gpu, route: '/admin/gpus' },
     { label: 'Modelos', icon: this.icons.ComponentIcon, route: '/admin/models' },

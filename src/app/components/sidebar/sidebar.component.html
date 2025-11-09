@@ -15,7 +15,7 @@
   </div>
 
   <nav class="sidebar__nav">
-    @for (item of navbarItems; track item.route) {
+    @for (item of sidebarItems; track item.route) {
     <a routerLink="{{ item.route }}" routerLinkActive="active" class="sidebar__nav__item" [class.sidebar__nav__item--active]="isSelected(item.route)">
       <app-lucide-icon [icon]="item.icon" class="sidebar__nav__item-icon sidebar-icon"></app-lucide-icon>
       <span class="sidebar__nav__item-label">{{ item.label }}</span>
