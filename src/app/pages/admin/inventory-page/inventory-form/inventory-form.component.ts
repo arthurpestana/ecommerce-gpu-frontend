@@ -47,7 +47,6 @@ export class InventoryFormComponent {
 
   gpuOptions = computed<SelectOption[]>(() => {
     const data = this.gpuQuery.getListGpus.data();
-    console.log(data);
     if (!data) return [];
 
     return data.items.map(m => ({

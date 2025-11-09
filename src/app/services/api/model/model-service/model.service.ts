@@ -17,7 +17,7 @@ export class ModelService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<ModelResponse>> {
     const params = new HttpParams()
-      .set('offset', pagination.offset)
+      .set('page', pagination.page)
       .set('limit', pagination.limit);
 
     return firstValueFrom(
@@ -30,7 +30,7 @@ export class ModelService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<ModelResponse>> {
     const params = new HttpParams()
-      .set('offset', pagination.offset)
+      .set('page', pagination.page)
       .set('limit', pagination.limit);
 
     return firstValueFrom(
@@ -46,7 +46,7 @@ export class ModelService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<ModelResponse>> {
     const params = new HttpParams()
-      .set('offset', pagination.offset)
+      .set('page', pagination.page)
       .set('limit', pagination.limit);
 
     return firstValueFrom(

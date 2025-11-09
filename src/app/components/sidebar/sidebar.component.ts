@@ -22,7 +22,6 @@ export class SidebarComponent {
 
   toggleSidebar() {
     this.isCollapsed.update(v => !v);
-    console.log('Sidebar collapsed:', this.isCollapsed());
   }
 
   sidebarItems = [

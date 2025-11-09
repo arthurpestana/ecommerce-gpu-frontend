@@ -13,9 +13,7 @@ export class ProductCardComponent {
   @Input() gpu!: GpuResponse;
 
   get manufacturer(): string {
-    console.log(this.gpu);
     return this.gpu.model?.manufacturer.name ?? 'Desconhecido';
-
   }
 
   get image(): string {

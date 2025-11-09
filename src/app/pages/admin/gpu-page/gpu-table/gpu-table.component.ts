@@ -105,7 +105,8 @@ export class GpuTableComponent {
   get currentPage() {
     const data = this.listGpus.data();
     if (!data) return 1;
-    return data.offset;
+    console.log(data, "dataGPU");
+    return data.page;
   }
 
   get totalPages() {

@@ -1,11 +1,11 @@
 export interface PaginationResponse<T> {
     items: T[];
-    offset: number;
+    page: number;
     limit: number;
     total: number;
 }
 
 export interface PaginationRequest {
-    offset: number;
+    page: number;
     limit: number;
 }

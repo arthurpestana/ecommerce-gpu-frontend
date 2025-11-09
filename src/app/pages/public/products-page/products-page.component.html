@@ -11,7 +11,7 @@
 
       <div class="products-page__search">
         <app-search-filter
-          (searchSubmit)="onSearchText($event)"
+          (searchSubmit)="onSearch($event)"
           placeholderText="Buscar por nome, marca ou especificações..."
         />
       </div>
@@ -24,7 +24,7 @@
             <p class="products-page__state-text">Carregando produtos...</p>
           </div>
 
-        } @else if (paginatedProducts.length > 0) {
+        } @else if (dataGpus.length > 0) {
 
           <app-page-range
             [totalItems]="totalItems"
@@ -33,7 +33,7 @@
           ></app-page-range>
 
           <div class="products-page__results-grid">
-            @for (gpu of paginatedProducts; track gpu.id) {
+            @for (gpu of dataGpus; track gpu.id) {
               <app-product-card [gpu]="gpu"></app-product-card>
             }
           </div>
@@ -43,7 +43,7 @@
               <app-pagination
                 [currentPage]="currentPage"
                 [totalPages]="totalPages"
-                (pageChange)="onPageChanged($event)"
+                (pageChange)="onPageChange($event)"
               />
             </div>
           }

@@ -12,7 +12,6 @@ export class PageRangeComponent {
   @Input() totalItems: number = 0;
 
   getProductsRangeStart() {
-    console.log(this.currentPage, this.limit);
     return (this.currentPage) * this.limit + 1;
   }
 

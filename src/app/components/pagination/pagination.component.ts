@@ -16,6 +16,11 @@ export class PaginationComponent implements OnChanges {
 
   pages: number[] = [];
 
+  ngOnInit() {
+    console.log(this.totalPages, "totalPages");
+    console.log(this.currentPage, "currentPage");
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['totalPages']) {
       this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);

@@ -45,7 +45,7 @@ export class GpuQueryService {
   get pagination() {
     const p = this.params();
     return {
-      offset: (p.page - 1),
+      page: p.page - 1,
       limit: p.limit,
     };
   }
@@ -60,7 +60,7 @@ export class GpuQueryService {
       if (paramsQuery.search) {
         return this.gpuService.filterGpus({
           name: paramsQuery.search,
-          offset: pag.offset,
+          page: pag.page,
           limit: pag.limit,
         });
       }

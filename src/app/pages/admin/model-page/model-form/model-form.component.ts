@@ -40,7 +40,6 @@ export class ModelFormComponent {
 
   manufacturersOptions = computed<SelectOption[]>(() => {
     const data = this.manufacturerQuery.getListManufacturers.data();
-    console.log(data);
     if (!data) return [];
 
     return data.items.map(m => ({

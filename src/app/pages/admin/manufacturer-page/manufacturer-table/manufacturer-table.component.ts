@@ -51,7 +51,6 @@ export class ManufacturerTableComponent {
   }
 
   get data() {
-    console.log(this.listManufacturers?.data())
     return this.listManufacturers.data()?.items ?? [];
   }
 
@@ -70,6 +69,6 @@ export class ManufacturerTableComponent {
   get currentPage() {
     const data = this.listManufacturers.data();
     if (!data) return 1;
-    return data.offset;
+    return data.page;
   }
 }

@@ -10,8 +10,6 @@ import { PaginationRequest } from '../../../lib/interfaces/IPagination';
 import { GpuQueryService } from '../../../services/api/gpu/gpu-query/gpu-query.service';
 import { PageRangeComponent } from '../../../components/page-range/page-range.component';
 
-const ITEMS_PER_PAGE = 10;
-
 @Component({
   selector: 'app-products-page',
   standalone: true,
@@ -23,29 +21,9 @@ export class ProductsPageComponent {
   private readonly gpuQuery = inject(GpuQueryService);
 
   listGpus = this.gpuQuery.getListGpus;
-
-  get currentPage() {
-    const data = this.listGpus.data();
-    if (!data) return 1;
-    return data.offset;
-  }
-
-  get paginatedProducts() {
+  
+  get dataGpus() {
     return this.listGpus.data()?.items ?? [];
-  }
-
-  get totalItems() {
-    return this.listGpus.data()?.total ?? 0;
-  }
-
-  get limit() {
-    const gpuData = this.listGpus.data();
-    if (!gpuData) return ITEMS_PER_PAGE;
-    return gpuData.limit;
-  }
-
-  get totalPages() {
-    return Math.ceil(this.totalItems / this.limit);
   }
 
   get isLoading() {
@@ -56,12 +34,32 @@ export class ProductsPageComponent {
     return this.listGpus.isError();
   }
 
-  async onSearchText(newSearchText: string): Promise<void> {
-    this.gpuQuery.setParams({ search: newSearchText, page: 1 });
+  get totalItems() {
+    return this.listGpus.data()?.total ?? 0;
   }
 
-  async onPageChanged(newPage: number): Promise<void> {
+  get limit() {
+    const data = this.listGpus.data();
+    if (!data) return 10;
+    return data.limit;
+  }
+
+  get currentPage() {
+    const data = this.listGpus.data();
+    if (!data) return 1;
+    console.log(data, "dataGPU");
+    return data.page + 1;
+  }
+
+  get totalPages() {
+    return Math.ceil(this.totalItems / this.limit);
+  }
+
+  onSearch(value: string) {
+    this.gpuQuery.setParams({ search: value, page: 1 });
+  }
+
+  async onPageChange(newPage: number): Promise<void> {
     this.gpuQuery.setParams({ page: newPage });
   }
-
 }

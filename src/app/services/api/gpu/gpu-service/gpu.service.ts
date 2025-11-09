@@ -14,7 +14,7 @@ export class GpuService {
 
   async findAllGpus(paginationParams: PaginationRequest): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
-      .set('offset', paginationParams.offset)
+      .set('page', paginationParams.page)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
@@ -29,7 +29,7 @@ export class GpuService {
     minPrice?: number;
     maxPrice?: number;
     isActive?: boolean;
-    offset?: number;
+    page?: number;
     limit?: number;
   }): Promise<PaginationResponse<GpuResponse>> {
     let params = new HttpParams();
@@ -39,7 +39,7 @@ export class GpuService {
     if (filters.minPrice) params = params.set('minPrice', filters.minPrice);
     if (filters.maxPrice) params = params.set('maxPrice', filters.maxPrice);
     if (filters.isActive !== undefined) params = params.set('isActive', filters.isActive);
-    if (filters.offset !== undefined) params = params.set('offset', filters.offset);
+    if (filters.page !== undefined) params = params.set('page', filters.page);
     if (filters.limit !== undefined) params = params.set('limit', filters.limit);
 
     return firstValueFrom(
@@ -52,7 +52,7 @@ export class GpuService {
     paginationParams: PaginationRequest
   ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
-      .set('offset', paginationParams.offset)
+      .set('page', paginationParams.page)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
@@ -67,7 +67,7 @@ export class GpuService {
     paginationParams: PaginationRequest
   ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
-      .set('offset', paginationParams.offset)
+      .set('page', paginationParams.page)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
@@ -87,7 +87,7 @@ export class GpuService {
     if (min !== undefined) params = params.set('min', min);
     if (max !== undefined) params = params.set('max', max);
     if (paginationParams) {
-      params = params.set('offset', paginationParams.offset).set('limit', paginationParams.limit);
+      params = params.set('page', paginationParams.page).set('limit', paginationParams.limit);
     }
 
     return firstValueFrom(
@@ -100,7 +100,7 @@ export class GpuService {
     paginationParams: PaginationRequest
   ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
-      .set('offset', paginationParams.offset)
+      .set('page', paginationParams.page)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(
@@ -115,7 +115,7 @@ export class GpuService {
     paginationParams: PaginationRequest
   ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
-      .set('offset', paginationParams.offset)
+      .set('page', paginationParams.page)
       .set('limit', paginationParams.limit);
 
     return firstValueFrom(

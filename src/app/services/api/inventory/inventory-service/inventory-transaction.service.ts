@@ -21,7 +21,7 @@ export class InventoryTransactionService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<InventoryTransactionResponse>> {
     const params = new HttpParams()
-      .set("offset", pagination.offset)
+      .set("page", pagination.page)
       .set("limit", pagination.limit);
 
     return firstValueFrom(
@@ -37,7 +37,7 @@ export class InventoryTransactionService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<InventoryTransactionResponse>> {
     const params = new HttpParams()
-      .set("offset", pagination.offset)
+      .set("page", pagination.page)
       .set("limit", pagination.limit);
 
     return firstValueFrom(
@@ -53,7 +53,7 @@ export class InventoryTransactionService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<InventoryTransactionResponse>> {
     const params = new HttpParams()
-      .set("offset", pagination.offset)
+      .set("page", pagination.page)
       .set("limit", pagination.limit);
 
     return firstValueFrom(
@@ -70,7 +70,7 @@ export class InventoryTransactionService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<InventoryTransactionResponse>> {
     let params = new HttpParams()
-      .set("offset", pagination.offset)
+      .set("page", pagination.page)
       .set("limit", pagination.limit)
       .set("start", start)
       .set("end", end);

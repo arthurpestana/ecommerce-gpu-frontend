@@ -72,7 +72,6 @@ export class GpuFormComponent {
 
   modelOptions = computed<SelectOption[]>(() => {
     const data = this.modelQuery.getListModels.data();
-    console.log(data);
     if (!data) return [];
 
     return data.items.map(m => ({
@@ -83,7 +82,6 @@ export class GpuFormComponent {
 
   categoryOptions = computed<SelectOption[]>(() => {
     const data = this.categoryQuery.getListCategories.data();
-    console.log(data);
     if (!data) return [];
 
     return data.items.map(c => ({

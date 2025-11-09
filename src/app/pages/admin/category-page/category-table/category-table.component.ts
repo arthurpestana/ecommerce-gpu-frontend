@@ -57,7 +57,8 @@ export class CategoryTableComponent {
   get currentPage() {
     const data = this.listCategories.data();
     if (!data) return 1;
-    return data.offset;
+    console.log(data, "data123");
+    return data.page;
   }
 
   get totalPages() {

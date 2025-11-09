@@ -17,7 +17,7 @@ export class ManufacturerService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<ManufacturerResponse>> {
     const params = new HttpParams()
-      .set('offset', pagination.offset)
+      .set('page', pagination.page)
       .set('limit', pagination.limit);
 
     return firstValueFrom(
@@ -30,7 +30,7 @@ export class ManufacturerService {
     pagination: PaginationRequest
   ): Promise<PaginationResponse<ManufacturerResponse>> {
     const params = new HttpParams()
-      .set('offset', pagination.offset)
+      .set('page', pagination.page)
       .set('limit', pagination.limit);
 
     return firstValueFrom(
