@@ -1,0 +1,36 @@
+<div class="page-admin">
+  <div class="page-admin__header">
+    <div class="page-admin__header__group">
+      <h1 class="page-admin__header__group-title">Gerenciamento de Fabricantes</h1>
+      <p class="page-admin__header__group-subtitle">
+        Adicione, edite ou remova fabricantes cadastrados.
+      </p>
+    </div>
+
+    <app-button variant="primary" size="medium" icon="plus" (clicked)="onCreate()">
+      Novo Fabricante
+    </app-button>
+  </div>
+
+  <app-manufacturer-table
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-manufacturer-table>
+
+  <app-manufacturer-form
+    [open]="createOrEditDialogOpen"
+    [manufacturer]="selectedManufacturer"
+    (close)="createOrEditDialogOpen = false"
+    (submitForm)="handleSubmit($event)"
+  ></app-manufacturer-form>
+
+  <app-alert-dialog
+    [open]="deleteDialogOpen"
+    title="Confirmar Exclusão"
+    message="Deseja realmente excluir este fabricante?"
+    cancelText="Cancelar"
+    confirmText="Excluir"
+    (closed)="deleteDialogOpen = false"
+    (confirmed)="confirmDelete()"
+  ></app-alert-dialog>
+</div>

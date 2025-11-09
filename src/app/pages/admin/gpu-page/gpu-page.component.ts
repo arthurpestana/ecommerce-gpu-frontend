@@ -57,38 +57,21 @@ export class GpuPageComponent {
     });
   }
 
-  handleSubmit(event: {
+  handleSubmit({ payload, images, deleteImages }: {
     payload: GpuRequest;
     images: File[];
     deleteImages: string[];
   }) {
-    const validation = gpuRequestSchema.safeParse(event.payload);
-
-    if (!validation.success) {
-      const errors = validation.error.flatten().fieldErrors;
-
-      Object.values(errors).forEach(errList => {
-        if (errList) {
-          errList.forEach(msg => this.toast.error(msg));
-        }
-      });
-
-      console.error("ZOD Validation errors:", errors);
-      return;
-    }
-
-    const validData = validation.data;
-
-    if (this.selectedGpu && event.deleteImages.length > 0) {
+    if (this.selectedGpu && deleteImages.length > 0) {
       this.gpuQuery.deleteImagesFromGpu.mutate({
         gpuId: this.selectedGpu.id,
-        imageIds: event.deleteImages,
+        imageIds: deleteImages,
       });
     }
 
     if (this.selectedGpu) {
       this.gpuQuery.updateGpu.mutate(
-        { id: this.selectedGpu.id, data: validData, images: event.images },
+        { id: this.selectedGpu.id, data: payload, images: images },
         {
           onSuccess: () => {
             this.createOrEditDialogOpen = false;
@@ -99,7 +82,7 @@ export class GpuPageComponent {
     }
 
     this.gpuQuery.createGpu.mutate(
-      { data: validData, images: event.images },
+      { data: payload, images: images },
       {
         onSuccess: () => {
           this.createOrEditDialogOpen = false;

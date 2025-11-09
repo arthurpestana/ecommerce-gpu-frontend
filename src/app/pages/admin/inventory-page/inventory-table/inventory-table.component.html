@@ -1,0 +1,21 @@
+<app-container-div direction="column" gap="1rem">
+  <app-search-filter
+    placeholderText="Buscar por nome da GPU..."
+    (searchSubmit)="onSearch($event)"
+  ></app-search-filter>
+
+  <app-page-range
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [limit]="limit"
+  ></app-page-range>
+
+  <app-table
+    [data]="data"
+    [columns]="columns"
+    [actions]="false"
+    [pageSize]="10"
+    (pageChange)="onPageChange($event)"
+  >
+  </app-table>
+</app-container-div>

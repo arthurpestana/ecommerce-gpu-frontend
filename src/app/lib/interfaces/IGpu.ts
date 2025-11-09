@@ -4,19 +4,21 @@ import { ModelResponse } from "./IModel";
 import { TechnologyRequest, TechnologyResponse } from "./ITechnology";
 
 export interface GpuResponse {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    isActive: boolean;
-    availableQuantity: number;
-    memory: number;
-    architecture: string;
-    energyConsumption: number;
-    model: ModelResponse;
-    images: ImageResponse[];
-    technologies: TechnologyResponse[];
-    categories: CategoryResponse[];
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  isActive: boolean;
+  availableQuantity: number;
+  memory: number;
+  architecture: string;
+  energyConsumption: number;
+  model: ModelResponse;
+  images: ImageResponse[];
+  technologies: TechnologyResponse[];
+  categories: CategoryResponse[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface GpuRequest {

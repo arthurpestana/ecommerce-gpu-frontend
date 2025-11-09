@@ -14,11 +14,7 @@ import { SearchFilterComponent } from '../../search-filter/search-filter.compone
 import { LucideIconComponent } from '../../lucide-icon/lucide-icon.component';
 import { ButtonComponent } from '../../button/button.component';
 import { TagComponent } from '../../tag/tag.component';
-
-export interface SelectOption {
-  value: string;
-  label: string;
-}
+import { SelectOption } from '../select-input/select-input.component';
 
 @Component({
   selector: 'app-select-input-multi',
@@ -56,6 +52,10 @@ export class SelectInputMultiComponent {
   @ViewChild('dropdownRoot') dropdownRoot!: ElementRef;
 
   ngOnInit() {
+    this.filteredOptions = this.options;
+  }
+
+  ngOnChanges() {
     this.filteredOptions = this.options;
   }
 

@@ -3,6 +3,8 @@ export interface ImageResponse {
   url: string;
   altText: string;
   objectName: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ImageRequest {

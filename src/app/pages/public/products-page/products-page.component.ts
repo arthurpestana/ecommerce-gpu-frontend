@@ -8,13 +8,14 @@ import { GpuService } from '../../../services/api/gpu/gpu-service/gpu.service';
 import { GpuResponse } from '../../../lib/interfaces/IGpu';
 import { PaginationRequest } from '../../../lib/interfaces/IPagination';
 import { GpuQueryService } from '../../../services/api/gpu/gpu-query/gpu-query.service';
+import { PageRangeComponent } from '../../../components/page-range/page-range.component';
 
 const ITEMS_PER_PAGE = 10;
 
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [CommonModule, SearchFilterComponent, PaginationComponent, ProductCardComponent],
+  imports: [CommonModule, SearchFilterComponent, PaginationComponent, ProductCardComponent, PageRangeComponent],
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css'],
 })
@@ -67,11 +68,4 @@ export class ProductsPageComponent {
     this.gpuQuery.setParams({ page: newPage });
   }
 
-  getProductsRangeStart() {
-    return (this.currentPage - 1) * this.limit + 1;
-  }
-
-  getProductsRangeEnd() {
-    return Math.min(this.currentPage * this.limit, this.totalItems);
-  }
 }

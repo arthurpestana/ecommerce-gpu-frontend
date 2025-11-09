@@ -142,7 +142,6 @@ export class GpuQueryService {
     mutationFn: (payload: { gpuId: string; imageIds: string[] }) =>
       this.gpuService.deleteImagesFromGpu(payload.gpuId, payload.imageIds),
     onSuccess: () => {
-      this.toastService.success("Imagens removidas com sucesso!");
       this.queryClient.invalidateQueries({ queryKey: ['gpu'] });
     },
 

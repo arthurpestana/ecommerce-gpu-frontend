@@ -1,1 +1,41 @@
-<p>category-page works!</p>
+<div class="page-admin">
+  <div class="page-admin__header">
+    <div class="page-admin__header__group">
+      <h1 class="page-admin__header__group-title">Gerenciamento de Categorias</h1>
+      <p class="page-admin__header__group-subtitle">
+        Adicione, edite ou remova categorias.
+      </p>
+    </div>
+
+    <app-button
+      variant="primary"
+      size="medium"
+      icon="plus"
+      (clicked)="onCreate()"
+    >
+      Nova Categoria
+    </app-button>
+  </div>
+
+  <app-category-table
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-category-table>
+
+  <app-category-form
+    [open]="createOrEditDialogOpen"
+    [category]="selectedCategory"
+    (close)="createOrEditDialogOpen = false"
+    (submitForm)="handleSubmit($event)"
+  ></app-category-form>
+
+  <app-alert-dialog
+    [open]="deleteDialogOpen"
+    title="Confirmar Exclusão"
+    message="Tem certeza de que deseja excluir esta categoria?"
+    cancelText="Cancelar"
+    confirmText="Excluir"
+    (closed)="deleteDialogOpen = false"
+    (confirmed)="confirmDelete()"
+  ></app-alert-dialog>
+</div>

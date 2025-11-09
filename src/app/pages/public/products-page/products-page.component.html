@@ -1,40 +1,45 @@
 <div class="products-page">
   <main class="products-page__main">
-    <div class="products-page__content-wrapper">
-      
-      <div class="products-page__header">
-        <h1 class="products-page__title">Placas de Vídeo</h1>
-        <p class="products-page__subtitle">
+    <div class="products-page__content">
+
+      <header class="products-page__header">
+        <h1 class="products-page__header-title">Placas de Vídeo</h1>
+        <p class="products-page__header-subtitle">
           Encontre a placa de vídeo perfeita para suas necessidades
         </p>
-      </div>
+      </header>
 
-      <div class="products-page__search-container">
-        <app-search-filter (searchSubmit)="onSearchText($event)" placeholderText="Buscar por nome, marca ou especificações..."/>
+      <div class="products-page__search">
+        <app-search-filter
+          (searchSubmit)="onSearchText($event)"
+          placeholderText="Buscar por nome, marca ou especificações..."
+        />
       </div>
 
       <div class="products-page__results">
+
         @if (isLoading) {
-          <div class="products-page__state-indicator">
+
+          <div class="products-page__state">
             <p class="products-page__state-text">Carregando produtos...</p>
           </div>
-        } @else if (paginatedProducts.length > 0) {
-          
-          <div class="products-page__results-info">
-            <p class="products-page__results-text">
-              Mostrando {{ getProductsRangeStart() }}-{{ getProductsRangeEnd() }} de
-              {{ totalItems }} produtos
-            </p>
-          </div>
 
-          <div class="products-page__product-grid">
+        } @else if (paginatedProducts.length > 0) {
+
+          <app-page-range
+            [totalItems]="totalItems"
+            [currentPage]="currentPage"
+            [limit]="limit"
+          ></app-page-range>
+
+          <div class="products-page__results-grid">
             @for (gpu of paginatedProducts; track gpu.id) {
               <app-product-card [gpu]="gpu"></app-product-card>
             }
           </div>
 
           @if (totalPages >= 1) {
-            <div class="products-page__pagination-container">
+            <div class="products-page__pagination">
               <app-pagination
                 [currentPage]="currentPage"
                 [totalPages]="totalPages"
@@ -42,13 +47,15 @@
               />
             </div>
           }
+
         } @else {
-          <div class="products-page__state-indicator">
+          <div class="products-page__state">
             <p class="products-page__state-text">
               Nenhum produto encontrado com os filtros selecionados.
             </p>
           </div>
         }
+
       </div>
     </div>
   </main>

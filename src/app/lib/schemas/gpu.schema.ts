@@ -14,10 +14,15 @@ export const gpuRequestSchema = z.object({
   architecture: z.string().min(1, "Arquitetura é obrigatória"),
   energyConsumption: z.number().min(1, "Consumo deve ser >= 1"),
 
-  modelId: z.string().uuid("Modelo inválido").nullable(),
+  modelId: z.string().uuid("Modelo inválido"),
 
   technologies: z.array(technologyRequestSchema).optional(),
   categoryIds: z.array(z.string().uuid("Categoria inválida")).optional(),
-});
+}).strict();
 
-export type GpuRequestSchema = z.infer<typeof gpuRequestSchema>;
+export const gpuCreateRequestSchema = gpuRequestSchema;
+
+export const gpuUpdateRequestSchema = gpuRequestSchema.partial();
+
+export type gpuCreateRequestSchema = z.infer<typeof gpuCreateRequestSchema>;
+export type gpuUpdateRequestSchema = z.infer<typeof gpuUpdateRequestSchema>;

@@ -26,15 +26,15 @@ export class NavbarComponent {
   }
 
   navbarItems = [
-    { label: 'Dashboard', icon: this.icons.House, route: '/admin' },
+    // { label: 'Dashboard', icon: this.icons.House, route: '/admin' },
     { label: 'Gpus', icon: this.icons.Gpu, route: '/admin/gpus' },
     { label: 'Modelos', icon: this.icons.ComponentIcon, route: '/admin/models' },
     { label: 'Fabricantes', icon: this.icons.Factory, route: '/admin/manufacturers' },
     { label: 'Categorias', icon: this.icons.ChartBarStacked, route: '/admin/categories' },
-    { label: 'Tecnologias', icon: this.icons.Cpu, route: '/admin/technologies' },
+    // { label: 'Tecnologias', icon: this.icons.Cpu, route: '/admin/technologies' },
     { label: 'Inventário', icon: this.icons.PackageSearch, route: '/admin/inventory' },
-    { label: 'Usuários', icon: this.icons.Users, route: '/admin/users' },
-    { label: 'Configurações', icon: this.icons.Settings, route: '/admin/settings' },
+    // { label: 'Usuários', icon: this.icons.Users, route: '/admin/users' },
+    // { label: 'Configurações', icon: this.icons.Settings, route: '/admin/settings' },
   ];
 
 }

@@ -1,0 +1,26 @@
+<app-container-div direction="column" gap="1rem">
+  <app-search-filter
+    (searchSubmit)="onSearch($event)"
+    placeholderText="Buscar modelos..."
+  />
+
+  <app-page-range
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [limit]="limit"
+  ></app-page-range>
+
+  <app-table
+    [data]="data"
+    [actions]="true"
+    [columns]="columnsTable"
+    (pageChange)="onPageChange($event)"
+  >
+    <ng-template #tableActions let-row>
+      <app-button icon="pencil" variant="outline" size="square-small" (clicked)="edit.emit(row)">
+      </app-button>
+      <app-button icon="trash" variant="outline" size="square-small" (clicked)="delete.emit(row)">
+      </app-button>
+    </ng-template>
+  </app-table>
+</app-container-div>

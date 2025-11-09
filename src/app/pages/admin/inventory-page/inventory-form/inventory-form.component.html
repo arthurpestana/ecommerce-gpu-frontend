@@ -1,0 +1,33 @@
+<app-form-dialog
+  [open]="open"
+  [title]="'Nova Movimentação de Inventário'"
+  cancelText="Cancelar"
+  submitText="Salvar"
+  (closed)="close.emit()"
+  (submitted)="submit()"
+>
+  <app-container-div direction="column" gap="1rem">
+
+    <app-select-input
+      label="GPU"
+      placeholder="Selecione uma GPU"
+      [options]="gpuOptions()"
+      [(model)]="form.gpuId"
+    ></app-select-input>
+
+    <app-select-input
+      label="Tipo de Transação"
+      [options]="transactionTypeOptions"
+      [(model)]="form.transactionType"
+    ></app-select-input>
+
+    <app-input-number
+      label="Quantidade"
+      [min]="1"
+      [(model)]="form.quantity"
+    ></app-input-number>
+
+    <app-textarea label="Motivo" placeholder="Opcional" [(model)]="form.reason!" [rows]="4"
+      [maxLength]="100" description="Máximo de 100 caracteres"></app-textarea>
+  </app-container-div>
+</app-form-dialog>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,33 +13,81 @@ export class InputMaskComponent {
 
   @Input() label = '';
   @Input() placeholder = '';
-  @Input() mask = ''; // Ex: '999.999.999-99'
+  @Input() mask = '';                // Ex.: '99.999.999/9999-99'
   @Input() disabled = false;
   @Input() error = '';
   @Input() description = '';
 
+  @Input() onlyNumbers = false;
+  @Input() maxDigits = 0;
+
   @Input() model: string = '';
   @Output() modelChange = new EventEmitter<string>();
 
+  private getUnmaskedDigits(v: string): string {
+    return (v ?? '').replace(/\D/g, '');
+  }
+
+  private applyMask(digits: string): string {
+    if (!this.mask) return digits;
+
+    let masked = '';
+    let i = 0;
+    for (const ch of this.mask) {
+      if (ch === '9') {
+        if (i < digits.length) masked += digits[i++];
+        else break;
+      } else {
+        if (i < digits.length) masked += ch;
+      }
+    }
+    return masked;
+  }
+
   handleInput(value: string) {
-    this.model = this.applyMask(value);
+    let digits = this.getUnmaskedDigits(value);
+
+    if (this.maxDigits > 0 && digits.length > this.maxDigits) {
+      digits = digits.slice(0, this.maxDigits);
+    }
+
+    if (this.onlyNumbers && !this.mask) {
+      this.model = digits;
+    } else {
+      this.model = this.applyMask(digits);
+    }
+
     this.modelChange.emit(this.model);
   }
 
-  applyMask(value: string): string {
-    let digits = value.replace(/\D/g, '');
-    let masked = '';
-    let idx = 0;
+  @HostListener('keydown', ['$event'])
+  onKeyDown(e: KeyboardEvent) {
+    if (this.disabled) return;
 
-    for (let char of this.mask) {
-      if (char === '9') {
-        if (digits[idx]) masked += digits[idx++];
-        else break;
-      } else {
-        if (digits[idx]) masked += char;
-      }
+    const key = e.key;
+
+    const controlKeys = [
+      'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight',
+      'ArrowUp', 'ArrowDown', 'Tab', 'Home', 'End', 'Escape', 'Enter'
+    ];
+    if (controlKeys.includes(key) || e.ctrlKey || e.metaKey) return;
+
+    if (this.onlyNumbers && !/^[0-9]$/.test(key)) {
+      e.preventDefault();
+      return;
     }
 
-    return masked;
+    if (this.mask && !/^[0-9]$/.test(key)) {
+      e.preventDefault();
+      return;
+    }
+
+    if (this.maxDigits > 0) {
+      const currentDigits = this.getUnmaskedDigits(this.model);
+      if (/^[0-9]$/.test(key) && currentDigits.length >= this.maxDigits) {
+        e.preventDefault();
+      }
+    }
   }
+
 }

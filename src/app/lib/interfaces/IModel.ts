@@ -4,5 +4,13 @@ export interface ModelResponse {
     id: string;
     name: string;
     manufacturer: ManufacturerResponse;
-    releaseDate: Date;
+    releaseYear: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface ModelRequest {
+    name: string;
+    manufacturerId: string;
+    releaseYear: number;
 }

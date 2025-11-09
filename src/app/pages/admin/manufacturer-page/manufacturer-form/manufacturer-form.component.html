@@ -1,0 +1,16 @@
+<app-form-dialog [open]="open" [title]="manufacturer ? 'Editar Fabricante' : 'Novo Fabricante'"
+    [cancelText]="'Cancelar'" [submitText]="'Salvar'" (closed)="close.emit()" (submitted)="submit()">
+    <app-container-div direction="column" gap="0.75rem">
+
+        <app-input-text label="Nome do Fabricante" placeholder="Digite o nome..."
+            [(model)]="form.name"></app-input-text>
+
+        <app-input-text label="Email" placeholder="Digite o email..." [(model)]="form.email"></app-input-text>
+
+        <app-input-mask label="CNPJ" placeholder="00.000.000/0000-00" mask="99.999.999/9999-99" [onlyNumbers]="true"
+            [maxDigits]="14" [(model)]="form.cnpj"></app-input-mask>
+
+        <app-input-text label="País" placeholder="Digite o país..." [(model)]="form.country"></app-input-text>
+
+    </app-container-div>
+</app-form-dialog>

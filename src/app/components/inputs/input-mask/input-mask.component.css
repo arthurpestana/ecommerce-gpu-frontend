@@ -5,20 +5,21 @@
 }
 
 .input-mask__label {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--foreground);
 }
 
 .input-mask__input {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.675rem;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 
   color: var(--foreground);
-  font-size: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 

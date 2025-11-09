@@ -6,11 +6,12 @@ import { SearchFilterComponent } from '../../../../components/search-filter/sear
 import { ButtonComponent } from '../../../../components/button/button.component';
 import { ToggleInputComponent } from '../../../../components/inputs/toggle-input/toggle-input.component';
 import { ContainerDivComponent } from '../../../../components/container-div/container-div.component';
+import { PageRangeComponent } from '../../../../components/page-range/page-range.component';
 
 @Component({
   selector: 'app-gpu-table',
   standalone: true,
-  imports: [TableComponent, SearchFilterComponent, ButtonComponent, ToggleInputComponent, ContainerDivComponent],
+  imports: [TableComponent, SearchFilterComponent, ButtonComponent, ToggleInputComponent, ContainerDivComponent, PageRangeComponent],
   templateUrl: './gpu-table.component.html',
 })
 export class GpuTableComponent {
@@ -89,5 +90,27 @@ export class GpuTableComponent {
 
   get isError() {
     return this.listGpus.isError();
+  }
+
+  get totalItems() {
+    return this.listGpus.data()?.total ?? 0;
+  }
+
+  get limit() {
+    const gpuData = this.listGpus.data();
+    if (!gpuData) return 10;
+    return gpuData.limit;
+  }
+
+  get currentPage() {
+    const gpuData = this.listGpus.data();
+    if (!gpuData) return 1;
+    return gpuData.offset / gpuData.limit + 1;
+  }
+
+  get totalPages() {
+    const gpuData = this.listGpus.data();
+    if (!gpuData) return 1;
+    return Math.ceil(gpuData.total / gpuData.limit);
   }
 }

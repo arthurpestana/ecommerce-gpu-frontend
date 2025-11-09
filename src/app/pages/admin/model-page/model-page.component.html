@@ -1,0 +1,33 @@
+<div class="page-admin">
+  <div class="page-admin__header">
+    <div class="page-admin__header__group">
+      <h1 class="page-admin__header__group-title">Gerenciamento de Modelos</h1>
+      <p class="page-admin__header__group-subtitle">
+        Adicione, edite ou remova modelos de GPU.
+      </p>
+    </div>
+
+    <app-button variant="primary" size="medium" icon="plus" (clicked)="onCreate()">
+      Novo Modelo
+    </app-button>
+  </div>
+
+  <app-model-table (edit)="onEdit($event)" (delete)="onDelete($event)"></app-model-table>
+
+  <app-model-form 
+    [open]="createOrEditDialogOpen" 
+    [model]="selectedModel"
+    (close)="createOrEditDialogOpen = false"
+    (submitForm)="handleSubmit($event)">
+  </app-model-form>
+
+  <app-alert-dialog
+    [open]="deleteDialogOpen"
+    title="Confirmar Exclusão"
+    message="Tem certeza de que deseja excluir este modelo?"
+    cancelText="Cancelar"
+    confirmText="Excluir"
+    (closed)="deleteDialogOpen = false"
+    (confirmed)="confirmDelete()">
+  </app-alert-dialog>
+</div>

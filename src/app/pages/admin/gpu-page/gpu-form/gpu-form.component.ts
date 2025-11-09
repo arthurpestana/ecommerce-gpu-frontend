@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, inject, computed } from '@angular/core';
 import { GpuRequest, GpuResponse } from '../../../../lib/interfaces/IGpu';
 import { gpuRequestSchema } from '../../../../lib/schemas/gpu.schema';
 import { FileInputComponent } from '../../../../components/inputs/file-input/file-input.component';
@@ -9,11 +9,13 @@ import { ContainerDivComponent } from '../../../../components/container-div/cont
 import { InputTextComponent } from '../../../../components/inputs/input-text/input-text.component';
 import { InputNumberComponent } from '../../../../components/inputs/input-number/input-number.component';
 import { TextAreaComponent } from '../../../../components/textarea/textarea.component';
-import { SelectInputComponent } from '../../../../components/inputs/select-input/select-input.component';
+import { SelectInputComponent, SelectOption } from '../../../../components/inputs/select-input/select-input.component';
 import { SelectInputMultiComponent } from '../../../../components/inputs/select-input-multi/select-input-multi.component';
 import { TagInputComponent } from '../../../../components/inputs/tag-input/tag-input.component';
 import { FileItemComponent } from '../../../../components/file-item/file-item.component';
 import { ToggleInputComponent } from '../../../../components/inputs/toggle-input/toggle-input.component';
+import { CategoryQueryService } from '../../../../services/api/category/category-query/category-query.service';
+import { ModelQueryService } from '../../../../services/api/model/model-query/model-query.service';
 
 @Component({
   selector: 'app-gpu-form',
@@ -29,11 +31,12 @@ import { ToggleInputComponent } from '../../../../components/inputs/toggle-input
     TagInputComponent,
     FileInputComponent,
     FileItemComponent,
-    ToggleInputComponent,
   ],
   templateUrl: './gpu-form.component.html',
 })
 export class GpuFormComponent {
+  private readonly categoryQuery = inject(CategoryQueryService);
+  private readonly modelQuery = inject(ModelQueryService)
   private readonly toast = inject(ToastService);
 
   @Input() open = false;
@@ -67,17 +70,27 @@ export class GpuFormComponent {
     categoryIds: [],
   };
 
-  modelOptions = [
-    { value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", label: 'GeForce RTX 4090' },
-    { value: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", label: 'Radeon RX 7900 XTX' },
-    { value: "cccccccc-cccc-cccc-cccc-cccccccccccc", label: 'Arc A770' },
-  ];
+  modelOptions = computed<SelectOption[]>(() => {
+    const data = this.modelQuery.getListModels.data();
+    console.log(data);
+    if (!data) return [];
 
-  listaCategorias = [
-    { value: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', label: 'High-End' },
-    { value: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', label: 'Mid-Range' },
-    { value: 'cccccccc-cccc-cccc-cccc-cccccccccccc', label: 'Entry-Level' },
-  ];
+    return data.items.map(m => ({
+      value: m.id,
+      label: m.name
+    }));
+  });
+
+  categoryOptions = computed<SelectOption[]>(() => {
+    const data = this.categoryQuery.getListCategories.data();
+    console.log(data);
+    if (!data) return [];
+
+    return data.items.map(c => ({
+      value: c.id,
+      label: c.name
+    }));
+  });
 
   ngOnChanges() {
     queueMicrotask(() => this.fileInput?.reset());

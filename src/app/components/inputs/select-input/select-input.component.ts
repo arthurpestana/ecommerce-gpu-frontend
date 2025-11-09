@@ -6,6 +6,7 @@ import {
   HostListener,
   ViewChild,
   ElementRef,
+  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,7 @@ import { SearchFilterComponent } from '../../search-filter/search-filter.compone
 import { LucideIconComponent } from '../../lucide-icon/lucide-icon.component';
 
 export interface SelectOption {
-  value: string | number;
+  value: string;
   label: string;
 }
 
@@ -42,6 +43,10 @@ export class SelectInputComponent {
   @ViewChild('dropdownRoot') dropdownRoot!: ElementRef;
 
   ngOnInit() {
+    this.filteredOptions = this.options;
+  }
+
+  ngOnChanges() {
     this.filteredOptions = this.options;
   }
 

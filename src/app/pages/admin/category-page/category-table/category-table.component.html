@@ -1,0 +1,36 @@
+<app-container-div direction="column" gap="1rem">
+  <app-search-filter
+    placeholderText="Buscar categorias..."
+    (searchSubmit)="onSearch($event)"
+  />
+
+  <app-page-range
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [limit]="limit"
+  ></app-page-range>
+
+  <app-table
+    [data]="items"
+    [columns]="columnsTable"
+    [actions]="true"
+    [pageSize]="10"
+    (pageChange)="onPageChange($event)"
+  >
+    <ng-template #tableActions let-row>
+      <app-button
+        variant="outline"
+        size="square-small"
+        icon="pencil"
+        (clicked)="edit.emit(row)"
+      ></app-button>
+
+      <app-button
+        variant="outline"
+        size="square-small"
+        icon="trash"
+        (clicked)="delete.emit(row)"
+      ></app-button>
+    </ng-template>
+  </app-table>
+</app-container-div>

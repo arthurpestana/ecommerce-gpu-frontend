@@ -21,9 +21,9 @@
     </app-container-div>
     <app-input-text label="Arquitetura" [(model)]="form.architecture"
       placeholder="Escreva a arquitetura da placa de vídeo..."></app-input-text>
-    <app-select-input label="Modelo" [(model)]="form.modelId" [options]="modelOptions"
+    <app-select-input label="Modelo" [(model)]="form.modelId" [options]="modelOptions()"
       placeholder="Selecione o modelo..."></app-select-input>
-    <app-select-input-multi label="Categorias" [options]="listaCategorias"
+    <app-select-input-multi label="Categorias" [options]="categoryOptions()"
       [(model)]="form.categoryIds!"></app-select-input-multi>
     <app-tag-input label="Tecnologias" placeholder="Adicione tecnologias..." [(model)]="technologyTags"></app-tag-input>
     <app-file-input label="Imagens" accept="image/*" [multiple]="true" description="Upload de imagens da GPU"

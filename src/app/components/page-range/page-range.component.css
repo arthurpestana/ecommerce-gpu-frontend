@@ -1,0 +1,5 @@
+.page-range__text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--muted-foreground);
+}

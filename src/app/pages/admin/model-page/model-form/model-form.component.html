@@ -1,0 +1,33 @@
+<app-form-dialog
+  [open]="open"
+  [title]="model ? 'Editar Modelo' : 'Novo Modelo'"
+  cancelText="Cancelar"
+  submitText="Salvar"
+  (closed)="close.emit()"
+  (submitted)="submit()"
+>
+  <app-container-div direction="column" gap="0.75rem">
+
+    <app-input-text
+      label="Nome"
+      [(model)]="form.name"
+      placeholder="Nome do modelo..."
+    ></app-input-text>
+
+    <app-input-number
+      label="Ano de Lançamento"
+      [(model)]="form.releaseYear"
+      [min]="1980"
+      [max]="2099">
+    </app-input-number>
+
+    <app-select-input
+      label="Fabricante"
+      [options]="manufacturersOptions()"
+      [(model)]="form.manufacturerId"
+      placeholder="Selecione o fabricante..."
+    ></app-select-input>
+
+  </app-container-div>
+</app-form-dialog>
+

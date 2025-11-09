@@ -1,0 +1,27 @@
+<div class="page-admin">
+  <div class="page-admin__header">
+    <div class="page-admin__header__group">
+      <h1 class="page-admin__header__group-title">Histórico de Inventário</h1>
+      <p class="page-admin__header__group-subtitle">
+        Veja as movimentações e adicione entradas/saídas de estoque.
+      </p>
+    </div>
+
+    <app-button
+      variant="primary"
+      size="medium"
+      icon="plus"
+      (clicked)="openCreate()"
+    >
+      Nova Transação
+    </app-button>
+  </div>
+
+  <app-inventory-table></app-inventory-table>
+
+  <app-inventory-form
+    [open]="createDialogOpen"
+    (close)="createDialogOpen = false"
+    (submitForm)="handleSubmit($event)"
+  ></app-inventory-form>
+</div>
