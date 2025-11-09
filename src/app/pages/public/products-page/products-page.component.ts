@@ -25,9 +25,9 @@ export class ProductsPageComponent {
   listGpus = this.gpuQuery.getListGpus;
 
   get currentPage() {
-    const gpuData = this.listGpus.data();
-    if (!gpuData) return 1;
-    return gpuData.offset;
+    const data = this.listGpus.data();
+    if (!data) return 1;
+    return data.offset;
   }
 
   get paginatedProducts() {
@@ -58,8 +58,6 @@ export class ProductsPageComponent {
 
   async onSearchText(newSearchText: string): Promise<void> {
     this.gpuQuery.setParams({ search: newSearchText, page: 1 });
-    console.log('Search text updated to:', newSearchText);
-    console.log(this.paginatedProducts);
   }
 
   async onPageChanged(newPage: number): Promise<void> {

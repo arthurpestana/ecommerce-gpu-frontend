@@ -15,6 +15,7 @@
     [columns]="columnsTable"
     [actions]="true"
     [pageSize]="10"
+    [totalPages]="totalPages"
     (pageChange)="onPageChange($event)"
   >
     <ng-template #tableActions let-row>
