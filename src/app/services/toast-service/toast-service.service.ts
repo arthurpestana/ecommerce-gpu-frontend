@@ -19,7 +19,24 @@ export class ToastService {
     return crypto.randomUUID();
   }
 
+  private findDuplicate(message: string, type: ToastType): Toast | undefined {
+    return this.toastsSignal()
+      .find(t => t.message === message && t.type === type && !t.closing);
+  }
+
   show(message: string, type: ToastType, duration = 3500) {
+    const duplicate = this.findDuplicate(message, type);
+
+    if (duplicate) {
+      this.update(duplicate.id, message, type, duration);
+
+      if (type !== 'loading') {
+        setTimeout(() => this.dismiss(duplicate.id), duration);
+      }
+
+      return duplicate.id;
+    }
+
     const toast: Toast = {
       id: this.generateId(),
       message,

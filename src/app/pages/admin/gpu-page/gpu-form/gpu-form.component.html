@@ -1,0 +1,40 @@
+<app-form-dialog
+  [open]="open"
+  [title]="gpu ? 'Editar Placa de Vídeo' : 'Nova Placa de Vídeo'"
+  [cancelText]="'Cancelar'"
+  [submitText]="gpu ? 'Salvar' : 'Criar'"
+  (closed)="close.emit()"
+  (submitted)="submit()"
+>
+<app-container-div [direction]="'column'" gap="0.75rem">
+    <app-input-text label="Nome" [(model)]="form.name"
+      placeholder="Escreva o nome da placa de vídeo..."></app-input-text>
+    <app-textarea label="Descrição detalhada" placeholder="Escreva algo..." [(model)]="form.description" [rows]="6"
+      [maxLength]="500" description="Máximo de 500 caracteres"></app-textarea>
+    <app-container-div [direction]="'row'" gap="1rem" [full]="true">
+      <app-input-number label="Preço" [(model)]="form.price" [min]="0" [step]="0.01"></app-input-number>
+      <app-input-number label="Quantidade" [(model)]="form.availableQuantity" [min]="0"></app-input-number>
+    </app-container-div>
+    <app-container-div [direction]="'row'" gap="1rem" [full]="true">
+      <app-input-number label="Memória" [(model)]="form.memory" [min]="0"></app-input-number>
+      <app-input-number label="Consumo de Energia" [(model)]="form.energyConsumption" [min]="0"></app-input-number>
+    </app-container-div>
+    <app-input-text label="Arquitetura" [(model)]="form.architecture"
+      placeholder="Escreva a arquitetura da placa de vídeo..."></app-input-text>
+    <app-select-input label="Modelo" [(model)]="form.modelId" [options]="modelOptions"
+      placeholder="Selecione o modelo..."></app-select-input>
+    <app-select-input-multi label="Categorias" [options]="listaCategorias"
+      [(model)]="form.categoryIds!"></app-select-input-multi>
+    <app-tag-input label="Tecnologias" placeholder="Adicione tecnologias..." [(model)]="technologyTags"></app-tag-input>
+    <app-file-input label="Imagens" accept="image/*" [multiple]="true" description="Upload de imagens da GPU"
+      [(model)]="uploadImages"></app-file-input>
+    @for (img of existingImages; track img.id) {
+    <app-file-item [item]="{
+        id: img.id,
+        url: img.url,
+        altText: img.altText,
+        isRemote: true
+      }" [showPreview]="true" [hideDownload]="false" (remove)="removeExistingImage(img)"></app-file-item>
+    }
+  </app-container-div>
+</app-form-dialog>

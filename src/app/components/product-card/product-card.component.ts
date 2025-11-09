@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { GpuResponse } from '../../lib/interfaces/IGpu';
 
 @Component({
-  selector: 'app-gpu-card',
+  selector: 'app-product-card',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './gpu-card.component.html',
-  styleUrls: ['./gpu-card.component.css'],
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.css'],
 })
-export class GpuCardComponent {
+export class ProductCardComponent {
   @Input() gpu!: GpuResponse;
 
   get manufacturer(): string {

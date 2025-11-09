@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GpuCardComponent } from './gpu-card.component';
+import { GpuFormComponent } from './gpu-form.component';
 
-describe('GpuCardComponent', () => {
-  let component: GpuCardComponent;
-  let fixture: ComponentFixture<GpuCardComponent>;
+describe('GpuFormComponent', () => {
+  let component: GpuFormComponent;
+  let fixture: ComponentFixture<GpuFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GpuCardComponent]
+      imports: [GpuFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GpuCardComponent);
+    fixture = TestBed.createComponent(GpuFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

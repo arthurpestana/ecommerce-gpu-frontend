@@ -7,7 +7,7 @@ import { TagComponent } from '../../tag/tag.component';
 @Component({
   selector: 'app-tag-input',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonComponent, TagComponent],
+  imports: [CommonModule, FormsModule, TagComponent],
   templateUrl: './tag-input.component.html',
   styleUrls: ['./tag-input.component.css'],
 })

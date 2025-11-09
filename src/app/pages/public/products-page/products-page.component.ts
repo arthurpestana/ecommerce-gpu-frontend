@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SearchFilterComponent } from '../../../components/search-filter/search-filter.component';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
-import { GpuCardComponent } from '../../../components/gpu-card/gpu-card.component';
+import { ProductCardComponent } from '../../../components/product-card/product-card.component';
 import { GpuService } from '../../../services/api/gpu/gpu-service/gpu.service';
 import { GpuResponse } from '../../../lib/interfaces/IGpu';
 import { PaginationRequest } from '../../../lib/interfaces/IPagination';
@@ -14,7 +14,7 @@ const ITEMS_PER_PAGE = 10;
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [CommonModule, SearchFilterComponent, PaginationComponent, GpuCardComponent],
+  imports: [CommonModule, SearchFilterComponent, PaginationComponent, ProductCardComponent],
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css'],
 })

@@ -1,0 +1,17 @@
+
+<ng-template #toggleTemplate let-value let-row="row">
+  <app-toggle-input [model]="value" (modelChange)="onToggleStatus(row, $event)"></app-toggle-input>
+</ng-template>
+
+<app-container-div [direction]="'column'" gap="1.5rem">
+    <app-search-filter (searchSubmit)="onSearch($event)" placeholderText="Buscar por placas de vídeo..." />
+    
+    <app-table [data]="dataGpus" [actions]="true" [columns]="columnsTable" [pageSize]="10" [actions]="true"
+        (pageChange)="onPageChange($event)">
+        <ng-template #tableActions let-row>
+            <app-button variant="outline" size="square-small" icon="pencil"
+                (clicked)="edit.emit(row)"></app-button>
+            <app-button variant="outline" size="square-small" icon="trash" (clicked)="delete.emit(row)"></app-button>
+        </ng-template>
+    </app-table>
+</app-container-div>

@@ -165,4 +165,14 @@ export class GpuQueryService {
     },
 
   }));
+
+  getProductsRangeStart() {
+    const params = this.params();
+    return (params.page - 1) * params.limit + 1;
+  }
+
+  getProductsRangeEnd(totalItems: number) {
+    const params = this.params();
+    return Math.min(params.page * params.limit, totalItems);
+  }
 }

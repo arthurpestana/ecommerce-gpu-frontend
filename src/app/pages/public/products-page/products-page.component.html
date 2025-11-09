@@ -29,7 +29,7 @@
 
           <div class="products-page__product-grid">
             @for (gpu of paginatedProducts; track gpu.id) {
-              <app-gpu-card [gpu]="gpu"></app-gpu-card>
+              <app-product-card [gpu]="gpu"></app-product-card>
             }
           </div>
 
