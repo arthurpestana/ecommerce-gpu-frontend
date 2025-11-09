@@ -83,7 +83,7 @@ export class InventoryTableComponent {
   get currentPage() {
     const data = this.listTransactions.data();
     if (!data) return 1;
-    return data.page;
+    return (data.page ?? 0) + 1;
   }
 
   get totalPages() {

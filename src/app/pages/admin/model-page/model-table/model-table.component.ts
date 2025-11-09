@@ -66,7 +66,7 @@ export class ModelTableComponent {
   get currentPage() {
     const data = this.listModels.data();
     if (!data) return 1;
-    return data.page;
+    return (data.page ?? 0) + 1;
   }
 
   get totalPages() {

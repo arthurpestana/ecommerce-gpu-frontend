@@ -69,6 +69,6 @@ export class ManufacturerTableComponent {
   get currentPage() {
     const data = this.listManufacturers.data();
     if (!data) return 1;
-    return data.page;
+    return (data.page ?? 0) + 1;
   }
 }

@@ -21,7 +21,7 @@ export class ProductsPageComponent {
   private readonly gpuQuery = inject(GpuQueryService);
 
   listGpus = this.gpuQuery.getListGpus;
-  
+
   get dataGpus() {
     return this.listGpus.data()?.items ?? [];
   }
@@ -48,7 +48,7 @@ export class ProductsPageComponent {
     const data = this.listGpus.data();
     if (!data) return 1;
     console.log(data, "dataGPU");
-    return data.page + 1;
+    return (data.page ?? 0) + 1;
   }
 
   get totalPages() {

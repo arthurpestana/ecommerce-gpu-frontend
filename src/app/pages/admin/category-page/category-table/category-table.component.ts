@@ -58,7 +58,7 @@ export class CategoryTableComponent {
     const data = this.listCategories.data();
     if (!data) return 1;
     console.log(data, "data123");
-    return data.page;
+    return (data.page ?? 0) + 1;
   }
 
   get totalPages() {
