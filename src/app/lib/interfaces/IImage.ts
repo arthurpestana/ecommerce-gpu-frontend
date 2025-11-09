@@ -1,7 +1,8 @@
 export interface ImageResponse {
-  id: number;
+  id: string;
   url: string;
   altText: string;
+  objectName: string;
 }
 
 export interface ImageRequest {

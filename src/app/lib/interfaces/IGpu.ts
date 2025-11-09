@@ -4,7 +4,7 @@ import { ModelResponse } from "./IModel";
 import { TechnologyRequest, TechnologyResponse } from "./ITechnology";
 
 export interface GpuResponse {
-    id: number;
+    id: string;
     name: string;
     description: string;
     price: number;
@@ -29,7 +29,6 @@ export interface GpuRequest {
   architecture: string;
   energyConsumption: number;
   modelId: string;
-  images?: ImageRequest[]; 
   technologies?: TechnologyRequest[];
   categoryIds?: string[];
 }

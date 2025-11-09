@@ -17,6 +17,9 @@ import { ToggleInputComponent } from '../../../components/inputs/toggle-input/to
 import { FileInputComponent } from '../../../components/inputs/file-input/file-input.component';
 import { TagInputComponent } from '../../../components/inputs/tag-input/tag-input.component';
 import { FileDownloadService } from '../../../services/file-download/file-download.service';
+import { ToastService } from '../../../services/toast-service/toast-service.service';
+import { FileItemComponent } from '../../../components/file-item/file-item.component';
+import { ImageResponse } from '../../../lib/interfaces/IImage';
 
 @Component({
   selector: 'app-gpu-page',
@@ -35,13 +38,16 @@ import { FileDownloadService } from '../../../services/file-download/file-downlo
     ToggleInputComponent,
     FileInputComponent,
     TagInputComponent,
+    FileItemComponent
   ],
   templateUrl: './gpu-page.component.html',
   styleUrl: './gpu-page.component.css',
 })
 export class GpuPageComponent {
   private readonly gpuQuery = inject(GpuQueryService);
+  private readonly toastService = inject(ToastService);
   @ViewChild('toggleTemplate', { static: true }) toggleTemplate!: TemplateRef<any>;
+  @ViewChild(FileInputComponent) fileInput!: FileInputComponent;
 
   columnsTable: TableColumn<GpuResponse>[] = [];
 
@@ -78,26 +84,25 @@ export class GpuPageComponent {
     ];
   }
 
-  createDialogOpen = false;
-  editDialogOpen = false;
   deleteDialogOpen = false;
   createOrEditDialogOpen = false;
 
   selectedGpu: GpuResponse | null = null;
 
   modelOptions = [
-    { value: 1, label: 'RTX 3060' },
-    { value: 2, label: 'RTX 3070' },
-    { value: 3, label: 'RX 6600 XT' },
+    { value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", label: 'GeForce RTX 4090' },
+    { value: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", label: 'Radeon RX 7900 XTX' },
+    { value: "cccccccc-cccc-cccc-cccc-cccccccccccc", label: 'Arc A770' },
   ];
 
   listaCategorias = [
-    { value: '1', label: 'Gaming' },
-    { value: '2', label: 'Workstation' },
-    { value: '3', label: 'Budget' },
-    { value: '4', label: 'High-End' },
+    { value: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', label: 'High-End' },
+    { value: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', label: 'Mid-Range' },
+    { value: 'cccccccc-cccc-cccc-cccc-cccccccccccc', label: 'Entry-Level' },
   ];
 
+  existingImages: ImageResponse[] = [];
+  imagesToDelete: string[] = [];
   uploadImages: File[] = [];
   technologyTags: string[] = [];
 
@@ -111,7 +116,6 @@ export class GpuPageComponent {
     architecture: '',
     energyConsumption: 0,
     modelId: '',
-    images: [],
     technologies: [],
     categoryIds: [],
   };
@@ -147,9 +151,17 @@ export class GpuPageComponent {
   }
 
   openCreateOrEditDialog(gpu: GpuResponse | null) {
-    this.selectedGpu = gpu;
+    this.uploadImages = [];
+    this.imagesToDelete = [];
+    this.existingImages = [];
+    this.technologyTags = [];
+    queueMicrotask(() => {
+      this.fileInput?.reset();
+    });
 
     if (gpu) {
+      this.selectedGpu = gpu;
+
       this.form = {
         name: gpu.name,
         description: gpu.description,
@@ -160,13 +172,15 @@ export class GpuPageComponent {
         architecture: gpu.architecture,
         energyConsumption: gpu.energyConsumption,
         modelId: String(gpu.model.id),
-        images: gpu.images ?? [],
-        technologies: gpu.technologies ?? [],
+        technologies: gpu.technologies?.map(t => ({ name: t.name, description: '' })) ?? [],
         categoryIds: gpu.categories?.map((c) => String(c.id)) ?? [],
       };
 
-      this.technologyTags = gpu.technologies.map((tech) => tech.name) ?? [];
-      this.uploadImages = gpu.images.map((img) => new File([img.url], img.altText)) ?? [];
+      this.existingImages = [...gpu.images];
+      this.imagesToDelete = [];
+      this.uploadImages = [];
+      this.technologyTags = gpu.technologies.map(t => t.name);
+
     } else {
       this.form = {
         name: '',
@@ -178,11 +192,13 @@ export class GpuPageComponent {
         architecture: '',
         energyConsumption: 0,
         modelId: '',
-        images: [],
         technologies: [],
         categoryIds: [],
       };
 
+      this.existingImages = [];
+      this.imagesToDelete = [];
+      this.uploadImages = [];
       this.technologyTags = [];
     }
 
@@ -219,25 +235,33 @@ export class GpuPageComponent {
     );
   }
 
-  onSubmitForm() {
-    const payload: GpuRequest = {
+  onRemoveExistingImage(img: ImageResponse) {
+    this.imagesToDelete.push(img.id);
+    this.existingImages = this.existingImages.filter((image) => image.id !== img.id);
+  }
+
+  async onSubmitForm() {
+    const payloadData: GpuRequest = {
       ...this.form,
-      images: this.form.images?.map((image) => ({
-        url: image.url,
-        altText: image.altText,
-      })),
-      technologies: this.technologyTags.map((techTag) => ({
-        name: techTag,
+      technologies: this.technologyTags.map((tag) => ({
+        name: tag,
         description: '',
       })),
     };
 
-    console.log('Submitting form:', payload);
+    if (this.selectedGpu && this.imagesToDelete.length > 0) {
+      this.gpuQuery.deleteImagesFromGpu.mutate({
+        gpuId: this.selectedGpu.id,
+        imageIds: this.imagesToDelete,
+      });
+    }
+
     if (this.selectedGpu) {
       this.gpuQuery.updateGpu.mutate(
         {
           id: this.selectedGpu.id,
-          data: payload,
+          data: payloadData,
+          images: this.uploadImages,
         },
         {
           onSuccess: () => {
@@ -246,11 +270,17 @@ export class GpuPageComponent {
         }
       );
     } else {
-      this.gpuQuery.createGpu.mutate(payload, {
-        onSuccess: () => {
-          this.createOrEditDialogOpen = false;
+      this.gpuQuery.createGpu.mutate(
+        {
+          data: payloadData,
+          images: this.uploadImages,
         },
-      });
+        {
+          onSuccess: () => {
+            this.createOrEditDialogOpen = false;
+          },
+        }
+      );
     }
   }
 }

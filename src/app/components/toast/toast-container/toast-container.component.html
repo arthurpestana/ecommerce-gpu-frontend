@@ -1,0 +1,9 @@
+<div class="toast-container">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <app-toast
+      [toast]="toast"
+      (close)="toastService.dismiss(toast.id)"
+      [style.--toast-duration]="toast.duration + 'ms'"
+    />
+  }
+</div>

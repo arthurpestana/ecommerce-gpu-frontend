@@ -1,0 +1,43 @@
+<div class="file-item">
+
+  @if (showPreview) {
+
+    @if (isFile() && fileAsLocal) {
+      <img
+        [src]="fileAsLocal | filePreview"
+        class="file-item__preview"
+        alt="preview"
+      />
+    }
+
+    @if (isRemote() && remoteUrl) {
+      <img
+        [src]="remoteUrl"
+        class="file-item__preview"
+        alt="preview"
+      />
+    }
+  }
+  <span class="file-item__name">
+    {{ getName() }}
+  </span>
+
+  @if (!hideDownload && hasDownload()) {
+    <app-button
+      variant="ghost"
+      size="square-small"
+      icon="download"
+      (clicked)="onDownload()"
+    ></app-button>
+  }
+
+  @if (!disableDelete) {
+    <app-button
+      variant="ghost"
+      size="square-small"
+      icon="x"
+      (clicked)="onRemove()"
+    ></app-button>
+  }
+
+</div>

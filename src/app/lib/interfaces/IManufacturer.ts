@@ -1,5 +1,5 @@
 export interface ManufacturerResponse {
-    id: number;
+    id: string;
     name: string;
     email: string;
     cnpj: string;

@@ -1,0 +1,22 @@
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+}
+
+.file-item__name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--foreground);
+}
+
+.file-item__preview {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}

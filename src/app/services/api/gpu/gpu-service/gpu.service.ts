@@ -48,7 +48,7 @@ export class GpuService {
   }
 
   async findByModel(
-    modelId: number,
+    modelId: string,
     paginationParams: PaginationRequest
   ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
@@ -63,7 +63,7 @@ export class GpuService {
   }
 
   async findByManufacturer(
-    manufacturerId: number,
+    manufacturerId: string,
     paginationParams: PaginationRequest
   ): Promise<PaginationResponse<GpuResponse>> {
     const params = new HttpParams()
@@ -125,25 +125,55 @@ export class GpuService {
     );
   }
 
-  async findGpuById(id: number): Promise<GpuResponse> {
+  async findGpuById(id: string): Promise<GpuResponse> {
     return firstValueFrom(this.httpClient.get<GpuResponse>(`${this.apiUrl}/${id}`));
   }
 
-  async createGpu(payload: GpuRequest): Promise<GpuResponse> {
-    return firstValueFrom(this.httpClient.post<GpuResponse>(`${this.apiUrl}`, payload));
+  async createGpu(payload: { data: GpuRequest; images?: File[] }): Promise<GpuResponse> {
+    const form = new FormData();
+    form.append("data", new Blob([JSON.stringify(payload.data)], { type: "application/json" }));
+
+    if (payload.images?.length) {
+      payload.images.forEach(img => form.append("images", img));
+    }
+
+    return firstValueFrom(
+      this.httpClient.post<GpuResponse>(`${this.apiUrl}`, form)
+    );
   }
 
-  async updateGpu(id: number, payload: Partial<GpuRequest>): Promise<GpuResponse> {
-    return firstValueFrom(this.httpClient.put<GpuResponse>(`${this.apiUrl}/${id}`, payload));
+
+  async updateGpu(
+    id: string,
+    payload: { data: Partial<GpuRequest>; images?: File[] }
+  ): Promise<GpuResponse> {
+    const form = new FormData();
+    form.append("data", new Blob([JSON.stringify(payload.data)], { type: "application/json" }));
+
+    if (payload.images?.length) {
+      payload.images.forEach(img => form.append("images", img));
+    }
+
+    return firstValueFrom(
+      this.httpClient.put<GpuResponse>(`${this.apiUrl}/${id}`, form)
+    );
   }
 
-  async updateGpuStatus(id: number, isActive: boolean): Promise<GpuResponse> {
+  async deleteImagesFromGpu(gpuId: string, imageIds: string[]): Promise<void> {
+    const body = { imageIds };
+
+    return firstValueFrom(
+      this.httpClient.delete<void>(`${this.apiUrl}/${gpuId}/images`, { body })
+    );
+  }
+
+  async updateGpuStatus(id: string, isActive: boolean): Promise<GpuResponse> {
     return firstValueFrom(
       this.httpClient.patch<GpuResponse>(`${this.apiUrl}/${id}/status`, { isActive })
     );
   }
 
-  async deleteGpu(id: number): Promise<number> {
+  async deleteGpu(id: string): Promise<number> {
     return firstValueFrom(this.httpClient.delete<number>(`${this.apiUrl}/${id}`));
   }
 }

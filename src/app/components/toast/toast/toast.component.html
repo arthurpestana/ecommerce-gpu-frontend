@@ -1,0 +1,6 @@
+<div class="toast" [class]="toast.type" [class.toast--closing]="toast.closing">
+    <app-lucide-icon [icon]="getIcon" size="24" class="toast__icon" [class.toast__icon--spin]="isLoading"></app-lucide-icon>
+  <div class="toast__content">{{ toast.message }}</div>
+  <app-button class="toast__close" (clicked)="close.emit()" icon="X" variant="ghost" size="none" iconSize="16"></app-button>
+  @if (!isLoading){<div class="toast__progress"></div>}
+</div>

@@ -1,98 +1,50 @@
 <ng-template #toggleTemplate let-value let-row="row">
-  <app-toggle-input
-    [model]="value"
-    (modelChange)="onToggleStatus(row, $event)"
-  ></app-toggle-input>
+  <app-toggle-input [model]="value" (modelChange)="onToggleStatus(row, $event)"></app-toggle-input>
 </ng-template>
 
-<app-form-dialog
-  [open]="createOrEditDialogOpen"
-  [title]="selectedGpu ? 'Editar Placa de Vídeo' : 'Nova Placa de Vídeo'"
+<app-form-dialog [open]="createOrEditDialogOpen" [title]="selectedGpu ? 'Editar Placa de Vídeo' : 'Nova Placa de Vídeo'"
   [subtitle]="
     selectedGpu
       ? 'Modifique os detalhes da placa de vídeo selecionada.'
       : 'Preencha os detalhes para criar uma nova placa de vídeo.'
-  "
-  [cancelText]="'Cancelar'"
-  [submitText]="selectedGpu ? 'Salvar' : 'Criar'"
-  (closed)="createOrEditDialogOpen = false"
-  (submitted)="onSubmitForm()"
->
+  " [cancelText]="'Cancelar'" [submitText]="selectedGpu ? 'Salvar' : 'Criar'" (closed)="createOrEditDialogOpen = false"
+  (submitted)="onSubmitForm()">
   <app-container-div [direction]="'column'" gap="0.75rem">
-    <app-input-text
-      label="Nome"
-      [(model)]="form.name"
-      placeholder="Escreva o nome da placa de vídeo..."
-    ></app-input-text>
-    <app-textarea
-      label="Descrição detalhada"
-      placeholder="Escreva algo..."
-      [(model)]="form.description"
-      [rows]="6"
-      [maxLength]="500"
-      description="Máximo de 500 caracteres"
-    ></app-textarea>
+    <app-input-text label="Nome" [(model)]="form.name"
+      placeholder="Escreva o nome da placa de vídeo..."></app-input-text>
+    <app-textarea label="Descrição detalhada" placeholder="Escreva algo..." [(model)]="form.description" [rows]="6"
+      [maxLength]="500" description="Máximo de 500 caracteres"></app-textarea>
     <app-container-div [direction]="'row'" gap="1rem" [full]="true">
-      <app-input-number
-        label="Preço"
-        [(model)]="form.price"
-        [min]="0"
-        [step]="0.01"
-      ></app-input-number>
-      <app-input-number
-        label="Quantidade"
-        [(model)]="form.availableQuantity"
-        [min]="0"
-      ></app-input-number>
+      <app-input-number label="Preço" [(model)]="form.price" [min]="0" [step]="0.01"></app-input-number>
+      <app-input-number label="Quantidade" [(model)]="form.availableQuantity" [min]="0"></app-input-number>
     </app-container-div>
     <app-container-div [direction]="'row'" gap="1rem" [full]="true">
       <app-input-number label="Memória" [(model)]="form.memory" [min]="0"></app-input-number>
-      <app-input-number
-        label="Consumo de Energia"
-        [(model)]="form.energyConsumption"
-        [min]="0"
-      ></app-input-number>
+      <app-input-number label="Consumo de Energia" [(model)]="form.energyConsumption" [min]="0"></app-input-number>
     </app-container-div>
-    <app-input-text
-      label="Arquitetura"
-      [(model)]="form.architecture"
-      placeholder="Escreva a arquitetura da placa de vídeo..."
-    ></app-input-text>
-    <app-select-input
-      label="Marca"
-      [(model)]="form.modelId"
-      [options]="modelOptions"
-      placeholder="Selecione a marca..."
-    ></app-select-input>
-    <app-select-input-multi
-      label="Categorias"
-      [options]="listaCategorias"
-      [(model)]="categoryIds"
-    ></app-select-input-multi>
-    <app-tag-input
-      label="Tecnologias"
-      placeholder="Adicione tecnologias..."
-      [(model)]="technologyTags"
-    ></app-tag-input>
-    <app-file-input
-      label="Imagens"
-      accept="image/*"
-      [multiple]="true"
-      description="Upload de imagens da GPU"
-      [(model)]="uploadImages"
-    ></app-file-input>
+    <app-input-text label="Arquitetura" [(model)]="form.architecture"
+      placeholder="Escreva a arquitetura da placa de vídeo..."></app-input-text>
+    <app-select-input label="Modelo" [(model)]="form.modelId" [options]="modelOptions"
+      placeholder="Selecione o modelo..."></app-select-input>
+    <app-select-input-multi label="Categorias" [options]="listaCategorias"
+      [(model)]="categoryIds"></app-select-input-multi>
+    <app-tag-input label="Tecnologias" placeholder="Adicione tecnologias..." [(model)]="technologyTags"></app-tag-input>
+    <app-file-input label="Imagens" accept="image/*" [multiple]="true" description="Upload de imagens da GPU"
+      [(model)]="uploadImages"></app-file-input>
+    @for (img of existingImages; track img.id) {
+    <app-file-item [item]="{
+        id: img.id,
+        url: img.url,
+        altText: img.altText,
+        isRemote: true
+      }" [showPreview]="true" [hideDownload]="false" (remove)="onRemoveExistingImage(img)"></app-file-item>
+    }
   </app-container-div>
 </app-form-dialog>
 
-<app-alert-dialog
-  [open]="deleteDialogOpen"
-  title="Confirmar Exclusão"
-  message="Tem certeza de que deseja excluir esta placa de vídeo?"
-  [cancelText]="'Cancelar'"
-  [confirmText]="'Excluir'"
-  (closed)="deleteDialogOpen = false"
-  (confirmed)="onConfirmDelete()"
->
+<app-alert-dialog [open]="deleteDialogOpen" title="Confirmar Exclusão"
+  message="Tem certeza de que deseja excluir esta placa de vídeo?" [cancelText]="'Cancelar'" [confirmText]="'Excluir'"
+  (closed)="deleteDialogOpen = false" (confirmed)="onConfirmDelete()">
 </app-alert-dialog>
 
 <div class="page-admin">
@@ -103,37 +55,18 @@
         Adicione, edite ou remova placas de vídeo na tabela abaixo.
       </p>
     </div>
-    <app-button variant="primary" size="medium" icon="plus" (clicked)="openCreateOrEditDialog(null)"
-      >Nova Placa</app-button
-    >
+    <app-button variant="primary" size="medium" icon="plus" (clicked)="openCreateOrEditDialog(null)">Nova
+      Placa</app-button>
   </div>
-  <app-search-filter
-    (searchSubmit)="onSearchText($event)"
-    placeholderText="Buscar por placas de vídeo..."
-  />
+  <app-search-filter (searchSubmit)="onSearchText($event)" placeholderText="Buscar por placas de vídeo..." />
 
-  <app-table
-    [data]="dataGpus"
-    [actions]="true"
-    [columns]="columnsTable"
-    [pageSize]="10"
-    [actions]="true"
-    (pageChange)="onPageChanged($event)"
-  >
+  <app-table [data]="dataGpus" [actions]="true" [columns]="columnsTable" [pageSize]="10" [actions]="true"
+    (pageChange)="onPageChanged($event)">
     <ng-template #tableActions let-row>
-      <app-button
-        variant="outline"
-        size="square-small"
-        icon="pencil"
-        (clicked)="openCreateOrEditDialog(row)"
-      ></app-button>
+      <app-button variant="outline" size="square-small" icon="pencil"
+        (clicked)="openCreateOrEditDialog(row)"></app-button>
 
-      <app-button
-        variant="outline"
-        size="square-small"
-        icon="trash"
-        (clicked)="openDeleteDialog(row)"
-      ></app-button>
+      <app-button variant="outline" size="square-small" icon="trash" (clicked)="openDeleteDialog(row)"></app-button>
     </ng-template>
   </app-table>
 </div>
