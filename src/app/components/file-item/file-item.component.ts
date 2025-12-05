@@ -22,7 +22,6 @@ export type FileItem = File | RemoteFile;
   styleUrls: ['./file-item.component.css'],
 })
 export class FileItemComponent {
-  private readonly fileDownloadService = inject(FileDownloadService);
 
   @Input({ required: true }) item!: FileItem;
   @Input() isLocal = false;

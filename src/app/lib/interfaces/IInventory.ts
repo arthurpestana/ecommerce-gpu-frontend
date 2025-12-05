@@ -1,9 +1,5 @@
+import { TransactionTypes } from "../enums/TransactionTypes";
 import { GpuResponse } from "./IGpu";
-
-export enum TransactionTypes {
-    ADD = "ADD",
-    REMOVE = "REMOVE"
-}
 
 export interface InventoryTransactionResponse {
     id: string;
