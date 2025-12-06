@@ -1,0 +1,52 @@
+<app-container-div title="Informações da Conta" gap="1rem">
+
+    <div class="settings__header">
+        <h2 class="settings__header__title">Informações da Conta</h2>
+        <p>Atualize suas informações pessoais abaixo.</p>
+    </div>
+  <app-container-div direction="column" gap="1rem">
+      <app-input-text
+        label="Nome completo"
+        placeholder="Digite seu nome"
+        [(model)]="form.name"
+      />
+      <app-input-text
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        [(model)]="form.email"
+      />
+      <app-container-div direction="row" gap="1rem" [full]="true">
+          <app-input-mask
+            label="Telefone"
+            placeholder="(99) 99999-9999"
+            mask="(00) 00000-0000"
+            [(model)]="form.phoneNumber"
+            [maxDigits]="13"
+          />
+          <app-input-mask
+            label="CPF"
+            placeholder="000.000.000-00"
+            mask="000.000.000-00"
+            [maxDigits]="11"
+            [(model)]="form.cpf"
+          />
+      </app-container-div>
+      <app-input-password
+        label="Senha"
+        placeholder="Digite uma nova senha"
+        [(model)]="form.password"
+        description="Caso deixe vazio, a senha atual será mantida."
+      />
+  </app-container-div>
+
+  <div class="settings__actions">
+    <app-button
+      variant="primary"
+      size="small"
+      (clicked)="submit()"
+    >
+      Salvar Alterações
+    </app-button>
+  </div>
+
+</app-container-div>

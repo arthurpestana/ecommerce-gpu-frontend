@@ -1,1 +1,47 @@
-<p>login-page works!</p>
+<div class="login">
+
+    <div class="login__card">
+        <div class="login__card__header">
+            <div class="login__card__header__logo">
+                <div class="login__card__header__logo-circle" (click)="goToHome()">
+                    <app-lucide-icon icon="gpu" size="32" class="login__card__header__logo-img"></app-lucide-icon>
+                </div>
+            </div>
+
+            <h1 class="login__card__header__title">Bem-vindo</h1>
+            <p class="login__card__header__subtitle">Acesse a sua conta no GPU Store</p>
+        </div>
+
+        <app-container-div direction="column" gap="1rem">
+
+            <app-input-text label="Email" type="email" placeholder="seu@email.com" [(model)]="form.email">
+            </app-input-text>
+
+            <app-input-password label="Senha" placeholder="••••••••" [(model)]="form.password">
+            </app-input-password>
+
+            <div class="login__card__forgot-password">
+                <a href="#">Esqueceu sua senha?</a>
+
+            </div>
+
+            <div class="login__card__button-group">
+                <app-button [fullWidth]="true" variant="primary" size="large" class="login__card__button login__card__button--primary"
+                    (clicked)="submit()">
+                    Entrar
+                </app-button>
+                <div class="login__card__divider">Novo por aqui?</div>
+                <app-button [fullWidth]="true" variant="outline" size="large" class="login__card__button login__card__button--outline"
+                    (clicked)="goToRegister()">
+                    Criar conta
+                </app-button>
+            </div>
+
+        </app-container-div>
+
+    </div>
+
+    <footer class="login__footer">
+        GPU STORE
+    </footer>
+</div>

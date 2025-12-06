@@ -1,0 +1,67 @@
+<div class="addresses">
+
+  <div class="addresses__header">
+    <h2 class="addresses__title">Meus Endereços</h2>
+
+    <app-button
+      variant="primary"
+      size="small"
+      icon="plus"
+      (clicked)="openCreate()">
+      Novo Endereço
+    </app-button>
+  </div>
+
+  <div class="addresses__list">
+    @for (addr of addresses(); track addr.id) {
+      <div class="address-card">
+
+        <div class="address-card__info">
+          <p class="address-card__info__title">{{ addr.street }}</p>
+          <p class="address-card__info__subtitle">
+            {{ addr.city }}, {{ addr.state }} - {{ addr.country }}
+          </p>
+          <p class="address-card__info__cep">CEP: {{ getZipCode(addr) }}</p>
+        </div>
+
+        <div class="address-card__actions">
+          <app-button
+            variant="outline"
+            size="square-small"
+            icon="pencil"
+            (clicked)="openEdit(addr)">
+          </app-button>
+
+          <app-button
+            variant="outline"
+            size="square-small"
+            icon="trash"
+            (clicked)="openDelete(addr)">
+          </app-button>
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>
+
+<!-- Formulário de criar/editar -->
+<app-address-form
+  [open]="formDialogOpen()"
+  [userId]="user?.id || null"
+  [address]="selectedAddress()"
+  (close)="formDialogOpen.set(false)"
+  (saved)="handleSaved()">
+</app-address-form>
+
+<!-- Confirmação de remoção -->
+<app-alert-dialog
+  [open]="deleteDialogOpen()"
+  title="Confirmar Exclusão"
+  message="Tem certeza de que deseja excluir este endereço?"
+  cancelText="Cancelar"
+  confirmText="Excluir"
+  (closed)="deleteDialogOpen.set(false)"
+  (confirmed)="confirmDelete()">
+</app-alert-dialog>

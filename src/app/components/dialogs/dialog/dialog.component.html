@@ -2,10 +2,11 @@
 <div
   class="dialog__overlay"
   [class.show]="open"
+  [style.zIndex]="zIndex"
   (click)="!disableBackdropClose && closeDialog()"
 ></div>
 
-<div class="dialog__container" [style.width]="width">
+<div class="dialog__container" [style.width]="width" [style.zIndex]="zIndex">
   <div class="dialog__container__header">
     @if (title) {
     <div class="dialog__container__header-group">

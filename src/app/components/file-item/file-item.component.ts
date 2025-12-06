@@ -6,69 +6,78 @@ import { FilePreviewPipe } from '../../lib/utils/file-preview/file-preview-pipe'
 import { FileDownloadService } from '../../services/file-download/file-download.service';
 
 export type RemoteFile = {
-  id: string;
-  url: string;
-  altText: string;
-  isRemote: true;
+    id: string;
+    url: string;
+    altText: string;
+    isRemote: true;
 };
 
 export type FileItem = File | RemoteFile;
 
 @Component({
-  selector: 'app-file-item',
-  standalone: true,
-  imports: [CommonModule, ButtonComponent, LucideIconComponent, FilePreviewPipe],
-  templateUrl: './file-item.component.html',
-  styleUrls: ['./file-item.component.css'],
+    selector: 'app-file-item',
+    standalone: true,
+    imports: [CommonModule, ButtonComponent, LucideIconComponent, FilePreviewPipe],
+    templateUrl: './file-item.component.html',
+    styleUrls: ['./file-item.component.css'],
 })
 export class FileItemComponent {
 
-  @Input({ required: true }) item!: FileItem;
-  @Input() isLocal = false;
-  @Input() showPreview = true;
-  @Input() disableDelete = false;
-  @Input() hideDownload = false;
+    private readonly fileDownload = inject(FileDownloadService);
 
-  @Output() remove = new EventEmitter<FileItem>();
-  @Output() download = new EventEmitter<FileItem>();
+    @Input({ required: true }) item!: FileItem;
+    @Input() isLocal = false;
+    @Input() showPreview = true;
+    @Input() disableDelete = false;
+    @Input() hideDownload = false;
 
-  isFile(): boolean {
-    return this.isLocal && this.item instanceof File;
-  }
+    @Output() remove = new EventEmitter<FileItem>();
+    @Output() download = new EventEmitter<FileItem>();
 
-  isRemote(): boolean {
-    return !this.isLocal;
-  }
+    isFile(): boolean {
+        return this.isLocal && this.item instanceof File;
+    }
 
-  getName(): string {
-    return this.isFile()
-      ? (this.item as File).name
-      : (this.item as RemoteFile).altText;
-  }
+    isRemote(): boolean {
+        return !this.isLocal;
+    }
 
-  getRemoteUrl(): string | null {
-    return this.isRemote() ? (this.item as RemoteFile).url : null;
-  }
+    getName(): string {
+        return this.isFile()
+            ? (this.item as File).name
+            : (this.item as RemoteFile).altText;
+    }
 
-  hasDownload(): boolean {
-    return this.isRemote() && !!(this.item as RemoteFile).url;
-  }
+    getRemoteUrl(): string | null {
+        return this.isRemote() ? (this.item as RemoteFile).url : null;
+    }
 
-  onRemove() {
-    if (!this.disableDelete) this.remove.emit(this.item);
-  }
+    hasDownload(): boolean {
+        return this.isRemote() && !!(this.item as RemoteFile).url;
+    }
 
-  onDownload() {
-    if (this.hasDownload()) {
-      this.download.emit(this.item)
-    };
-  }
+    onRemove() {
+        if (!this.disableDelete) this.remove.emit(this.item);
+    }
 
-  get fileAsLocal(): File | null {
-    return this.isFile() ? (this.item as File) : null;
-  }
+    onDownload() {
+        if (!this.hasDownload()) return;
 
-  get remoteUrl(): string | null {
-    return this.isRemote() ? (this.item as RemoteFile).url : null;
-  }
+        const file = this.item as RemoteFile;
+
+        this.fileDownload.download(
+            file.url,
+            file.altText || 'imagem'
+        );
+    }
+
+
+
+    get fileAsLocal(): File | null {
+        return this.isFile() ? (this.item as File) : null;
+    }
+
+    get remoteUrl(): string | null {
+        return this.isRemote() ? (this.item as RemoteFile).url : null;
+    }
 }

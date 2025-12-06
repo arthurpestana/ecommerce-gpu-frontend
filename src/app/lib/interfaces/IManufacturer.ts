@@ -4,8 +4,8 @@ export interface ManufacturerResponse {
     email: string;
     cnpj: string;
     country: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface ManufacturerRequest {

@@ -80,6 +80,7 @@
   border-radius: var(--radius);
   transition: background-color 200ms ease;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 .sidebar--collapsed .sidebar__nav__item {

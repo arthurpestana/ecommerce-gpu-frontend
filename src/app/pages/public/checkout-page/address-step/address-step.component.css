@@ -1,0 +1,44 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.step__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.address-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: var(--card);
+  transition: border-color 150ms ease;
+}
+
+.address-card:hover {
+  border-color: var(--ring);
+}
+
+.address-card--selected {
+  border-color: var(--primary);
+  z-index: 1;
+}
+
+.address-card__line {
+  margin: 0;
+}
+
+.step__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}

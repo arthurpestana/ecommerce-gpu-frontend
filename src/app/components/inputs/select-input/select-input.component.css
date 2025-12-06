@@ -27,7 +27,7 @@
 }
 
 .select-field__control:hover {
-  border-color: var(--muted-foreground);
+  border-color: var(--ring);
 }
 
 .select-field__control--disabled {

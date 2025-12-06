@@ -1,0 +1,23 @@
+<div class="summary-card">
+
+    <h3 class="summary-card__title">Resumo</h3>
+
+    <div class="summary-card__row">
+        <span>Valor dos produtos:</span>
+        <strong>R$ {{ total | number:'1.2-2' }}</strong>
+    </div>
+    <div class="summary-card__row">
+        <span>Quantidade de produtos:</span>
+        <strong>{{ quantity }}</strong>
+    </div>
+
+    <div class="summary-card__divider"></div>
+
+    <app-button variant="primary" size="medium" [fullWidth]="true" [disabled]="disabled" (clicked)="continue.emit()">
+        Continuar
+    </app-button>
+    <app-button variant="outline" class="cart-page__back-button" size="medium" [fullWidth]="true" (clicked)="return.emit()">
+        Voltar
+    </app-button>
+
+</div>

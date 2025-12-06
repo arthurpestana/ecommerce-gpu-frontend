@@ -1,0 +1,30 @@
+<div class="page-admin">
+    <div class="page-admin__header">
+        <div class="page-admin__header__group">
+            <h1 class="page-admin__header__group-title">Gerenciamento de Usuários</h1>
+            <p class="page-admin__header__group-subtitle">
+                Adicione, edite ou remova usuários no sistema.
+            </p>
+        </div>
+
+        <app-button variant="primary" size="medium" icon="plus" (clicked)="onCreate()">
+            Novo Usuário
+        </app-button>
+    </div>
+
+    <app-user-table (edit)="onEdit($event)" (delete)="onDelete($event)" (manageAddresses)="openAddressManager($event)">
+    </app-user-table>
+
+    <app-address-manager [open]="addressDialogOpen()" [userId]="selectedUser()?.id ?? null" [userName]="selectedUser()?.name ?? ''"
+        (close)="addressDialogOpen.set(false)">
+    </app-address-manager>
+
+
+    <app-user-form [open]="createOrEditDialogOpen()" [user]="selectedUser()" (close)="createOrEditDialogOpen.set(false)"
+        (submitForm)="handleSubmit($event)">
+    </app-user-form>
+
+    <app-alert-dialog [open]="deleteDialogOpen()" title="Confirmar Exclusão"
+        message="Tem certeza de que deseja excluir este usuário?" cancelText="Cancelar" confirmText="Excluir"
+        (closed)="deleteDialogOpen.set(false)" (confirmed)="confirmDelete()"></app-alert-dialog>
+</div>

@@ -1,0 +1,54 @@
+<div class="step">
+    @if (items().length === 0) {
+
+    <div class="cart__empty">
+        <h1 class="cart__empty__title">O seu carrinho está vazio.</h1>
+        <p>Deseja olhar outros produtos similares?</p>
+
+        <app-button variant="primary" size="medium" icon="shoppingCart" (clicked)="back.emit()"
+            class="cart__empty__button">
+            Continuar comprando
+        </app-button>
+    </div>
+
+    } @else {
+
+    <div class="cart__alert">
+        <app-lucide-icon icon="info" size="18"></app-lucide-icon>
+        <div>
+            <strong>Não deixe seus itens escaparem!</strong>
+            <p>Finalize a compra para garantir agora.</p>
+        </div>
+    </div>
+
+    <div class="cart__container">
+        <div class="cart__left">
+
+            <div class="cart__section-header">
+                <h2 class="cart__section-title">
+                    Produtos no carrinho ({{ items().length }})
+                </h2>
+
+                <app-button variant="outline" icon="trash" size="small" class="cart__remove-all" (clicked)="clear()"
+                    iconSize="16">
+                    Remover todos os produtos
+                </app-button>
+            </div>
+
+            <div class="cart__items">
+                @for (item of items(); track item.id) {
+                <app-cart-item [item]="item"></app-cart-item>
+                }
+            </div>
+
+        </div>
+
+        <div class="cart__right">
+            <app-cart-summary [quantity]="totalQuantity()" [total]="totalPrice()" [disabled]="isDisabled()" (continue)="next.emit()"
+                (return)="back.emit()"></app-cart-summary>
+        </div>
+
+    </div>
+
+    }
+</div>

@@ -1,0 +1,27 @@
+<div class="step">
+
+    <h2 class="step__title">Selecione o endereço de entrega</h2>
+
+    <div class="address-list">
+
+        @for (address of addresses(); track address.id) {
+        <app-address-item [address]="address" [showActions]="false" class="address-card"
+            [class.address-card--selected]="selectedAddress?.id === address.id" (click)="selectAddress(address)">
+        </app-address-item>
+        }
+
+        @if (addresses().length === 0) {
+        <p class="empty-text">Nenhum endereço encontrado.</p>
+        }
+
+    </div>
+
+    <div class="step__actions">
+        <app-button variant="outline" size="small" (clicked)="back.emit()">Voltar</app-button>
+
+        <app-button variant="primary" size="small" [disabled]="!selectedAddress" (clicked)="continue()">
+            Continuar
+        </app-button>
+    </div>
+
+</div>

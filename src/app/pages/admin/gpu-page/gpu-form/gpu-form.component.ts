@@ -145,6 +145,8 @@ export class GpuFormComponent {
       technologies: this.technologyTags.map(t => ({ name: t, description: '' }))
     });
 
+    console.log(parsed);
+
     if (!parsed.success) {
       Object.values(parsed.error.flatten().fieldErrors).forEach(errs => {
         errs?.forEach(msg => this.toast.error(msg));

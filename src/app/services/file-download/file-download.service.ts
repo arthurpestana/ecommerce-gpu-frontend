@@ -2,17 +2,18 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, map, Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class FileDownloadService {
-  private readonly httpClient = inject(HttpClient);
+    download(url: string, filename: string) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
 
-  downloadFile(url: string, fileName: string, fileType: string): Promise<File> {
-    return firstValueFrom(
-      this.httpClient
-        .get(url, { responseType: 'blob' })
-        .pipe(map((blob) => new File([blob], fileName, { type: fileType })))
-    );
-  }
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 }
+

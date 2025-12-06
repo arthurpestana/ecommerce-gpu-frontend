@@ -3,7 +3,7 @@
   [title]="title"
   [subtitle]="subtitle"
   (closed)="onCancel()"
-  width="520px"
+  width="650px"
 >
   <form class="form-dialog__form" (ngSubmit)="onSubmit()">
 
@@ -14,14 +14,14 @@
     <div class="form-dialog__form__footer">
       <app-button
         variant="outline"
-        size="large"
+        size="medium"
         (clicked)="onCancel()"
         type="button"
       >{{ cancelText }}</app-button>
 
       <app-button
         variant="primary"
-        size="large"
+        size="medium"
         type="button"
         (clicked)="onSubmit()"
       >{{ submitText }}</app-button>

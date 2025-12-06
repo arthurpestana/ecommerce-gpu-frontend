@@ -8,7 +8,8 @@ import { InputTextComponent } from '../../../../components/inputs/input-text/inp
 import { SelectInputComponent, SelectOption } from '../../../../components/inputs/select-input/select-input.component';
 
 import { GpuQueryService } from '../../../../services/api/gpu/gpu-query/gpu-query.service';
-import { InventoryTransactionRequest, TransactionTypes } from '../../../../lib/interfaces/IInventory';
+import { InventoryTransactionRequest } from '../../../../lib/interfaces/IInventory';
+import { TransactionTypes } from '../../../../lib/enums/TransactionTypes';
 import { inventoryTransactionRequestSchema } from '../../../../lib/schemas/inventoryTransaction.schema';
 import { TextAreaComponent } from '../../../../components/textarea/textarea.component';
 
@@ -19,7 +20,6 @@ import { TextAreaComponent } from '../../../../components/textarea/textarea.comp
     FormDialogComponent,
     ContainerDivComponent,
     InputNumberComponent,
-    InputTextComponent,
     SelectInputComponent,
     TextAreaComponent
   ],

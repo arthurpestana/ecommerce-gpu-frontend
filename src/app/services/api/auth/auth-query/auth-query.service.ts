@@ -29,14 +29,16 @@ export class AuthQueryService {
         localStorage.removeItem("token");
     }
 
-    fetchAuthenticatedUser = injectQuery(() => ({
+    authenticatedUser = injectQuery(() => ({
         queryKey: ['auth', 'me', this.token()],
         queryFn: () => this.authService.me(),
         enabled: !!this.token(),
         refetchOnWindowFocus: false,
 
         select: (user) => {
+            console.log('Fetched authenticated user:', user);
             this.user.set(user);
+            console.log('User signal updated to:', this.user());
             return user;
         },
 

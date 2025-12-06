@@ -23,6 +23,7 @@ export class ButtonComponent {
   @Input() icon?: string;
   @Input() iconPosition: IconPosition = 'left';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() fullWidth = false
 
   public isIconOnly(): boolean {
     return !!this.icon && !this.hasContent;

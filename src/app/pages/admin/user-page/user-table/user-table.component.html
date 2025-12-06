@@ -1,0 +1,38 @@
+<ng-template #toggleTemplate let-value let-row="row">
+    <app-toggle-input [model]="value" (modelChange)="onToggleStatus(row, $event)"></app-toggle-input>
+</ng-template>
+
+<app-container-div direction="column" gap="1rem">
+
+  <app-search-filter
+    (searchSubmit)="onSearch($event)"
+    placeholderText="Buscar usuários...">
+  </app-search-filter>
+
+  <app-page-range
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [limit]="limit">
+  </app-page-range>
+
+  <app-table
+    [data]="dataUsers"
+    [columns]="columnsTable"
+    [totalPages]="totalPages"
+    [actions]="true"
+    [pageSize]="10"
+    (pageChange)="onPageChange($event)">
+
+    <ng-template #tableActions let-row>
+        <app-button 
+        variant="outline" 
+        size="square-small" 
+        icon="map-pin"
+        (clicked)="manageAddresses.emit(row)">
+      </app-button>
+      <app-button variant="outline" size="square-small" icon="pencil" (clicked)="edit.emit(row)"></app-button>
+      <app-button variant="outline" size="square-small" icon="trash" (clicked)="delete.emit(row)"></app-button>
+    </ng-template>
+
+  </app-table>
+</app-container-div>

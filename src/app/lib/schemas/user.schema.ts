@@ -14,16 +14,23 @@ export const userRequestSchema = z
 
     phoneNumber: z
       .string()
-      .regex(/^\d{10,15}$/, "Telefone deve conter entre 10 e 15 dígitos numéricos"),
+      .transform(v => v.replace(/\D/g, ""))
+      .refine(v => /^\d{10,15}$/.test(v), {
+        message: "Telefone deve conter entre 10 e 15 dígitos numéricos",
+      }),
 
     cpf: z
       .string()
-      .regex(/^\d{11}$/, "CPF deve conter exatamente 11 dígitos"),
-
+      .transform(v => v.replace(/\D/g, ""))
+      .refine(v => /^\d{11}$/.test(v), {
+        message: "CPF deve conter exatamente 11 dígitos",
+      }),
+      
     password: z
       .string()
       .min(6, "A senha deve conter no mínimo 6 caracteres")
       .max(100, "A senha deve conter no máximo 100 caracteres"),
+      
 
     role: z.enum(["ADMIN", "CUSTOMER"]),
 

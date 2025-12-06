@@ -1,0 +1,49 @@
+<div class="step">
+
+  <h2 class="step__title">Escolha a forma de pagamento</h2>
+
+  <div class="payment-options">
+
+    <button
+      class="payment-option"
+      [class.payment-option--active]="selected === PaymentMethod.PIX"
+      (click)="select(PaymentMethod.PIX)"
+    >
+      <strong>PIX</strong> -
+      <span>À vista</span>
+    </button>
+
+    <button
+      class="payment-option"
+      [class.payment-option--active]="selected === PaymentMethod.CREDIT_CARD"
+      (click)="select(PaymentMethod.CREDIT_CARD)"
+    >
+      <strong>Cartão de Crédito</strong> -
+      <span>Parcelamento disponível</span>
+    </button>
+
+    <button
+      class="payment-option"
+      [class.payment-option--active]="selected === PaymentMethod.BOLETO"
+      (click)="select(PaymentMethod.BOLETO)"
+    >
+      <strong>Boleto</strong> -
+      <span>Pagamento à vista</span>
+    </button>
+
+  </div>
+
+  <div class="step__actions">
+    <app-button variant="outline" size="small" (clicked)="back.emit()">Voltar</app-button>
+
+    <app-button 
+      variant="primary" 
+      size="small"
+      [disabled]="!selected"
+      (clicked)="continue()"
+    >
+      Continuar
+    </app-button>
+  </div>
+
+</div>

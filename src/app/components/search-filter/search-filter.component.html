@@ -1,4 +1,4 @@
-<div class="search-filter" [class.search-filter--compact]="variant === 'compact'">
+<div class="search-filter" [class.search-filter--compact]="variant === 'compact'" [class.search-filter--small]="variant === 'small'">
 
   <div class="search-filter__input-container">
     <div class="search-filter__input-container__icon">
@@ -9,12 +9,12 @@
       [(ngModel)]="currentSearchText" (ngModelChange)="emitSearchText()" (keyup.enter)="emitSearchClicked()"/>
 
     @if (currentSearchText) {
-    <app-button (clicked)="clearSearch()" class="search-filter__input-container__clear-button" variant="ghost" size="square" icon="x" />
+    <app-button (clicked)="clearSearch()" class="search-filter__input-container__clear-button" variant="ghost" [size]="variant === 'small' ? 'square-small' : 'square'" icon="x" />
     }
   </div>
 
   @if (showSubmitButton) {
-  <app-button class="search-filter__submit-button" variant="primary" size="square" icon="Search"
-    (clicked)="emitSearchClicked()" />
+  <app-button class="search-filter__submit-button" variant="primary" [size]="variant === 'small' ? 'square-small' : 'square'" icon="Search"
+    (clicked)="emitSearchClicked()" [iconSize]="variant === 'small' ? 18 : 20"/>
   }
 </div>

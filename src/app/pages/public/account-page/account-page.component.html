@@ -1,0 +1,37 @@
+<div class="account">
+
+  <div class="account__tabs">
+    <button 
+      class="account__tab"
+      [class.active]="section() === 'settings'"
+      (click)="goToSettings()"
+    >Informações</button>
+
+    <button 
+      class="account__tab"
+      [class.active]="section() === 'addresses'"
+      (click)="goToAddresses()"
+    >Endereços</button>
+
+    <button 
+      class="account__tab"
+      [class.active]="section() === 'orders'"
+      (click)="goToOrders()"
+    >Pedidos</button>
+  </div>
+
+  <div class="account__content">
+    @if (section() === 'settings') {
+      <app-settings-manager />
+    }
+
+    @if (section() === 'addresses') {
+      <app-addresses-manager />
+    }
+
+    @if (section() === 'orders') {
+      <app-orders-manager />
+    }
+  </div>
+
+</div>

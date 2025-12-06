@@ -22,10 +22,11 @@ export class GpuService {
     );
   }
 
-  async filterGpus(filters: {
+  async findFilteredGpus(filters: {
     name?: string;
-    modelId?: number;
-    manufacturerId?: number;
+    modelId?: string;
+    manufacturerId?: string;
+    categoryId?: string;
     minPrice?: number;
     maxPrice?: number;
     isActive?: boolean;
@@ -36,6 +37,7 @@ export class GpuService {
     if (filters.name) params = params.set('name', filters.name);
     if (filters.modelId) params = params.set('modelId', filters.modelId);
     if (filters.manufacturerId) params = params.set('manufacturerId', filters.manufacturerId);
+    if (filters.categoryId) params = params.set('categoryId', filters.categoryId);
     if (filters.minPrice) params = params.set('minPrice', filters.minPrice);
     if (filters.maxPrice) params = params.set('maxPrice', filters.maxPrice);
     if (filters.isActive !== undefined) params = params.set('isActive', filters.isActive);
@@ -105,21 +107,6 @@ export class GpuService {
 
     return firstValueFrom(
       this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/technology/${tech}`, {
-        params,
-      })
-    );
-  }
-
-  async findByCategory(
-    category: string,
-    paginationParams: PaginationRequest
-  ): Promise<PaginationResponse<GpuResponse>> {
-    const params = new HttpParams()
-      .set('page', paginationParams.page)
-      .set('limit', paginationParams.limit);
-
-    return firstValueFrom(
-      this.httpClient.get<PaginationResponse<GpuResponse>>(`${this.apiUrl}/category/${category}`, {
         params,
       })
     );

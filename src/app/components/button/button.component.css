@@ -14,6 +14,10 @@
   gap: 0.5rem;
 }
 
+.button--full {
+  width: 100%;
+}
+
 .button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -90,16 +94,17 @@
 
 .button--small {
   padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
 .button--medium {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   font-size: 1rem;
 }
 
 .button--large {
-  padding: 0.5rem 1.5rem;
+  padding: 0.675rem 1.5rem;
   font-size: 1rem;
 }
 

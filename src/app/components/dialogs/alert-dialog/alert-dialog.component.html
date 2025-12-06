@@ -3,7 +3,7 @@
   [title]="title"
   [subtitle]="subtitle"
   (closed)="onCancel()"
-  width="420px"
+  width="500px"
 >
   <div class="alert-dialog__body">
     {{ message }}
@@ -13,14 +13,14 @@
     <app-button
       type="button"
       variant="outline"
-      size="large"
+      size="medium"
       (clicked)="onCancel()"
     >{{ cancelText }}</app-button>
 
     <app-button
       type="submit"
       variant="destructive"
-      size="large"
+      size="medium"
       (clicked)="onConfirm()"
     >{{ confirmText }}</app-button>
   </div>

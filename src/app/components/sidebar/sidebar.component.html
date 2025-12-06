@@ -1,7 +1,7 @@
 <div class="sidebar" [class.sidebar--collapsed]="isCollapsed()">
   <div class="sidebar__header">
     <div>
-      <span class="sidebar__header__brand">GPU Commerce</span>
+      <span class="sidebar__header__brand">GPU Store</span>
       <span class="sidebar__header__version">Painel Administrativo</span>
     </div>
     <app-button
@@ -24,7 +24,7 @@
   </nav>
 
   <div class="sidebar__footer">
-    <a class="sidebar__footer__item sidebar__nav__item" routerLink="/logout">
+    <a class="sidebar__footer__item sidebar__nav__item" (click)="logout()">
       <lucide-icon
         [img]="icons.LogOut"
         class="sidebar__footer__item-icon sidebar__nav__item-icon sidebar-icon"

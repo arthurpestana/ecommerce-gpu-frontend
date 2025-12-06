@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransactionTypes } from "../interfaces/IInventory";
+import { TransactionTypes } from "../enums/TransactionTypes";
 
 export const transactionTypesEnum = [
     TransactionTypes.ADD,

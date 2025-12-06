@@ -1,0 +1,27 @@
+@if (isLoading()) {
+  <app-full-loading />
+}
+
+<div class="step">
+    <div class="step__header">
+
+        <h2 class="step__title">Confirmar Pedido</h2>
+
+        <p>Confira os dados antes de finalizar:</p>
+    </div>
+
+    <ul class="confirm-list">
+        <li><strong>Endereço:</strong> {{ address.street }}, {{ address.city }}, {{ address.state }}, {{ address.zipCode
+            }}</li>
+        <li><strong>Pagamento:</strong> {{ getPaymentMethodName() }}</li>
+    </ul>
+
+    <div class="step__actions">
+        <app-button variant="outline" size="small" (clicked)="back.emit()">Voltar</app-button>
+
+        <app-button variant="primary" size="small" (clicked)="createOrder()">
+            Finalizar Pedido
+        </app-button>
+    </div>
+
+</div>

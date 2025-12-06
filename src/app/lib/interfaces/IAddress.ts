@@ -1,20 +1,22 @@
 import { UserResponse } from "./IUser";
 
 export interface AddressResponse {
-  id: string;
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-  user: UserResponse;
+    id: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+    userId: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface AddressRequest {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-  userId: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+    userId: string;
 }

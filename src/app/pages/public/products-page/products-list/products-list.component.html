@@ -1,0 +1,38 @@
+<div class="products-list">
+
+  @if (isLoading) {
+    <div class="products-list__state">
+      <p>Carregando produtos...</p>
+    </div>
+
+  } @else if (items.length > 0) {
+
+    <app-page-range
+      [totalItems]="totalItems"
+      [currentPage]="currentPage"
+      [limit]="limit"
+    />
+
+    <div class="products-list__grid">
+      @for (gpu of items; track gpu.id) {
+        <app-product-card [gpu]="gpu"></app-product-card>
+      }
+    </div>
+
+    @if (totalPages > 1) {
+      <div class="products-list__pagination">
+        <app-pagination
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          (pageChange)="pageChange($event)"
+        />
+      </div>
+    }
+
+  } @else {
+    <div class="products-list__state">
+      <p>Nenhum produto encontrado com os filtros selecionados.</p>
+    </div>
+  }
+
+</div>

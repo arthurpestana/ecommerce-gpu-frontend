@@ -4,7 +4,7 @@
   opacity: 0.6;
   background: color-mix(in oklch, var(--background) 60%, black 40%);
   backdrop-filter: blur(4px);
-  z-index: 999;
+  z-index: var(--z-index, 999);
   transition: opacity .2s ease;
 }
 
@@ -24,9 +24,10 @@
   border-radius: var(--radius-lg);
   padding: 1.5rem;
 
-  z-index: 1000;
+  z-index: var(--z-index, 1000);
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
 
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.10);
 

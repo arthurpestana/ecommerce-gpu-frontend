@@ -1,65 +1,61 @@
-import { Component, OnInit, computed, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SearchFilterComponent } from '../../../components/search-filter/search-filter.component';
-import { PaginationComponent } from '../../../components/pagination/pagination.component';
-import { ProductCardComponent } from '../../../components/product-card/product-card.component';
-import { GpuService } from '../../../services/api/gpu/gpu-service/gpu.service';
-import { GpuResponse } from '../../../lib/interfaces/IGpu';
-import { PaginationRequest } from '../../../lib/interfaces/IPagination';
+import { ProductsFiltersComponent } from './products-filters/products-filters.component';
+import { ProductsListComponent } from './products-list/products-list.component';
 import { GpuQueryService } from '../../../services/api/gpu/gpu-query/gpu-query.service';
-import { PageRangeComponent } from '../../../components/page-range/page-range.component';
 
 @Component({
-  selector: 'app-products-page',
-  standalone: true,
-  imports: [CommonModule, SearchFilterComponent, PaginationComponent, ProductCardComponent, PageRangeComponent],
-  templateUrl: './products-page.component.html',
-  styleUrls: ['./products-page.component.css'],
+    selector: 'app-products-page',
+    standalone: true,
+    imports: [
+        CommonModule,
+        SearchFilterComponent,
+        ProductsFiltersComponent,
+        ProductsListComponent
+    ],
+    templateUrl: './products-page.component.html',
+    styleUrls: ['./products-page.component.css']
 })
 export class ProductsPageComponent {
-  private readonly gpuQuery = inject(GpuQueryService);
 
-  listGpus = this.gpuQuery.getListGpus;
+    private readonly gpuQuery = inject(GpuQueryService);
+    private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
 
-  get dataGpus() {
-    return this.listGpus.data()?.items ?? [];
-  }
+    constructor() {
+        this.route.queryParams.subscribe(params => {
+            const search = params['search'] ?? '';
 
-  get isLoading() {
-    return this.listGpus.isLoading();
-  }
+            this.gpuQuery.setParams({
+                search,
+                page: 1
+            });
+        });
+    }
 
-  get isError() {
-    return this.listGpus.isError();
-  }
+    onSearch(value: string) {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: { search: value || null },
+            queryParamsHandling: 'merge'
+        });
+    }
 
-  get totalItems() {
-    return this.listGpus.data()?.total ?? 0;
-  }
+    onPageChange(newPage: number) {
+        this.gpuQuery.setParams({ page: newPage });
+    }
 
-  get limit() {
-    const data = this.listGpus.data();
-    if (!data) return 10;
-    return data.limit;
-  }
-
-  get currentPage() {
-    const data = this.listGpus.data();
-    if (!data) return 1;
-    console.log(data, "dataGPU");
-    return (data.page ?? 0) + 1;
-  }
-
-  get totalPages() {
-    return Math.ceil(this.totalItems / this.limit);
-  }
-
-  onSearch(value: string) {
-    this.gpuQuery.setParams({ search: value, page: 1 });
-  }
-
-  async onPageChange(newPage: number): Promise<void> {
-    this.gpuQuery.setParams({ page: newPage });
-  }
+    listGpus = this.gpuQuery.getListGpus;
+    get isError() {
+        return this.listGpus.isError();
+    }
+    get dataGpus() { return this.listGpus.data()?.items ?? []; }
+    get isLoading() { return this.listGpus.isLoading(); }
+    get totalItems() { return this.listGpus.data()?.total ?? 0; }
+    get limit() { return this.listGpus.data()?.limit ?? 10; }
+    get currentPage() { return (this.listGpus.data()?.page ?? 0) + 1; }
+    get totalPages() { return Math.ceil(this.totalItems / this.limit); }
 }

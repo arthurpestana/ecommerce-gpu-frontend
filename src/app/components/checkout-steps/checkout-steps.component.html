@@ -1,0 +1,22 @@
+<div class="steps">
+  @for (step of steps; track step.key) {
+
+    <div class="steps__item"
+        [class.steps__item--active]="currentStep === step.key" [class.steps__item--completed]="isStepCompleted(step.key)">
+      
+      <lucide-icon class="steps__item__icon"
+        [img]="step.icon"
+        size="14">
+      </lucide-icon>
+
+      <span class="steps__item__label">
+        {{ step.label }}
+      </span>
+    </div>
+
+    @if (step.key !== steps[steps.length - 1].key) {
+      <div class="steps__separator"></div>
+    }
+
+  }
+</div>

@@ -1,0 +1,38 @@
+.account {
+  max-width: 60rem;
+  margin: auto;
+  padding: 4rem 1rem;
+}
+
+.account__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.account__tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.account__tab {
+  padding: 0.25rem 1.25rem;
+  font-size: 0.9rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--muted-foreground);
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: 150ms;
+}
+
+.account__tab.active {
+    font-weight: 500;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+.account__content {
+  margin-top: 1rem;
+}

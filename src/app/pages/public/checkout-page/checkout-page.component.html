@@ -1,0 +1,21 @@
+<div class="checkout">
+
+    <app-checkout-steps [currentStep]="currentStep()" />
+
+    @if (currentStep() === 'cart') {
+    <app-cart-step (next)="goToAddress()" (back)="goToProducts()" />
+    }
+
+    @if (currentStep() === 'address') {
+    <app-address-step (back)="goToCart()" (next)="goToPayment($event)" />
+    }
+
+    @if (currentStep() === 'payment') {
+    <app-payment-step (back)="goToAddress()" (next)="goToConfirm($event)" />
+    }
+    @if (currentStep() === 'complete') {
+    <app-confirm-step [address]="selectedAddress()!" [paymentMethod]="selectedPaymentMethod()!"
+        (back)="goToPayment()" />
+    }
+
+</div>

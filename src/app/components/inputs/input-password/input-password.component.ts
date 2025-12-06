@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
   selector: 'app-input-password',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, ButtonComponent],
   templateUrl: './input-password.component.html',
   styleUrls: ['./input-password.component.css']
 })

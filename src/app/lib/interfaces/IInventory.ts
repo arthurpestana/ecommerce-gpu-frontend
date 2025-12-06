@@ -8,8 +8,8 @@ export interface InventoryTransactionResponse {
     transactionDate: string;
     reason: string | null;
     transactionType: TransactionTypes;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface InventoryTransactionRequest {

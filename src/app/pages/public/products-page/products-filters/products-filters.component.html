@@ -1,0 +1,59 @@
+<div class="filters">
+
+    <div class="filters__header">
+        <h2 class="filters__title">Filtros</h2>
+        <app-button size="small" variant="outline" (clicked)="resetFilters()">
+            Limpar filtros
+        </app-button>
+    </div>
+
+    <div class="filters__group">
+        <span class="filters__label">Marca</span>
+
+        <button class="filters__item" [class.filters__item--active]="selectedManufacturer() === null"
+            (click)="setManufacturer(null)">
+            Todas
+        </button>
+
+        @for (m of limitedManufacturers(); track m.id) {
+        <button class="filters__item" [class.filters__item--active]="selectedManufacturer() === m.id"
+            (click)="setManufacturer(m.id)">
+            {{ m.name }}
+        </button>
+        }
+
+        @if (manufacturers().length > 5) {
+        <button class="filters__more-btn" (click)="showAllManufacturers.set(!showAllManufacturers())">
+            {{ showAllManufacturers() ? 'Ver menos' : 'Ver mais' }}
+        </button>
+        }
+    </div>
+
+    <div class="filters__group">
+        <span class="filters__label">Categoria</span>
+
+        <button class="filters__item" [class.filters__item--active]="selectedCategory() === null"
+            (click)="setCategory(null)">
+            Todas
+        </button>
+
+        @for (c of limitedCategories(); track c.id) {
+        <button class="filters__item" [class.filters__item--active]="selectedCategory() === c.id"
+            (click)="setCategory(c.id)">
+            {{ c.name }}
+        </button>
+        }
+
+        @if (categories().length > 5) {
+        <button class="filters__more-btn" (click)="showAllCategories.set(!showAllCategories())">
+            {{ showAllCategories() ? 'Ver menos' : 'Ver mais' }}
+        </button>
+        }
+    </div>
+
+    <div class="filters__group">
+        <app-input-range label="Preço máximo" [min]="500" [max]="20000" [step]="100" [(model)]="maxPrice"
+            (changeEnd)="updateMaxPrice($event)" description="Ajuste o preço máximo desejado"></app-input-range>
+    </div>
+
+</div>

@@ -7,4 +7,6 @@ export interface PaymentResponse {
     paymentStatus: PaymentStatus;
     paymentMethod: PaymentMethod;
     amount: number;
+    createdAt?: string;
+    updatedAt?: string;
 }

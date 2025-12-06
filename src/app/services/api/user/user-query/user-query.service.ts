@@ -40,7 +40,7 @@ export class UserQueryService {
     };
   }
 
-  listUsers = injectQuery(() => ({
+  getListUsers = injectQuery(() => ({
     queryKey: ['users', this.params()],
 
     queryFn: async () => {

@@ -18,7 +18,7 @@ export class SearchFilterComponent {
   @Output() searchSubmit = new EventEmitter<string>();
   @Input() showSubmitButton = true;
   @Input() placeholderText = 'Search...';
-  @Input() variant: 'default' | 'compact' = 'default';
+  @Input() variant: 'default' | 'small' | 'compact' = 'default';
 
   emitSearchText(): void {
     this.searchTextChange.emit(this.currentSearchText);

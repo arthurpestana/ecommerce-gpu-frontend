@@ -1,0 +1,40 @@
+<div class="order-card">
+
+  <div class="order-card__header">
+    <h3 class="order-id">Pedido #{{ order.id }}</h3>
+
+    <!-- <app-button 
+      variant="outline"
+      size="small"
+      icon="eye"
+      iconSize="18"
+      (clicked)="open.emit()">
+      Ver detalhes
+    </app-button> -->
+  </div>
+
+  <p class="order-date">
+    Realizado em {{ order.createdAt ? (order.createdAt | date:'dd/MM/yyyy HH:mm') : 'd/MM/yyyy HH:mm' }}
+  </p>
+
+  <div class="order-status">
+    <span>Status:</span>
+    <span class="status-badge" [class]="order.orderStatus.toLowerCase()">
+      {{ getOrderStatus() }}
+    </span>
+  </div>
+
+  <p class="order-total">
+    <strong>Total:</strong>
+    R$ {{ order.totalAmount| number:'1.2-2' }}
+  </p>
+
+  <div class="order-items">
+    @for (item of order.items; track item.id) {
+      <div class="order-item">
+        {{ item.quantity }}x {{ item.gpu?.name }}
+      </div>
+    }
+  </div>
+
+</div>

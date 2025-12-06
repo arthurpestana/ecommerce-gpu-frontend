@@ -1,1 +1,58 @@
-<p>register-page works!</p>
+<div class="register">
+
+    <div class="register__card">
+
+        <div class="register__card__header">
+            <div class="register__card__header__logo">
+                <div class="register__card__header__logo-circle" (click)="goToHome()">
+                    <app-lucide-icon icon="gpu" size="32"
+                        class="register__card__header__logo-img"></app-lucide-icon>
+                </div>
+            </div>
+
+            <h1 class="register__card__header__title">Criar Conta</h1>
+            <p class="register__card__header__subtitle">Registre-se para acessar o GPU Store</p>
+        </div>
+
+        <app-container-div direction="column" gap="1rem">
+
+            <app-input-text label="Nome completo" placeholder="Digite seu nome..." [(model)]="form.name">
+            </app-input-text>
+
+            <app-input-text label="E-mail" type="email" placeholder="seu@email.com" [(model)]="form.email">
+            </app-input-text>
+
+            <app-container-div direction="row" gap="0.75rem" [full]="true">
+                <app-input-mask label="Telefone" placeholder="(99) 99999-9999" mask="(99) 99999-9999"
+                    alternativeMask="(99) 9999-9999" [onlyNumbers]="true" [maxDigits]="11" [(model)]="form.phoneNumber">
+                </app-input-mask>
+
+                <app-input-mask label="CPF" placeholder="000.000.000-00" mask="999.999.999-99" [onlyNumbers]="true"
+                    [maxDigits]="11" [(model)]="form.cpf">
+                </app-input-mask>
+            </app-container-div>
+
+
+            <app-input-password label="Senha" placeholder="••••••••" [(model)]="form.password">
+            </app-input-password>
+
+            <div class="register__card__button-group">
+                <app-button [fullWidth]="true" variant="primary" size="large" (clicked)="submit()">
+                    Criar conta
+                </app-button>
+
+                <div class="register__card__divider">Já possui conta?</div>
+
+                <app-button [fullWidth]="true" variant="outline" size="large" (clicked)="goToLogin()">
+                    Fazer login
+                </app-button>
+            </div>
+
+        </app-container-div>
+
+    </div>
+
+    <footer class="register__footer">
+        GPU STORE
+    </footer>
+</div>

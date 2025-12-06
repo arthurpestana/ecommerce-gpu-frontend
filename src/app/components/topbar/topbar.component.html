@@ -1,0 +1,34 @@
+<div class="topbar">
+    <div class="topbar__content">
+        <div class="topbar__brand" (click)="router.navigate(['/'])">
+            <div class="topbar__brand__logo-circle">
+                <app-lucide-icon icon="gpu" size="18" class="topbar__brand__logo-img"></app-lucide-icon>
+            </div>
+            <span class="topbar__brand__name">GPU Store</span>
+        </div>
+        <div class="topbar__search">
+            <app-search-filter placeholderText="Buscar GPU, marca ou especificações..."
+                (searchSubmit)="onSearch($event)" variant="small"></app-search-filter>
+        </div>
+        <div class="topbar__actions">
+            <div class="topbar__actions__cart">
+                <app-button variant="ghost" size="square-small" (clicked)="goToCart()" icon="shoppingCart" iconSize="20">
+                </app-button>
+                @if (cartCount() > 0) {
+                <span class="topbar__actions__cart-badge">{{ cartCount() }}</span>
+                }
+            </div>
+            <div class="topbar__actions__profile">
+                @if (user()) {
+                <app-user-avatar [name]="user().name" (selectProfile)="goToProfile()"
+                    (selectLogout)="logout()"></app-user-avatar>
+                } @else {
+                <app-button variant="outline" size="small" (clicked)="goToLogin()" icon="logIn" iconSize="16">
+                    Entrar
+                </app-button>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

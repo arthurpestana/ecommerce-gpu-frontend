@@ -1,0 +1,30 @@
+<div class="range-field">
+
+  @if (label) {
+    <label class="range-field__label">{{ label }}</label>
+  }
+
+  <input
+    type="range"
+    class="range-field__slider"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [(ngModel)]="model"
+    (ngModelChange)="onInput($event)"
+    [class.range-field__slider--error]="error"
+  />
+
+  @if (showValue) {
+    <div class="range-field__value">
+      {{ model | number:'1.0-0' }}
+    </div>
+  }
+
+  @if (error) {
+    <p class="range-field__error">{{ error }}</p>
+  } @else if (description) {
+    <p class="range-field__description">{{ description }}</p>
+  }
+
+</div>

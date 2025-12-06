@@ -3,7 +3,8 @@ import { TableComponent, TableColumn } from '../../../../components/table/table.
 import { SearchFilterComponent } from '../../../../components/search-filter/search-filter.component';
 import { ContainerDivComponent } from '../../../../components/container-div/container-div.component';
 import { PageRangeComponent } from '../../../../components/page-range/page-range.component';
-import { InventoryTransactionResponse, TransactionTypes } from '../../../../lib/interfaces/IInventory';
+import { InventoryTransactionResponse } from '../../../../lib/interfaces/IInventory';
+import { TransactionTypes } from '../../../../lib/enums/TransactionTypes';
 import { InventoryTransactionQueryService } from '../../../../services/api/inventory/inventory-query/inventory-transaction-query.service';
 
 @Component({

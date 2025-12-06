@@ -4,6 +4,7 @@ import { firstValueFrom } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 
 import { LoginRequest, AuthResponse, RegisterRequest } from "../../../../lib/interfaces/IAuth";
+import { UserResponse } from "../../../../lib/interfaces/IUser";
 
 @Injectable({
   providedIn: "root",
@@ -24,9 +25,9 @@ export class AuthService {
     );
   }
 
-  async me(): Promise<AuthResponse["user"]> {
+  async me(): Promise<UserResponse> {
     return firstValueFrom(
-      this.http.get<AuthResponse["user"]>(`${this.apiUrl}/me`)
+      this.http.get<UserResponse>(`${this.apiUrl}/me`)
     );
   }
 }

@@ -1,0 +1,32 @@
+<app-form-dialog [open]="open" [title]="user ? 'Editar Usuário' : 'Novo Usuário'" cancelText="Cancelar"
+    [submitText]="user ? 'Salvar' : 'Criar'" (closed)="close.emit()" (submitted)="submit()">
+    <app-container-div direction="column" gap="0.75rem">
+
+        <app-input-text label="Nome" placeholder="Digite o nome do usuário..." [(model)]="form.name">
+        </app-input-text>
+
+        <app-input-text label="E-mail" type="email" placeholder="exemplo@dominio.com" [(model)]="form.email">
+        </app-input-text>
+
+        <app-select-input label="Papel" placeholder="Selecione um papel..." [options]="userRolesOptions"
+            [(model)]="form.role">
+        </app-select-input>
+
+        <app-container-div direction="row" gap="1rem" [full]="true">
+
+            <app-input-mask label="Telefone" placeholder="(99) 99999-9999" mask="(99) 99999-9999"
+                alternativeMask="(99) 9999-9999" [onlyNumbers]="true" [maxDigits]="11" [(model)]="form.phoneNumber">
+            </app-input-mask>
+
+            <app-input-mask label="CPF" placeholder="000.000.000-00" mask="999.999.999-99" [onlyNumbers]="true"
+                [maxDigits]="11" [(model)]="form.cpf">
+            </app-input-mask>
+        </app-container-div>
+
+        <app-input-password label="Senha" placeholder="Digite a senha..." [(model)]="form.password">
+        </app-input-password>
+
+
+
+    </app-container-div>
+</app-form-dialog>

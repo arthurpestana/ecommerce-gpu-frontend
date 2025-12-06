@@ -2,9 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-page-range',
-  imports: [],
   templateUrl: './page-range.component.html',
-  styleUrl: './page-range.component.css',
+  styleUrls: ['./page-range.component.css'],
 })
 export class PageRangeComponent {
   @Input() currentPage: number = 1;
@@ -12,10 +11,10 @@ export class PageRangeComponent {
   @Input() totalItems: number = 0;
 
   getProductsRangeStart() {
-    return (this.currentPage) * this.limit + 1;
+    return this.totalItems === 0 ? 0 : (this.currentPage - 1) * this.limit + 1;
   }
 
   getProductsRangeEnd() {
-    return Math.min((this.currentPage + 1) * this.limit, this.totalItems);
+    return this.totalItems === 0 ? 0 : Math.min(this.currentPage * this.limit, this.totalItems);
   }
 }

@@ -1,0 +1,28 @@
+<div class="user-avatar">
+  <div class="user-avatar__circle" (click)="toggleDropdown()">
+    {{ initials }}
+  </div>
+  @if (dropdownOpen()) {
+    <div class="user-avatar__dropdown">
+
+        <app-button
+          type="button"
+          variant="outline"
+            size="small"
+            (clicked)="selectProfile.emit(); closeDropdown()"
+            icon="user"
+            iconSize="18"
+            [fullWidth]="true"
+        >Meu Perfil</app-button>
+      <app-button
+          type="button"
+          variant="outline"
+            size="small"
+            (clicked)="selectLogout.emit(); closeDropdown()"
+            icon="logOut"
+            iconSize="18"
+            [fullWidth]="true"
+        >Sair</app-button>
+    </div>
+  }
+</div>

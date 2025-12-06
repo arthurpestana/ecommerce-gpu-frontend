@@ -1,0 +1,35 @@
+<div class="address-card">
+  <div class="address-card__info">
+    <p class="address-card__info__title">
+      {{ address.street }}
+    </p>
+
+    <p class="address-card__info__subtitle">
+      {{ address.city }}, {{ address.state }} - {{ address.country }}
+    </p>
+
+    @if (address.zipCode) {
+      <p class="address-card__info__cep">
+        CEP: {{ address.zipCode }}
+      </p>
+    }
+  </div>
+
+  @if (showActions) {
+    <div class="address-card__actions">
+      <app-button
+        variant="outline"
+        size="square-small"
+        icon="pencil"
+        (clicked)="onEdit()">
+      </app-button>
+
+      <app-button
+        variant="outline"
+        size="square-small"
+        icon="trash"
+        (clicked)="onDelete()">
+      </app-button>
+    </div>
+  }
+</div>

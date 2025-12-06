@@ -1,62 +1,23 @@
-<div class="products-page">
-  <main class="products-page__main">
-    <div class="products-page__content">
+<div class="products-page__content">
 
-      <header class="products-page__header">
+    <header class="products-page__header">
         <h1 class="products-page__header-title">Placas de Vídeo</h1>
         <p class="products-page__header-subtitle">
-          Encontre a placa de vídeo perfeita para suas necessidades
+            Encontre a placa de vídeo perfeita para suas necessidades
         </p>
-      </header>
+    </header>
 
-      <div class="products-page__search">
-        <app-search-filter
-          (searchSubmit)="onSearch($event)"
-          placeholderText="Buscar por nome, marca ou especificações..."
-        />
-      </div>
-
-      <div class="products-page__results">
-
-        @if (isLoading) {
-
-          <div class="products-page__state">
-            <p class="products-page__state-text">Carregando produtos...</p>
-          </div>
-
-        } @else if (dataGpus.length > 0) {
-
-          <app-page-range
-            [totalItems]="totalItems"
-            [currentPage]="currentPage"
-            [limit]="limit"
-          ></app-page-range>
-
-          <div class="products-page__results-grid">
-            @for (gpu of dataGpus; track gpu.id) {
-              <app-product-card [gpu]="gpu"></app-product-card>
-            }
-          </div>
-
-          @if (totalPages >= 1) {
-            <div class="products-page__pagination">
-              <app-pagination
-                [currentPage]="currentPage"
-                [totalPages]="totalPages"
-                (pageChange)="onPageChange($event)"
-              />
-            </div>
-          }
-
-        } @else {
-          <div class="products-page__state">
-            <p class="products-page__state-text">
-              Nenhum produto encontrado com os filtros selecionados.
-            </p>
-          </div>
-        }
-
-      </div>
+    <div class="products-page__search">
+        <app-search-filter (searchSubmit)="onSearch($event)"
+            placeholderText="Buscar por nome, marca ou especificações..." />
     </div>
-  </main>
+    <div class="products-page__body">
+        <aside class="products-page__body__filters">
+            <app-products-filters></app-products-filters>
+        </aside>
+        <app-products-list class="products-page__body__list" [items]="dataGpus" [isLoading]="isLoading"
+            [error]="isError" [totalItems]="totalItems" [currentPage]="currentPage" [totalPages]="totalPages"
+            [limit]="limit" [pageChange]="onPageChange.bind(this)"></app-products-list>
+    </div>
+
 </div>

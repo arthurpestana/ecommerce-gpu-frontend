@@ -1,0 +1,15 @@
+<div class="orders">
+
+  <div class="orders__header">
+    <h2 class="orders__header__title">Meus Pedidos</h2>
+    <p>Acompanhe o status dos seus pedidos</p>
+  </div>
+
+  <div class="orders__list">
+    @for (order of orders(); track order.id) {
+      <app-order-card
+        [order]="order"
+      ></app-order-card>
+    }
+  </div>
+</div>

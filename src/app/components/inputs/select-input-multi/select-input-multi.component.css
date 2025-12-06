@@ -27,7 +27,7 @@
 }
 
 .select-multi__control:hover {
-  border-color: var(--muted-foreground);
+  border-color: var(--ring);
 }
 
 .select-multi__control--error {

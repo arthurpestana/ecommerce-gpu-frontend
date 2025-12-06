@@ -7,6 +7,7 @@ export const orderItemRequestSchema = z.object({
 
 export const orderRequestSchema = z
   .object({
+    userId: z.string().min(1, "O ID do usuário é obrigatório"),
     addressId: z.string().min(1, "O endereço é obrigatório"),
     items: z
       .array(orderItemRequestSchema)

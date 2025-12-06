@@ -5,8 +5,8 @@ export interface ModelResponse {
     name: string;
     manufacturer: ManufacturerResponse;
     releaseYear: number;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface ModelRequest {

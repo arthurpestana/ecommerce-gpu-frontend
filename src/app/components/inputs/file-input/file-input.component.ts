@@ -1,14 +1,12 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../button/button.component';
 import { LucideIconComponent } from '../../lucide-icon/lucide-icon.component';
-import { FilePreviewPipe } from '../../../lib/utils/file-preview/file-preview-pipe';
 import { FileItem, FileItemComponent } from '../../file-item/file-item.component';
 
 @Component({
   selector: 'app-file-input',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, LucideIconComponent, FilePreviewPipe, FileItemComponent],
+  imports: [CommonModule, LucideIconComponent, FileItemComponent],
   templateUrl: './file-input.component.html',
   styleUrls: ['./file-input.component.css'],
 })
